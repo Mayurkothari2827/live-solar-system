@@ -2,8 +2,12 @@ kernels/
 cache/
 __pycache__/
 *.py[cod]
+*.py
 .venv/
-server.py
 requirements.txt
 start.command
 validation.json
+celestia-revision.txt
+CELESTIA-LICENSE.md
+CELESTIA-README
+LICENSES/
