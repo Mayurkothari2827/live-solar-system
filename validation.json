@@ -1,0 +1,41 @@
+{
+  "bodyCount": 30,
+  "checks": [
+    "30 body records; 577 samples each",
+    "Monotonic 300-second UTC timestamps",
+    "Finite JPL state vectors",
+    "Unit SPICE quaternions",
+    "Geometric ECLIPJ2000 reference frame and body centers",
+    "Current time inside every loaded window"
+  ],
+  "midpointErrorsMetres": {
+    "399": {
+      "max": 0.0017702078524177317,
+      "samples": 13,
+      "comparison": "Independent JPL queries at midpoints between cached states"
+    },
+    "401": {
+      "max": 0.47838475196557106,
+      "samples": 13,
+      "comparison": "Independent JPL queries at midpoints between cached states"
+    },
+    "501": {
+      "max": 0.025616434280346375,
+      "samples": 13,
+      "comparison": "Independent JPL queries at midpoints between cached states"
+    }
+  },
+  "orientationErrorsArcsec": {
+    "399": 0.0,
+    "301": 0.0,
+    "401": 0.08495558312922274,
+    "501": 0.0
+  },
+  "earthSubsolarCheck": {
+    "UTC": "2026-09-27T09:30:00Z",
+    "longitudeEast": 35.260505499175785,
+    "latitude": -1.711573314819911
+  },
+  "runtimeChecks": "Passed mocked-renderer application tests: 30 bodies, Earth\u2013Moon physical scale, real Earth rotation rate, pause, moon-system camera fit, Moon focus, Hyperion caveat, solar overview, physical sizes, live clock.",
+  "browserVerification": "Automated browser access was blocked by the browser security policy; visual rendering was not verified in a browser."
+}

@@ -1,0 +1,200 @@
+{
+  "8k_sun.jpg": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_sun.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather."
+  },
+  "8k_mercury.jpg": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_mercury.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather."
+  },
+  "4k_venus_atmosphere.jpg": {
+    "source": "https://www.solarsystemscope.com/textures/download/4k_venus_atmosphere.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather."
+  },
+  "8k_earth_daymap.jpg": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_earth_daymap.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather."
+  },
+  "8k_earth_nightmap.jpg": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_earth_nightmap.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather."
+  },
+  "8k_earth_clouds.jpg": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_earth_clouds.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather."
+  },
+  "8k_moon.jpg": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_moon.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather."
+  },
+  "8k_mars.jpg": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_mars.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather."
+  },
+  "8k_jupiter.jpg": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_jupiter.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather."
+  },
+  "8k_saturn.jpg": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_saturn.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather."
+  },
+  "8k_saturn_ring_alpha.png": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_saturn_ring_alpha.png",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather."
+  },
+  "2k_uranus.jpg": {
+    "source": "https://www.solarsystemscope.com/textures/download/2k_uranus.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather."
+  },
+  "2k_neptune.jpg": {
+    "source": "https://www.solarsystemscope.com/textures/download/2k_neptune.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather."
+  },
+  "phobos.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/phobos.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "deimos.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/deimos.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "io.png": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/io.png",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "europa.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/europa.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "ganymede.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/ganymede.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "callisto.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/callisto.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "mimas.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/mimas.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "enceladus.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/enceladus.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "tethys.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/tethys.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "dione.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/dione.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "rhea.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/rhea.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "titan.png": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/titan.png",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "hyperion.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/hyperion.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "iapetus.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/iapetus.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "miranda.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/miranda.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "ariel.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/ariel.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "umbriel.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/umbriel.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "titania.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/titania.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "oberon.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/oberon.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  },
+  "triton.jpg": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/triton.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed."
+  }
+}
