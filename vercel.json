@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "routes": [
+    { "src": "/api/catalog", "dest": "/api/catalog.js" },
+    { "src": "/api/ephemerides", "dest": "/api/ephemerides.js" },
+    { "src": "/api/status", "dest": "/api/status.js" },
+    { "src": "/api/health", "dest": "/api/health.js" },
+    { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "/style.css", "dest": "/style.css" },
+    { "src": "/app.js", "dest": "/app.js" },
+    { "src": "/README.md", "dest": "/README.md" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "functions": {
+    "api/ephemerides.js": {
+      "maxDuration": 60,
+      "memory": 1024
+    }
+  }
+}
