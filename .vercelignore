@@ -1,0 +1,10 @@
+.git/
+cache/
+__pycache__/
+**/__pycache__/
+*.pyc
+.venv/
+public/
+tests/
+asset-tree.json
+validation.json
