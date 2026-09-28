@@ -77,6 +77,8 @@ test('actual Bikaner geometry loads at the correct east/north coordinates',async
  assert(app.elements.get('map-loading').hidden);
  assert.match(app.elements.get('map-coverage').textContent,/1,948 mapped buildings/);
  assert(city.children.length>5);assert(walls.geometry.attributes.position.count>10000);
+ const heights=new Set();for(let i=0;i<walls.geometry.attributes.position.count;i++){const h=walls.geometry.attributes.position.getY(i);if(h>0)heights.add(h.toFixed(2));}
+ assert(heights.size>100,'string OSM IDs must produce varied estimated building heights');
  const coords=map.buildings.flatMap(b=>b.coordinates).map(([lon,lat])=>[(lon-73.3180)*111320*Math.cos(28.0229*Math.PI/180),-(lat-28.0229)*111320]);
  walls.geometry.computeBoundingBox();
  assert(Math.abs(walls.geometry.boundingBox.min.x-Math.min(...coords.map(p=>p[0])))<.01);
@@ -127,6 +129,15 @@ test('weather outage without cache reports unavailable without invented readings
 test('old successful weather responses are explicitly stale',async()=>{
  const app=await boot({data:weatherFixture(3*3600)});
  assert.equal(app.elements.get('weather-status').textContent,'CACHED / STALE');
+});
+
+test('partial hourly forecast leaves valid current conditions usable',async()=>{
+ const data=weatherFixture();data.hourly={time:data.hourly.time};
+ const app=await boot({data});
+ assert.equal(app.elements.get('weather-status').textContent,'LIVE MODEL');
+ assert.equal(app.elements.get('temperature').textContent,'34');
+ assert.equal(app.elements.get('hourly-forecast').children.length,12);
+ assert.equal(app.elements.get('refresh-weather').disabled,false);
 });
 
 test('reduced motion freezes sky animation and suppresses automatic orbit',async()=>{
