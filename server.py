@@ -1,6 +1,6 @@
 """Local, cached JPL Horizons + NAIF/SPICE solar-system viewer."""
 from pathlib import Path
-import sys, json, time, threading, datetime as dt, re, csv, io, math, os, gzip
+import sys, json, time, threading, datetime as dt, re, csv, io, math, os, gzip, tempfile
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 
@@ -12,12 +12,13 @@ import requests
 import spiceypy as spice
 
 UTC=dt.timezone.utc
-CACHE=ROOT/'cache';CACHE.mkdir(exist_ok=True)
+SERVERLESS=os.environ.get('VERCEL')=='1' or os.environ.get('SOLAR_SERVERLESS')=='1'
+CACHE=Path(tempfile.gettempdir())/'live-solar-system-cache' if SERVERLESS else ROOT/'cache'
 HEADERS={'User-Agent':os.environ.get('HORIZONS_USER_AGENT','Codex/1.0 (+https://openai.com/contact/)')}
 API='https://ssd.jpl.nasa.gov/api/horizons.api'
-LOCK=threading.RLock(); SPICE_LOCK=threading.Lock(); API_LOCK=threading.Lock()
+LOCK=threading.RLock(); SPICE_LOCK=threading.Lock(); API_LOCK=threading.Lock(); INIT_LOCK=threading.Lock()
 STATUS={'busy':False,'ready':0,'total':29,'message':'Starting','errors':{}}
-DATA={}; KERNEL_INFO={}; BODIES=[]
+DATA={}; KERNEL_INFO={}; BODIES=[]; BODY_LOCKS={}
 
 # IDs identify body centers, never substitute planetary-system barycenters.
 ROWS=[
@@ -43,9 +44,11 @@ ROWS=[
  (705,'Miranda',799,'Natural satellite',None),(801,'Triton',899,'Natural satellite',None)
 ]
 
-def initialize_spice():
+def _initialize_spice():
+    CACHE.mkdir(parents=True,exist_ok=True)
     for name in ['naif0012.tls','pck00011.tpc','earth_latest_high_prec.bpc','moon_pa_de440_200625.bpc','moon_de440_250416.tf']:
         p=ROOT/'kernels'/name
+        if name=='earth_latest_high_prec.bpc' and (CACHE/name).exists():p=CACHE/name
         if p.exists():
             spice.furnsh(str(p));KERNEL_INFO[name]={'bytes':p.stat().st_size,'downloadedUTC':iso(p.stat().st_mtime)}
     maps_path=ROOT/'assets/moon-files.json'
@@ -60,6 +63,14 @@ def initialize_spice():
         if code==10:rotation_note='IAU reference rotation; solar differential rotation is not resolved'
         if code==607:frame=None;rotation_note='Chaotic rotation: reliable instantaneous orientation is unavailable'
         BODIES.append(dict(id=code,name=name,parent=parent,kind=kind,radii=[float(v) for v in radii],radius=float(max(radii)),texture=texture or maps.get(name.lower()),frame=frame,rotationNote=rotation_note))
+        BODY_LOCKS[code]=threading.Lock()
+
+def initialize_spice():
+    """Initialize once whether imported by Vercel or launched locally."""
+    with INIT_LOCK:
+        if not BODIES:
+            _initialize_spice()
+            load_cached()
 
 def iso(seconds):return dt.datetime.fromtimestamp(seconds,UTC).isoformat(timespec='seconds').replace('+00:00','Z')
 def cal(seconds):return dt.datetime.fromtimestamp(seconds,UTC).strftime('%Y-%m-%d %H:%M:%S')
@@ -67,7 +78,7 @@ def cal(seconds):return dt.datetime.fromtimestamp(seconds,UTC).strftime('%Y-%m-%
 def horizons(code,parent,start,end,step='5 m'):
     params={'format':'json','COMMAND':f"'{code}'",'CENTER':f"'500@{parent}'",'MAKE_EPHEM':"'YES'",'OBJ_DATA':"'NO'",'EPHEM_TYPE':"'VECTORS'",'REF_PLANE':"'ECLIPTIC'",'REF_SYSTEM':"'ICRF'",'VEC_CORR':"'NONE'",'VEC_TABLE':"'2'",'CSV_FORMAT':"'YES'",'OUT_UNITS':"'KM-S'",'TIME_TYPE':"'UT'",'TIME_DIGITS':"'FRACSEC'",'START_TIME':f"'{cal(start)}'",'STOP_TIME':f"'{cal(end)}'",'STEP_SIZE':f"'{step}'"}
     with API_LOCK:
-        response=requests.get(API,params=params,headers=HEADERS,timeout=(20,100))
+        response=requests.get(API,params=params,headers=HEADERS,timeout=(5,30) if SERVERLESS else (20,100))
         response.raise_for_status();payload=response.json()
         if payload.get('signature',{}).get('version') not in {'1.2','1.3'}:raise ValueError('Unexpected Horizons API version; refusing unverified data')
         if payload.get('error'):raise ValueError(payload['error'][:500])
@@ -105,6 +116,42 @@ def load_cached():
                 if record['start']<=time.time()<=record['end']-1800:DATA[str(body['id'])]=record
             except (ValueError,KeyError):pass
 
+def save_record(record):
+    # Separate temporary names remain safe when multiple requests finish together.
+    with tempfile.NamedTemporaryFile(mode='w',dir=CACHE,suffix='.tmp',delete=False) as file:
+        json.dump(record,file,separators=(',',':'),allow_nan=False)
+        temporary=Path(file.name)
+    temporary.replace(CACHE/f"{record['id']}.json")
+    with LOCK:DATA[str(record['id'])]=record
+
+def make_record(body,start,end):
+    if body['id']==10:
+        record={'samples':[[start+i*300,0,0,0,0,0,0] for i in range(int((end-start)/300)+1)],'source':'Heliocentric origin','fetchedUTC':iso(time.time())}
+    else:record=horizons(body['id'],body['parent'],start,end)
+    times=[r[0] for r in record['samples']]
+    record.update(start=times[0],end=times[-1],id=body['id'],parent=body['parent'])
+    record['orientationStart']=times[0];record['orientationStep']=60
+    try:
+        record['orientations']=orientations(body,np.arange(times[0],times[-1]+.1,60))
+        record['orientationError']=None
+    except Exception as error:
+        record['orientations']=None;record['orientationError']=str(error).splitlines()[-2:]
+    return record
+
+def body_ephemeris(code):
+    """One bounded request per body: no background jobs or full-system cold start."""
+    initialize_spice()
+    body=next((b for b in BODIES if b['id']==code),None)
+    if body is None:raise ValueError('Unknown body ID')
+    with BODY_LOCKS[code]:
+        now=time.time();old=DATA.get(str(code))
+        if old and old['start']<=now and old['end']>now+10800:return old
+        if code==399:refresh_earth_kernel()
+        anchor=int(now//21600)*21600
+        record=make_record(body,anchor-43200,anchor+129600)
+        save_record(record)
+        return record
+
 def refresh_all():
     with LOCK:
         if STATUS['busy']:return
@@ -118,18 +165,8 @@ def refresh_all():
             if old and old['start']<=now and old['end']>now+10800:continue
             with LOCK:STATUS['message']='Loading '+body['name']
             try:
-                if body['id']==10:
-                    record={'samples':[[start+i*300,0,0,0,0,0,0] for i in range(int((end-start)/300)+1)],'source':'Heliocentric origin','fetchedUTC':iso(now)}
-                else:record=horizons(body['id'],body['parent'],start,end)
-                times=[r[0] for r in record['samples']]
-                record.update(start=times[0],end=times[-1],id=body['id'],parent=body['parent'])
-                record['orientationStart']=times[0];record['orientationStep']=60
-                orientation_times=list(np.arange(times[0],times[-1]+.1,60))
-                try:record['orientations']=orientations(body,orientation_times);record['orientationError']=None
-                except Exception as error:record['orientations']=None;record['orientationError']=str(error).splitlines()[-2:]
-                temporary=CACHE/f'{key}.json.tmp';temporary.write_text(json.dumps(record,separators=(',',':')));temporary.replace(CACHE/f'{key}.json')
-                with LOCK:DATA[key]=record
-                print('READY',body['name'],record['source'],len(times),'orientation',bool(record['orientations']),flush=True)
+                record=make_record(body,start,end);save_record(record)
+                print('READY',body['name'],record['source'],len(record['samples']),'orientation',bool(record['orientations']),flush=True)
             except Exception as error:
                 with LOCK:STATUS['errors'][key]=str(error)[:400]
                 print('FAILED',body['name'],str(error)[:400],flush=True)
@@ -147,27 +184,27 @@ def monitor():
 
 def refresh_earth_kernel():
     """Keep Earth orientation predictive coverage current, with daily caching."""
-    path=ROOT/'kernels/earth_latest_high_prec.bpc'
+    path=CACHE/'earth_latest_high_prec.bpc' if SERVERLESS else ROOT/'kernels/earth_latest_high_prec.bpc'
     if path.exists() and time.time()-path.stat().st_mtime<86400:return
+    loaded=path if path.exists() else ROOT/'kernels/earth_latest_high_prec.bpc'
     try:
-        response=requests.get('https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/earth_latest_high_prec.bpc',headers=HEADERS,timeout=(20,100));response.raise_for_status()
+        response=requests.get('https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/earth_latest_high_prec.bpc',headers=HEADERS,timeout=(5,10) if SERVERLESS else (20,100));response.raise_for_status()
         if not response.content.startswith(b'DAF/PCK'):raise ValueError('Invalid binary PCK response')
         temporary=path.with_suffix('.new.bpc');temporary.write_bytes(response.content)
         with SPICE_LOCK:
-            spice.unload(str(path));temporary.replace(path);spice.furnsh(str(path))
+            spice.unload(str(loaded));temporary.replace(path);spice.furnsh(str(path))
         KERNEL_INFO[path.name]={'bytes':path.stat().st_size,'downloadedUTC':iso(time.time())}
         body=next(b for b in BODIES if b['id']==399)
         with LOCK:record=dict(DATA['399']) if '399' in DATA else None
         if record:
             record['orientationStart']=record['start'];record['orientationStep']=60
             record['orientations']=orientations(body,np.arange(record['start'],record['end']+.1,60));record['orientationError']=None
-            temporary=CACHE/'399.json.tmp';temporary.write_text(json.dumps(record,separators=(',',':')));temporary.replace(CACHE/'399.json')
-            with LOCK:DATA['399']=record
+            save_record(record)
     except Exception as error:
         print('Earth kernel refresh unavailable:',str(error)[:180],flush=True)
 
 def catalog():
-    return {'bodies':BODIES,'kernels':KERNEL_INFO,'frame':'Geometric heliocentric ECLIPJ2000; moons relative to parent body center','timeScale':'UTC input converted by Horizons and SPICE','sampleStepSeconds':300,'orientationStepSeconds':60,'interpolation':'Cubic Hermite (positions + velocities); quaternion SLERP (orientation)','moonCount':21}
+    return {'bodies':BODIES,'delivery':'per-body' if SERVERLESS else 'local-cache','kernels':KERNEL_INFO,'frame':'Geometric heliocentric ECLIPJ2000; moons relative to parent body center','timeScale':'UTC input converted by Horizons and SPICE','sampleStepSeconds':300,'orientationStepSeconds':60,'interpolation':'Cubic Hermite (positions + velocities); quaternion SLERP (orientation)','moonCount':21}
 
 class Handler(BaseHTTPRequestHandler):
     def log_message(self,format,*args):
@@ -180,6 +217,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header('Content-Length',str(len(raw)));self.end_headers();self.wfile.write(raw)
     def do_GET(self):
         path=urlparse(self.path).path
+        if path.startswith('/api/'):initialize_spice()
         if path=='/api/catalog':return self.send_json(catalog())
         if path=='/api/status':
             with LOCK:state=dict(STATUS)
@@ -187,8 +225,12 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/ephemerides':
             with LOCK:payload={'bodies':dict(DATA),'status':dict(STATUS),'serverUTC':iso(time.time())}
             return self.send_json(payload)
+        if path=='/api/ephemeris':
+            try:return self.send_json(body_ephemeris(int(parse_qs(urlparse(self.path).query).get('id',[''])[0])))
+            except (ValueError,TypeError):return self.send_json({'error':'Unknown body ID'},400)
+            except Exception:return self.send_json({'error':'JPL data temporarily unavailable; retry shortly.'},503)
         if path=='/api/health':return self.send_json({'ok':True,'utc':iso(time.time()),'ready':len(DATA),'expected':len(BODIES)})
-        allowed={'/':'index.html','/index.html':'index.html','/app.js':'app.js','/style.css':'style.css','/README.md':'README.md'}
+        allowed={'/':'index.html','/index.html':'index.html','/app.js':'app.js','/style.css':'style.css','/README.md':'README.md','/city':'city.html','/city.html':'city.html','/city.js':'city.js','/city.css':'city.css'}
         if path in allowed:file=ROOT/allowed[path]
         elif path.startswith('/assets/') and '..' not in path:file=ROOT/path.lstrip('/')
         else:return self.send_error(404)
@@ -197,7 +239,7 @@ class Handler(BaseHTTPRequestHandler):
         content=file.read_bytes();self.send_response(200);self.send_header('Content-Type',mimetypes.guess_type(file.name)[0] or 'application/octet-stream');self.send_header('Content-Length',str(len(content)));self.send_header('Cache-Control','no-cache');self.end_headers();self.wfile.write(content)
 
 if __name__=='__main__':
-    initialize_spice();load_cached();STATUS['ready']=len([k for k in DATA if k!='10'])
+    initialize_spice();STATUS['ready']=len([k for k in DATA if k!='10'])
     if '--prime' in sys.argv:refresh_all();sys.exit(0 if len(DATA)==len(BODIES) else 1)
     threading.Thread(target=monitor,daemon=True).start()
     print('Solar system: http://127.0.0.1:8770/',flush=True)

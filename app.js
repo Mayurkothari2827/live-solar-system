@@ -17,7 +17,7 @@ const black=new T.DataTexture(new Uint8Array([0,0,0,255]),1,1);black.needsUpdate
 let catalogue=[],records={},bodies=new Map(),selected=399,view='close',mode='live',paused=false,speed=1,sim=Date.now()/1000;
 let start=0,end=0,width=1,height=1,theta=.5,phi=1.2,distance=5.7,targetDistance=5.7;
 let frameNow=0,previous=performance.now(),lastUI=0,fetching=false,nextFetch=0,ready=false,assetFailures=new Set();
-let apiState={},lastTrail=0,needsTrails=true;
+let apiState={},lastTrail=0,needsTrails=true,delivery='local-cache';
 const origin=new T.Vector3(),lightWorld=new T.Vector3(),lightView=new T.Vector3(),project=new T.Vector3();
 const qTemp=new T.Quaternion(),pTemp=new T.Vector3(),vTemp=new T.Vector3();
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -224,27 +224,63 @@ function positionLabels(visible){
   for(const [x,y] of options){const rect={x,y,w,h};if(x<8||x+w>width-8||y<98||y+h>height-76||occupied.some(a=>x<a.x+a.w+5&&x+w+5>a.x&&y<a.y+a.h+4&&y+h+4>a.y))continue;b.label.style.display='block';b.label.style.transform=`translate(${x}px,${y}px)`;occupied.push(rect);break;}
  }
 }
+function applyRecords(status){
+ apiState=status;
+ const all=Object.values(records);if(!all.length)return;
+ start=Math.max(...all.map(r=>r.start));end=Math.min(...all.map(r=>r.end));
+ setStates(sim);
+ if(bodies.get(selected)?.hasData&&!ready){ready=true;setView('close');$('loading').hidden=true;}
+ $('loading-message').textContent=`${status.message} · ${status.ready}/29 bodies`;
+ $('range-start').textContent=new Date(start*1000).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'UTC'});
+ $('range-end').textContent=new Date(end*1000).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'UTC'})+' UTC';
+ needsTrails=true;
+ const missing=29-(status.ready||0);
+ if(missing&&status.busy)$('notice').textContent=`Loading ${missing} more bodies from JPL…`;
+ else if(missing)$('notice').textContent=`${missing} bodies have unavailable data. Retrying shortly.`;
+ else if(!assetFailures.size)$('notice').textContent='';
+}
+async function fetchIndividualBodies(){
+ const now=Date.now()/1000;
+ for(const [key,record] of Object.entries(records))if(record.end<=now||record.start>now)delete records[key];
+ const priority=[10,399,301,599,501,502,503,504];
+ const pending=catalogue.filter(b=>!records[b.id]||records[b.id].end<now+10800).sort((a,b)=>{
+  const rank=b=>priority.includes(b.id)?priority.indexOf(b.id):10+b.id;
+  return rank(a)-rank(b);
+ });
+ const count=()=>Object.keys(records).filter(k=>k!=='10').length;
+ let consecutiveFailures=0;
+ for(const body of pending){
+  $('loading-message').textContent=`Loading ${body.name} from JPL…`;
+  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),60000);
+  try{
+   const response=await fetch('/api/ephemeris?id='+body.id,{signal:controller.signal});
+   if(!response.ok)throw new Error('Data service '+response.status);
+   const record=await response.json();
+   if(record.id!==body.id||!Array.isArray(record.samples)||record.samples.length<2||record.start>now||record.end<=now)throw new Error('Invalid ephemeris response');
+   records[body.id]=record;consecutiveFailures=0;
+   applyRecords({busy:true,ready:count(),message:'Loading bodies'});
+  }catch(error){consecutiveFailures++;if(consecutiveFailures>=3)break;}
+  finally{clearTimeout(timeout);}
+ }
+ const complete=count()===29;
+ applyRecords({busy:false,ready:count(),message:complete?'Ready':'Some bodies unavailable'});
+ if(!records[selected])$('loading-message').textContent='JPL data is temporarily unavailable. Retrying in 30 seconds…';
+ nextFetch=Date.now()+(complete?300000:30000);
+}
 async function fetchData(){
  if(fetching)return;fetching=true;
  try{
+  if(delivery==='per-body'){await fetchIndividualBodies();return;}
   const response=await fetch('/api/ephemerides',{cache:'no-store'});if(!response.ok)throw new Error('Data service '+response.status);
-  const payload=await response.json();records=payload.bodies;apiState=payload.status;
-  const all=Object.values(records);if(!all.length)throw new Error(payload.status.message||'Waiting for JPL data');
-  start=Math.max(...all.map(r=>r.start));end=Math.min(...all.map(r=>r.end));
-  setStates(sim);
-  if(records[selected]&&!ready){ready=true;setView('close');$('loading').hidden=true;}
-  $('loading-message').textContent=`${payload.status.message} · ${payload.status.ready}/29 bodies`;
-  $('range-start').textContent=new Date(start*1000).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'UTC'});
-  $('range-end').textContent=new Date(end*1000).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'UTC'})+' UTC';
-  nextFetch=Date.now()+(payload.status.busy?10000:300000);needsTrails=true;
-  const missing=29-(payload.status.ready||0);if(missing&&payload.status.busy)$('notice').textContent=`Loading ${missing} more bodies from JPL…`;
-  else if(missing)$('notice').textContent=`${missing} bodies have unavailable data. Their positions are not invented.`;
-  else if(!assetFailures.size)$('notice').textContent='';
+  const payload=await response.json();records=payload.bodies;
+  if(!Object.keys(records).length)throw new Error(payload.status.message||'Waiting for JPL data');
+  applyRecords(payload.status);
+  nextFetch=Date.now()+(payload.status.busy?10000:300000);
  }catch(error){$('loading-message').textContent=error.message;nextFetch=Date.now()+30000;$('notice').textContent='Live data connection unavailable. Only the displayed cached time window remains valid.';}
  finally{fetching=false;}
 }
 async function boot(){
- try{const response=await fetch('/api/catalog');if(!response.ok)throw new Error('Local data service unavailable');const cat=await response.json();catalogue=cat.bodies;
+ try{const response=await fetch('/api/catalog');if(!response.ok)throw new Error('Astronomy data service unavailable');const cat=await response.json();catalogue=cat.bodies;delivery=cat.delivery||'local-cache';
   for(const meta of catalogue)bodies.set(meta.id,makeBody(meta));
   const selectEl=$('body-select');selectEl.replaceChildren();const planetGroup=document.createElement('optgroup');planetGroup.label='Sun & planets';selectEl.append(planetGroup);
   for(const b of bodies.values())if(b.parent===10||b.id===10){const option=document.createElement('option');option.value=b.id;option.textContent=b.name;planetGroup.append(option);}

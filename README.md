@@ -34,3 +34,25 @@ SPICE Earth orientation kernels have finite predictive coverage. The service che
 - Renderer: Three.js r160, MIT license. Python astronomy bindings: SpiceyPy 8.2.0.
 
 This is an educational live ephemeris viewer. “Live” means the simulation clock follows current UTC and evaluates the loaded astronomical models, not a live camera feed or guaranteed exact measurement.
+
+## Bikaner City Observatory
+
+Choose **Bikaner city** in the solar-system header, or open `/city.html`. The view contains a roughly 5 × 5 km OpenStreetMap extract centered on Junagarh Fort: 1,948 mapped building polygons, 3,562 road segments, 60 mapped areas, and 18 landmarks. The bundled geometry does not require a map API key. Map source, date, license, and bounding box are preserved in `assets/bikaner.json`.
+
+Only real mapped building footprints are extruded. This extract has no measured building heights and only one mapped floor count; other heights, façade textures, rooftop tanks, fort wall details, trees within mapped parks, street lamps, and flat terrain are illustrative. This is an interactive geographic reconstruction, not a photogrammetric digital twin or live street-camera view. Geometry is © OpenStreetMap contributors, [ODbL](https://www.openstreetmap.org/copyright).
+
+Current conditions and a 12-hour forecast come directly from the [Open-Meteo forecast API](https://open-meteo.com/en/docs), CC BY 4.0. The page requests Bikaner's fixed coordinates (no device location permission) and refreshes every 10 minutes. Current conditions are weather-model estimates. Temperature, humidity, cloud cover, precipitation, visibility, wind speed, and wind direction drive the display. Solar lighting follows an approximate astronomical calculation for Bikaner's current time; sunrise/sunset times come from the API. Cloud structures and precipitation particles illustrate the supplied conditions, not tracked individual clouds or drops. All displayed times are Asia/Kolkata.
+
+The last successful weather response is retained in browser storage for up to 24 hours and is marked cached/stale on a failed refresh or if its model timestamp is older than two hours. An outage without saved data shows unavailable values. Golden-hour, rain, and night previews are explicitly separate from live weather and never replace the live numerical readings. Reduced-motion preferences stop rain movement, cloud drift, and automatic camera motion. The free Open-Meteo endpoint is intended for non-commercial use; use their appropriate subscription endpoint when adapting this for commercial use.
+
+Camera controls: drag to orbit, shift-drag (or right-drag) to pan, scroll or pinch to zoom. Presets show the fort, city aerial, and a low flight. **Live** in the atmosphere preview returns to current lighting and weather.
+
+## Deploy to Vercel
+
+Import this repository with its root as the project root. The included `vercel.json` selects **Other**, runs `python3 build_static.py`, and serves the generated `public/` directory. Remove old custom framework, build-command, or output-directory overrides if the project already has them.
+
+HTML, JavaScript, CSS, maps, and textures are served as static files. The Bikaner view works independently of the astronomy API. `api/index.py` exposes the Python astronomy API, initializes SPICE on demand, and writes caches and refreshed Earth kernels to temporary storage. Planet/moon data loads progressively through one request per body; it does not require an always-running background process. Successful responses are cached at Vercel's edge for one hour, within the ephemeris validity window. No secrets or API keys are required by the default setup.
+
+The original local-only server was not a Vercel function and wrote into the project directory. Those assumptions caused deployment incompatibility; the explicit static build and serverless adapter address them. A deployed instance can be checked at `/api/health`; it should report `ok: true` and `delivery: "per-body"`.
+
+Checks: `python3 -m unittest discover -s tests -p 'test_*.py'` (with requirements installed), `node tests/test_city.cjs`, and `python3 build_static.py`. Runtime tests mock WebGL; actual browser rendering should also be checked on the target device.
