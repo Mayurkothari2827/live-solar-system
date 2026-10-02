@@ -20,6 +20,16 @@ Trajectories are the loaded 48-hour ephemeris, not invented full circular orbits
 
 Surface maps and Earth clouds/night lights are static reference imagery. They are not today's live weather or current storm positions. Map alignment, unobserved terrain, and image processing limit surface realism independently of positional accuracy.
 
+## Phone observatory
+
+The ORBIT interface keeps the 3D view on screen with touch-sized controls, safe-area spacing, and compact **Telemetry / Moons / Time / Data** drawers. The UTC clock mirrors the actual simulation epoch. Real time, accelerated playback, and pause have distinct labels; position-data availability is shown separately. Landscape controls adapt to shorter screens. All source and accuracy notes remain accessible in Data.
+
+Phones use a rendering profile capped at 30 frames per second, 1.5 device-pixel ratio, 64 × 40 sphere segments, and 800 decorative stars. These limits reduce graphics work; they do not change the astronomical interpolation, orientation, or physical scale. Elapsed time is accumulated across skipped draws, so accelerated playback keeps its chosen rate. Background tabs suspend graphics and playback; live mode returns to current UTC when the page is visible again. Desktop rendering keeps higher geometry detail and is capped at 60 frames per second.
+
+The selected surface uses packaged 2k WebP maps; other visible bodies use 1k maps. Off-screen maps load when needed and phones release maps from previous systems. Default Earth startup textures total 959,394 bytes, compared with 35,069,137 bytes for the previous eager Earth/Moon/ring requests. Original reference maps remain available for desktop detail. Normal maps and Saturn ring alpha use lossless encoding after resizing; source credits are retained in `assets/optimized/credits.json`. To reproduce the derivatives offline, install Pillow and run `python3 optimize_textures.py`.
+
+The city uses **Weather / Explore / Forecast / Data** drawers with current UTC and the separate weather-model timestamp. Its phone profile caps pixel ratio at 1.25, uses 1024-pixel shadows and fewer cloud/rain layers, and caps drawing at 30 frames per second. Building construction yields between batches; all 38,801 mapped footprints are retained. Walking speed, weather readings, preview labels, and stale-data indicators are unchanged. Actual frame rate depends on the device and view.
+
 ## Data service
 
 Horizons requests are serialized and cached. The server checks hourly and refreshes only when the current window is near its end. The browser checks the local cache every five minutes and does not call NASA for each frame. Missing data is marked unavailable; no synthetic ephemeris is substituted. Playback stops at the valid data-window boundary. Set `HORIZONS_USER_AGENT` to your application's own valid product/version/contact header if adapting or redistributing the service.
@@ -59,4 +69,4 @@ HTML, JavaScript, CSS, maps, and textures are served as static files. The Bikane
 
 The original local-only server was not a Vercel function and wrote into the project directory. Those assumptions caused deployment incompatibility; the explicit static build and serverless adapter address them. A deployed instance can be checked at `/api/health`; it should report `ok: true` and `delivery: "per-body"`.
 
-Checks: `python3 -m unittest discover -s tests -p 'test_*.py'` (with requirements installed), `node tests/test_city.cjs`, and `python3 build_static.py`. Runtime tests mock WebGL; actual browser rendering should also be checked on the target device.
+Checks: `python3 -m unittest discover -s tests -p 'test_*.py'` (with requirements installed), `node --test tests/test_city.cjs tests/test_solar.cjs tests/test_mobile_ui.cjs`, and `python3 build_static.py`. Runtime tests use actual Three.js geometry/math with a mocked renderer; actual browser rendering and frame rate should also be checked on the target device.

@@ -1,0 +1,594 @@
+{
+  "8k_sun-small.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_sun.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_sun.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_sun-detail.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_sun.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_sun.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_mercury-small.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_mercury.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_mercury.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_mercury-detail.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_mercury.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_mercury.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "4k_venus_atmosphere-small.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/4k_venus_atmosphere.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "4k_venus_atmosphere.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "4k_venus_atmosphere-detail.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/4k_venus_atmosphere.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "4k_venus_atmosphere.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_earth_daymap-small.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_earth_daymap.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_earth_daymap.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_earth_daymap-detail.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_earth_daymap.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_earth_daymap.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_earth_nightmap-small.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_earth_nightmap.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_earth_nightmap.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_earth_nightmap-detail.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_earth_nightmap.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_earth_nightmap.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_earth_clouds-small.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_earth_clouds.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_earth_clouds.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_earth_clouds-detail.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_earth_clouds.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_earth_clouds.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_moon-small.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_moon.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_moon.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_moon-detail.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_moon.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_moon.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_mars-small.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_mars.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_mars.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_mars-detail.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_mars.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_mars.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_jupiter-small.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_jupiter.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_jupiter.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_jupiter-detail.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_jupiter.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_jupiter.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_saturn-small.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_saturn.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_saturn.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_saturn-detail.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_saturn.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_saturn.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_saturn_ring_alpha-small.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_saturn_ring_alpha.png",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_saturn_ring_alpha.png",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "8k_saturn_ring_alpha-detail.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/8k_saturn_ring_alpha.png",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "8k_saturn_ring_alpha.png",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "2k_uranus-small.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/2k_uranus.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "2k_uranus.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "2k_uranus-detail.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/2k_uranus.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "2k_uranus.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "2k_neptune-small.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/2k_neptune.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "2k_neptune.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "2k_neptune-detail.webp": {
+    "source": "https://www.solarsystemscope.com/textures/download/2k_neptune.jpg",
+    "credit": "Solar System Scope / INOVE",
+    "license": "CC BY 4.0",
+    "note": "Reference imagery; not live weather.",
+    "original": "2k_neptune.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "phobos-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/phobos.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "phobos.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "phobos-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/phobos.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "phobos.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "deimos-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/deimos.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "deimos.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "deimos-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/deimos.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "deimos.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "io-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/io.png",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "io.png",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "io-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/io.png",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "io.png",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "europa-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/europa.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "europa.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "europa-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/europa.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "europa.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "ganymede-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/ganymede.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "ganymede.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "ganymede-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/ganymede.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "ganymede.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "callisto-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/callisto.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "callisto.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "callisto-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/callisto.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "callisto.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "mimas-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/mimas.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "mimas.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "mimas-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/mimas.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "mimas.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "enceladus-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/enceladus.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "enceladus.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "enceladus-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/enceladus.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "enceladus.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "tethys-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/tethys.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "tethys.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "tethys-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/tethys.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "tethys.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "dione-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/dione.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "dione.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "dione-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/dione.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "dione.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "rhea-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/rhea.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "rhea.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "rhea-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/rhea.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "rhea.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "titan-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/titan.png",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "titan.png",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "titan-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/titan.png",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "titan.png",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "hyperion-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/hyperion.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "hyperion.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "hyperion-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/hyperion.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "hyperion.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "iapetus-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/iapetus.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "iapetus.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "iapetus-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/iapetus.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "iapetus.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "miranda-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/miranda.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "miranda.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "miranda-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/miranda.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "miranda.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "ariel-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/ariel.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "ariel.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "ariel-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/ariel.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "ariel.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "umbriel-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/umbriel.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "umbriel.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "umbriel-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/umbriel.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "umbriel.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "titania-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/titania.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "titania.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "titania-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/titania.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "titania.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "oberon-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/oberon.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "oberon.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "oberon-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/oberon.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "oberon.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "triton-small.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/triton.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "triton.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "triton-detail.webp": {
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/hires/triton.jpg",
+    "credit": "Celestia contributors; see Celestia README and REUSE.toml",
+    "license": "See accompanying license metadata",
+    "note": "Mapped/composite surface, with incomplete regions reconstructed.",
+    "original": "triton.jpg",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved."
+  },
+  "earth-normal-small.webp": {
+    "credit": "Celestia contributors; see CELESTIA-README",
+    "note": "Resampled Celestia normal map; numerical channels preserved with lossless WebP.",
+    "original": "earth-normal.png",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved.",
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/earth-normal.png",
+    "license": "See CELESTIA-LICENSE.md and LICENSES/"
+  },
+  "earth-normal-detail.webp": {
+    "credit": "Celestia contributors; see CELESTIA-README",
+    "note": "Resampled Celestia normal map; numerical channels preserved with lossless WebP.",
+    "original": "earth-normal.png",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved.",
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/earth-normal.png",
+    "license": "See CELESTIA-LICENSE.md and LICENSES/"
+  },
+  "mars-normal-small.webp": {
+    "credit": "Celestia contributors; see CELESTIA-README",
+    "note": "Resampled Celestia normal map; numerical channels preserved with lossless WebP.",
+    "original": "mars-normal.png",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved.",
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/mars-normal.png",
+    "license": "See CELESTIA-LICENSE.md and LICENSES/"
+  },
+  "mars-normal-detail.webp": {
+    "credit": "Celestia contributors; see CELESTIA-README",
+    "note": "Resampled Celestia normal map; numerical channels preserved with lossless WebP.",
+    "original": "mars-normal.png",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved.",
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/mars-normal.png",
+    "license": "See CELESTIA-LICENSE.md and LICENSES/"
+  },
+  "mercury-normal-small.webp": {
+    "credit": "Celestia contributors; see CELESTIA-README",
+    "note": "Resampled Celestia normal map; numerical channels preserved with lossless WebP.",
+    "original": "mercury-normal.png",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved.",
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/mercury-normal.png",
+    "license": "See CELESTIA-LICENSE.md and LICENSES/"
+  },
+  "mercury-normal-detail.webp": {
+    "credit": "Celestia contributors; see CELESTIA-README",
+    "note": "Resampled Celestia normal map; numerical channels preserved with lossless WebP.",
+    "original": "mercury-normal.png",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved.",
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/mercury-normal.png",
+    "license": "See CELESTIA-LICENSE.md and LICENSES/"
+  },
+  "moon-normal-small.webp": {
+    "credit": "Celestia contributors; see CELESTIA-README",
+    "note": "Resampled Celestia normal map; numerical channels preserved with lossless WebP.",
+    "original": "moon-normal.png",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved.",
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/moon-normal.png",
+    "license": "See CELESTIA-LICENSE.md and LICENSES/"
+  },
+  "moon-normal-detail.webp": {
+    "credit": "Celestia contributors; see CELESTIA-README",
+    "note": "Resampled Celestia normal map; numerical channels preserved with lossless WebP.",
+    "original": "moon-normal.png",
+    "derivative": "Lanczos resampling and WebP encoding; equirectangular mapping preserved.",
+    "source": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/3ed5836133901114a9cb4a2ea35751b274a464a1/textures/medres/moon-normal.png",
+    "license": "See CELESTIA-LICENSE.md and LICENSES/"
+  }
+}

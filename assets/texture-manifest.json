@@ -1,0 +1,746 @@
+{
+  "version": 1,
+  "note": "Resampled reference maps; not live surface imagery.",
+  "textures": {
+    "8k_sun.jpg": {
+      "sourceBytes": 3696361,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/8k_sun-small.webp",
+        "bytes": 104918,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/8k_sun-detail.webp",
+        "bytes": 278452,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "8k_mercury.jpg": {
+      "sourceBytes": 15035740,
+      "sourceSize": [
+        8192,
+        4096
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/8k_mercury-small.webp",
+        "bytes": 118494,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/8k_mercury-detail.webp",
+        "bytes": 495984,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "4k_venus_atmosphere.jpg": {
+      "sourceBytes": 1546146,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/4k_venus_atmosphere-small.webp",
+        "bytes": 15648,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/4k_venus_atmosphere-detail.webp",
+        "bytes": 44162,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "8k_earth_daymap.jpg": {
+      "sourceBytes": 4565076,
+      "sourceSize": [
+        8192,
+        4096
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/8k_earth_daymap-small.webp",
+        "bytes": 53662,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/8k_earth_daymap-detail.webp",
+        "bytes": 166998,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "8k_earth_nightmap.jpg": {
+      "sourceBytes": 3144468,
+      "sourceSize": [
+        8192,
+        4096
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/8k_earth_nightmap-small.webp",
+        "bytes": 21386,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/8k_earth_nightmap-detail.webp",
+        "bytes": 83764,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "8k_earth_clouds.jpg": {
+      "sourceBytes": 11619184,
+      "sourceSize": [
+        8192,
+        4096
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/8k_earth_clouds-small.webp",
+        "bytes": 156618,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/8k_earth_clouds-detail.webp",
+        "bytes": 579276,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "8k_moon.jpg": {
+      "sourceBytes": 15030356,
+      "sourceSize": [
+        8192,
+        4096
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/8k_moon-small.webp",
+        "bytes": 154894,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/8k_moon-detail.webp",
+        "bytes": 640730,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "8k_mars.jpg": {
+      "sourceBytes": 8396951,
+      "sourceSize": [
+        8192,
+        4096
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/8k_mars-small.webp",
+        "bytes": 76962,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/8k_mars-detail.webp",
+        "bytes": 274974,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "8k_jupiter.jpg": {
+      "sourceBytes": 3080980,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/8k_jupiter-small.webp",
+        "bytes": 51116,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/8k_jupiter-detail.webp",
+        "bytes": 146028,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "8k_saturn.jpg": {
+      "sourceBytes": 1098204,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/8k_saturn-small.webp",
+        "bytes": 12046,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/8k_saturn-detail.webp",
+        "bytes": 38442,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "8k_saturn_ring_alpha.png": {
+      "sourceBytes": 64790,
+      "sourceSize": [
+        8192,
+        500
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/8k_saturn_ring_alpha-small.webp",
+        "bytes": 4886,
+        "width": 1024,
+        "height": 62
+      },
+      "detail": {
+        "path": "optimized/8k_saturn_ring_alpha-detail.webp",
+        "bytes": 8556,
+        "width": 2048,
+        "height": 125
+      }
+    },
+    "2k_uranus.jpg": {
+      "sourceBytes": 77751,
+      "sourceSize": [
+        2048,
+        1024
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/2k_uranus-small.webp",
+        "bytes": 3106,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/2k_uranus-detail.webp",
+        "bytes": 9450,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "2k_neptune.jpg": {
+      "sourceBytes": 241580,
+      "sourceSize": [
+        2048,
+        1024
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/2k_neptune-small.webp",
+        "bytes": 6426,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/2k_neptune-detail.webp",
+        "bytes": 19118,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "phobos.jpg": {
+      "sourceBytes": 590288,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/phobos-small.webp",
+        "bytes": 20410,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/phobos-detail.webp",
+        "bytes": 58404,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "deimos.jpg": {
+      "sourceBytes": 230043,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/deimos-small.webp",
+        "bytes": 5320,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/deimos-detail.webp",
+        "bytes": 14150,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "io.png": {
+      "sourceBytes": 11589437,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/io-small.webp",
+        "bytes": 12228,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/io-detail.webp",
+        "bytes": 26604,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "europa.jpg": {
+      "sourceBytes": 1440001,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/europa-small.webp",
+        "bytes": 41346,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/europa-detail.webp",
+        "bytes": 189956,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "ganymede.jpg": {
+      "sourceBytes": 1460470,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/ganymede-small.webp",
+        "bytes": 52068,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/ganymede-detail.webp",
+        "bytes": 194834,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "callisto.jpg": {
+      "sourceBytes": 1931997,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/callisto-small.webp",
+        "bytes": 86916,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/callisto-detail.webp",
+        "bytes": 349378,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "mimas.jpg": {
+      "sourceBytes": 1122405,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/mimas-small.webp",
+        "bytes": 81030,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/mimas-detail.webp",
+        "bytes": 196346,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "enceladus.jpg": {
+      "sourceBytes": 1891393,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/enceladus-small.webp",
+        "bytes": 81204,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/enceladus-detail.webp",
+        "bytes": 331234,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "tethys.jpg": {
+      "sourceBytes": 1756540,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/tethys-small.webp",
+        "bytes": 114362,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/tethys-detail.webp",
+        "bytes": 372162,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "dione.jpg": {
+      "sourceBytes": 1825426,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/dione-small.webp",
+        "bytes": 108690,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/dione-detail.webp",
+        "bytes": 368918,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "rhea.jpg": {
+      "sourceBytes": 2092203,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/rhea-small.webp",
+        "bytes": 91572,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/rhea-detail.webp",
+        "bytes": 415030,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "titan.png": {
+      "sourceBytes": 2478053,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/titan-small.webp",
+        "bytes": 36754,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/titan-detail.webp",
+        "bytes": 94376,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "hyperion.jpg": {
+      "sourceBytes": 296038,
+      "sourceSize": [
+        2048,
+        1024
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/hyperion-small.webp",
+        "bytes": 40394,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/hyperion-detail.webp",
+        "bytes": 101544,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "iapetus.jpg": {
+      "sourceBytes": 1369992,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/iapetus-small.webp",
+        "bytes": 77410,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/iapetus-detail.webp",
+        "bytes": 246266,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "miranda.jpg": {
+      "sourceBytes": 378333,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/miranda-small.webp",
+        "bytes": 11858,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/miranda-detail.webp",
+        "bytes": 37154,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "ariel.jpg": {
+      "sourceBytes": 427212,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/ariel-small.webp",
+        "bytes": 16724,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/ariel-detail.webp",
+        "bytes": 52646,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "umbriel.jpg": {
+      "sourceBytes": 101804,
+      "sourceSize": [
+        2048,
+        1024
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/umbriel-small.webp",
+        "bytes": 13990,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/umbriel-detail.webp",
+        "bytes": 34970,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "titania.jpg": {
+      "sourceBytes": 144401,
+      "sourceSize": [
+        2048,
+        1024
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/titania-small.webp",
+        "bytes": 22742,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/titania-detail.webp",
+        "bytes": 61562,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "oberon.jpg": {
+      "sourceBytes": 97065,
+      "sourceSize": [
+        2048,
+        1024
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/oberon-small.webp",
+        "bytes": 14090,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/oberon-detail.webp",
+        "bytes": 35416,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "triton.jpg": {
+      "sourceBytes": 662510,
+      "sourceSize": [
+        4096,
+        2048
+      ],
+      "colorSpace": "srgb",
+      "small": {
+        "path": "optimized/triton-small.webp",
+        "bytes": 30050,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/triton-detail.webp",
+        "bytes": 97868,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "earth-normal.png": {
+      "sourceBytes": 645263,
+      "sourceSize": [
+        2048,
+        1024
+      ],
+      "colorSpace": "linear",
+      "small": {
+        "path": "optimized/earth-normal-small.webp",
+        "bytes": 129356,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/earth-normal-detail.webp",
+        "bytes": 517222,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "mars-normal.png": {
+      "sourceBytes": 1567406,
+      "sourceSize": [
+        2048,
+        1024
+      ],
+      "colorSpace": "linear",
+      "small": {
+        "path": "optimized/mars-normal-small.webp",
+        "bytes": 312778,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/mars-normal-detail.webp",
+        "bytes": 1279152,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "mercury-normal.png": {
+      "sourceBytes": 2165235,
+      "sourceSize": [
+        2048,
+        1024
+      ],
+      "colorSpace": "linear",
+      "small": {
+        "path": "optimized/mercury-normal-small.webp",
+        "bytes": 469092,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/mercury-normal-detail.webp",
+        "bytes": 1748836,
+        "width": 2048,
+        "height": 1024
+      }
+    },
+    "moon-normal.png": {
+      "sourceBytes": 3085474,
+      "sourceSize": [
+        2048,
+        1024
+      ],
+      "colorSpace": "linear",
+      "small": {
+        "path": "optimized/moon-normal-small.webp",
+        "bytes": 705550,
+        "width": 1024,
+        "height": 512
+      },
+      "detail": {
+        "path": "optimized/moon-normal-detail.webp",
+        "bytes": 2755250,
+        "width": 2048,
+        "height": 1024
+      }
+    }
+  }
+}

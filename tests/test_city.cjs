@@ -50,18 +50,21 @@ function weatherFixture(age=0){
  };
 }
 
-async function boot({offline=false,cached=null,reduced=false,data=weatherFixture(),mapFixture=smallMap,denseFixture=smallDense,missingResources=[],failedTextures=[]}={}){
+async function boot({offline=false,cached=null,reduced=false,mobile=false,pixelRatio=1,data=weatherFixture(),mapFixture=smallMap,denseFixture=smallDense,missingResources=[],failedTextures=[]}={}){
  const elements=new Map();
  for(const match of html.matchAll(/<([\w-]+)[^>]+id="([^"]+)"[^>]*>/g)){
-  const element=new Element(match[1]);element.checked=/\bchecked\b/.test(match[0]);element.hidden=/\bhidden\b/.test(match[0]);elements.set(match[2],element);
+  const element=new Element(match[1]);element.checked=/\bchecked\b/.test(match[0]);element.hidden=/\bhidden\b/.test(match[0]);element.clientWidth=mobile?390:1440;element.clientHeight=mobile?844:900;elements.set(match[2],element);
  }
  const buttons=[];
- for(const match of html.matchAll(/<button\s+data-(mood|camera|walk)="([^"]+)"[^>]*>/g)){const element=new Element('button');element.dataset[match[1]]=match[2];buttons.push(element);}
- const document={hidden:false,body:new Element('body'),documentElement:new Element('html'),getElementById:id=>elements.get(id),createElement:tag=>new Element(tag),createTextNode:text=>{const node=new Element();node.textContent=text;return node;},querySelectorAll:selector=>{const key=selector.match(/data-(\w+)/)?.[1];return buttons.filter(b=>b.dataset[key]);}};
+ const dataKey=key=>key.replace(/-([a-z])/g,(_,letter)=>letter.toUpperCase());
+ for(const match of html.matchAll(/<button\s+data-(mood|camera|walk|city-panel)="([^"]+)"[^>]*>/g)){const element=new Element('button');element.dataset[dataKey(match[1])]=match[2];buttons.push(element);}
+ const document=Object.assign(new EventTarget(),{hidden:false,body:new Element('body'),documentElement:new Element('html'),getElementById:id=>elements.get(id),createElement:tag=>new Element(tag),createTextNode:text=>{const node=new Element();node.textContent=text;return node;},querySelectorAll:selector=>{const key=dataKey(selector.match(/data-([\w-]+)/)?.[1]||'');return buttons.filter(b=>b.dataset[key]);}});
+ for(const element of [...elements.values(),...buttons])element.focus=()=>{document.activeElement=element;};
  document.documentElement.requestFullscreen=async()=>{document.fullscreenElement=document.documentElement;};document.exitFullscreen=()=>{document.fullscreenElement=null;};
  const frames=[],intervals=[],storage=new Map(),requests=[],textureRequests=[],warnings=[],errors=[];
  if(cached)storage.set('bikaner-weather-v1',JSON.stringify({saved:NOW-1000,data:cached}));
- let rendered=null,clock=NOW;
+ let rendered=null,clock=NOW,elapsed=0,renderer=null,renderCount=0,isMobile=mobile;
+ const resizeObservers=[];
  class FixedDate extends Date {constructor(...args){super(...(args.length?args:[clock]));}static now(){return clock;}}
  const three={...THREE,TextureLoader:class {
   async loadAsync(url){textureRequests.push(url);if(failedTextures.includes(url))throw new Error('Texture unavailable');
@@ -69,12 +72,12 @@ async function boot({offline=false,cached=null,reduced=false,data=weatherFixture
    const texture=new THREE.DataTexture(new Uint8Array([255,255,255,255]),1,1);texture.name=url;texture.flipY=true;return texture;
   }
  },WebGLRenderer:class {
-  constructor(){this.domElement=new Element('canvas');this.capabilities={getMaxAnisotropy:()=>8};this.shadowMap={};}
-  setPixelRatio(){}setSize(){}render(scene,camera){scene.updateMatrixWorld();rendered={scene,camera};}
+  constructor(options){renderer=this;this.options=options;this.domElement=new Element('canvas');this.capabilities={getMaxAnisotropy:()=>8};this.shadowMap={};}
+  setPixelRatio(ratio){this.pixelRatio=ratio;}setSize(width,height){this.size={width,height};}render(scene,camera){renderCount++;scene.updateMatrixWorld();rendered={scene,camera};}
  }};
- const window=new EventTarget();window.THREE=three;window.innerWidth=1440;
+ const window=new EventTarget();window.THREE=three;window.innerWidth=mobile?390:1440;
  const assets=new Map([['/assets/bikaner.json',mapFixture],['/assets/bikaner-buildings.json',denseFixture],['/assets/bikaner-imagery/metadata.json',imagery],['/assets/city-materials/credits.json',materials]]);
- const context={window,document,console:{log(){},warn:(...args)=>warnings.push(args),error:(...args)=>errors.push(args)},devicePixelRatio:1,performance:{now:()=>0},matchMedia:()=>({matches:reduced}),ResizeObserver:class{constructor(fn){this.fn=fn;}observe(){this.fn();}},localStorage:{getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,value)},URLSearchParams,AbortSignal,Float32Array,Date:FixedDate,Math,Map,Set,requestAnimationFrame:fn=>frames.push(fn),setInterval:fn=>intervals.push(fn),fetch:async url=>{
+ const context={window,document,console:{log(){},warn:(...args)=>warnings.push(args),error:(...args)=>errors.push(args)},devicePixelRatio:pixelRatio,performance:{now:()=>elapsed},matchMedia:query=>({get matches(){return query.includes('prefers-reduced-motion')?reduced:isMobile;}}),ResizeObserver:class{constructor(fn){this.fn=fn;resizeObservers.push(this);}observe(){this.fn();}},localStorage:{getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,value)},URLSearchParams,AbortSignal,Float32Array,Date:FixedDate,Math,Map,Set,requestAnimationFrame:fn=>frames.push(fn),setInterval:fn=>intervals.push(fn),setTimeout,fetch:async url=>{
   requests.push(String(url));
   if(assets.has(url))return {ok:!missingResources.includes(url)&&assets.get(url)!=null,status:404,json:async()=>structuredClone(assets.get(url))};
   assert(String(url).startsWith('https://api.open-meteo.com/v1/forecast?'),`Unexpected request: ${url}`);
@@ -83,10 +86,10 @@ async function boot({offline=false,cached=null,reduced=false,data=weatherFixture
  }};
  vm.createContext(context);vm.runInContext(fs.readFileSync(path.join(ROOT,'city.js'),'utf8'),context,{filename:'city.js'});
  for(let i=0;i<10;i++)await new Promise(resolve=>setImmediate(resolve));
- let elapsed=0;
+ if(mobile)for(let i=0;i<1000&&!elements.get('map-loading').hidden&&!errors.length;i++)await new Promise(resolve=>setTimeout(resolve,2));
  function frame(seconds=.05){elapsed+=seconds*1000;const callback=frames.shift();assert(callback,'animation frame is scheduled');callback(elapsed);}
  frame();
- return {elements,buttons,requests,textureRequests,storage,document,window,warnings,errors,frame,intervals,advance:seconds=>clock+=seconds*1000,get rendered(){return rendered;},mood(name){buttons.find(b=>b.dataset.mood===name).onclick();frame();},camera(name){buttons.find(b=>b.dataset.camera===name).onclick();frame();},key(code,down=true){window.dispatch(down?'keydown':'keyup',{code,target:document.body});}};
+ return {elements,buttons,requests,textureRequests,storage,document,window,warnings,errors,frame,intervals,advance:seconds=>clock+=seconds*1000,get rendered(){return rendered;},get renderer(){return renderer;},get renderCount(){return renderCount;},resizePhone(phone){isMobile=phone;const viewport=elements.get('city-scene');viewport.clientWidth=phone?390:1440;viewport.clientHeight=phone?844:900;resizeObservers.forEach(observer=>observer.fn());},mood(name){buttons.find(b=>b.dataset.mood===name).onclick();frame();},camera(name){buttons.find(b=>b.dataset.camera===name).onclick();frame();},panel(name){buttons.find(b=>b.dataset.cityPanel===name).onclick();},key(code,down=true){window.dispatch(down?'keydown':'keyup',{code,target:document.body});}};
 }
 
 function sceneParts(app){
@@ -206,6 +209,43 @@ test('partial hourly forecast leaves valid current conditions usable',async()=>{
 
 test('reduced motion freezes sky animation and suppresses automatic orbit',async()=>{
  const app=await boot({reduced:true});app.elements.get('auto-orbit').checked=true;app.frame();const position=app.rendered.camera.position.clone();for(let i=0;i<20;i++)app.frame();assert(app.rendered.camera.position.distanceTo(position)<1e-9);assert.equal(sceneParts(app).sky.material.uniforms.time.value,0);app.camera('aerial');assert(app.rendered.camera.position.distanceTo(position)>1000);
+});
+
+test('phone drawers expose one category and restore focus to visible controls across display modes',async()=>{
+ const app=await boot({mobile:true});
+ assert.equal(app.document.body.dataset.cityPanel,'');assert.equal(app.elements.get('city-drawer').inert,true);
+ app.panel('weather');assert(app.document.body.classList.contains('city-drawer-open'));assert.equal(app.document.body.dataset.cityPanel,'weather');assert.equal(app.elements.get('city-drawer').inert,false);assert.equal(app.buttons.find(b=>b.dataset.cityPanel==='weather')['aria-expanded'],'true');assert.equal(app.document.activeElement,app.elements.get('city-close-panel'));
+ app.panel('data');assert.equal(app.document.body.dataset.cityPanel,'data');assert.equal(app.elements.get('city-data-panel').open,true);assert.equal(app.buttons.find(b=>b.dataset.cityPanel==='weather')['aria-expanded'],'false');
+ app.elements.get('city-close-panel').onclick();assert.equal(app.document.body.dataset.cityPanel,'');assert.equal(app.elements.get('city-data-panel').open,false);assert.equal(app.document.activeElement,app.buttons.find(b=>b.dataset.cityPanel==='data'));
+ app.panel('explore');app.camera('street');assert.equal(app.document.body.dataset.cityPanel,'');assert.equal(app.elements.get('walk-controls').hidden,false);assert.equal(app.document.activeElement,app.buttons.find(b=>b.dataset.cityPanel==='explore'));
+ app.elements.get('city-summary-toggle').onclick();assert.equal(app.document.body.dataset.cityPanel,'weather');app.key('Escape');assert.equal(app.document.body.dataset.cityPanel,'');assert.equal(app.document.activeElement,app.elements.get('city-summary-toggle'));
+ app.elements.get('city-summary-toggle').onclick();app.elements.get('immersive').onclick();assert.equal(app.document.activeElement,app.elements.get('immersive'));
+ app.panel('weather');app.elements.get('city-close-panel').onclick();assert.equal(app.document.activeElement,app.buttons.find(b=>b.dataset.cityPanel==='weather'),'immersive mode cannot return focus to its hidden summary');
+ app.panel('data');app.resizePhone(false);assert.equal(app.document.body.dataset.cityPanel,'');assert.equal(app.elements.get('city-data-panel').open,false);assert.equal(app.elements.get('city-drawer').inert,false);assert.equal(app.document.activeElement,app.elements.get('immersive'),'desktop hides phone controls and restores focus to the header');
+});
+
+test('phone rendering limits pixel cost and frame rate while keeping walking at real speed',async()=>{
+ const app=await boot({mobile:true,pixelRatio:3}),{scene,sky,rain}=sceneParts(app);
+ assert.equal(app.renderer.pixelRatio,1.25);assert.equal(app.renderer.options.antialias,false);assert.equal(app.renderer.size.width,390);
+ assert.equal(scene.children.find(o=>o.isDirectionalLight).shadow.mapSize.x,1024);assert.equal(sky.material.defines.CLOUD_LAYERS,4);assert.equal(scene.children.filter(o=>o.isPointLight).length,3);
+ app.mood('rain');assert(rain.geometry.drawRange.count<=1600);assert.match(app.elements.get('city-visual-mode').textContent,/RAIN PREVIEW/);
+ app.camera('street');const start=app.rendered.camera.position.clone(),renders=app.renderCount;app.key('KeyS');for(let i=0;i<60;i++)app.frame(1/60);app.key('KeyS',false);
+ assert.equal(app.renderCount-renders,30);assert(Math.abs(app.rendered.camera.position.distanceTo(start)-1.7)<1e-6,'30 fps uses accumulated delta rather than slowing down walking');
+});
+
+test('suspending the page pauses graphics and clears movement while UTC and weather remain current',async()=>{
+ const app=await boot({mobile:true});app.camera('street');app.key('KeyS');const start=app.rendered.camera.position.clone(),renders=app.renderCount,clock=app.elements.get('city-utc-clock').textContent;
+ app.document.hidden=true;app.document.dispatch('visibilitychange');app.advance(60);for(let i=0;i<60;i++)app.frame(1);
+ assert.equal(app.renderCount,renders);assert(app.rendered.camera.position.distanceTo(start)<1e-9);assert.equal(app.elements.get('city-utc-clock').textContent,clock);
+ app.document.hidden=false;app.document.dispatch('visibilitychange');app.frame();assert.equal(app.elements.get('city-utc-clock').textContent,'06:31:00');assert.equal(app.elements.get('local-clock').textContent,'12:01');assert(app.rendered.camera.position.distanceTo(start)<1e-9,'movement is not stuck after returning from background');
+ assert.match(app.elements.get('city-summary-status').textContent,/LIVE MODEL · 12:00 IST/);const summary=app.elements.get('city-summary-temperature').textContent;app.mood('night');assert.equal(app.elements.get('city-summary-temperature').textContent,summary);assert.match(app.elements.get('city-visual-mode').textContent,/PREVIEW/);
+});
+
+test('phone progressive import retains all real mapped building edges and emits complete coverage',async()=>{
+ const app=await boot({mobile:true,mapFixture:map,denseFixture:dense});
+ assert(app.elements.get('map-loading').hidden);assert.equal(app.errors.length,0);assert.match(app.elements.get('map-coverage').textContent,/38,801 mapped buildings/);
+ const {walls}=sceneParts(app);let expected=0;for(const b of dense.buildings)for(const contour of [b.coordinates,...(b.holes||[])]){const points=contour.map(coords);if(points.at(-1)[0]===points[0][0]&&points.at(-1)[1]===points[0][1])points.pop();expected+=points.filter((p,i)=>Math.hypot(p[0]-points[(i+1)%points.length][0],p[1]-points[(i+1)%points.length][1])>0).length*6;}
+ assert.equal(walls.reduce((sum,wall)=>sum+wall.geometry.attributes.position.count,0),expected);
 });
 
 test('static build includes city routes, dense footprints, imagery, and textures without Python sources',()=>{
