@@ -1,7 +1,7 @@
 /* NASA/JPL ephemerides, SPICE orientation, camera-relative rendering. */
 (() => {
 'use strict';
-const $=id=>document.getElementById(id),T=window.THREE,AU=149597870.7;
+const $=id=>document.getElementById(id),T=window.THREE,AU=149597870.7,orbitModel=window.SolarOrbitGuides;
 if(!T){$('loading-message').textContent='The 3D renderer is unavailable.';return;}
 const mobile=matchMedia('(max-width: 760px)').matches||matchMedia('(pointer: coarse)').matches;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -21,7 +21,10 @@ const black=new T.DataTexture(new Uint8Array([0,0,0,255]),1,1);black.needsUpdate
 let catalogue=[],records={},bodies=new Map(),selected=399,view='close',mode='live',paused=false,speed=1,sim=Date.now()/1000;
 let start=0,end=0,width=1,height=1,theta=.5,phi=1.2,distance=5.7,targetDistance=5.7;
 let previous=performance.now(),lastRender=-Infinity,lastUI=0,lastMapCheck=-Infinity,lastLabels=-Infinity,elapsed=0,fetching=false,nextFetch=0,ready=false,assetFailures=new Set();
-let apiState={},needsTrails=true,delivery='local-cache',visibleKey='',visibleCache=[];
+let apiState={},needsTrails=true,needsOrbits=true,lastOrbitEpoch=-Infinity,overviewReadyCount=0,delivery='local-cache',visibleKey='',visibleCache=[];
+const planetColors={199:0xaa9b8d,299:0xe4c49a,399:0x6db9ec,499:0xe79971,599:0xd7bd9c,699:0xe1cc9b,799:0x8cdddf,899:0x6898e3};
+const overviewRadii={10:.98,199:.2,299:.3,399:.31,499:.24,599:.8,699:.7,799:.4,899:.39};
+const overviewPixels={10:34,199:10,299:13,399:14,499:11,599:25,699:22,799:17,899:17};
 const origin=new T.Vector3(),lightWorld=new T.Vector3(),lightView=new T.Vector3(),project=new T.Vector3();
 const qTemp=new T.Quaternion(),pTemp=new T.Vector3();
 const vertex=`
@@ -45,7 +48,7 @@ const fragment=`
  void main(){
  #include <logdepthbuf_fragment>
  vec4 tex=texture2D(dayMap,vUv);vec3 N=normalize(vN);if(hasNormal>.5)N=relief(N);vec3 L=normalize(lightView);float nl=dot(N,L);float vis=eclipse();vec3 color;
- if(sun>.5){color=tex.rgb*3.;}else{
+ if(sun>.5){color=tex.rgb*1.65;}else{
  color=tex.rgb*(.013+1.4*max(nl,0.)*vis);
  if(earth>.5){float sea=smoothstep(.025,.15,tex.b-tex.r);vec3 H=normalize(L+normalize(vEye));float spec=pow(max(dot(N,H),0.),100.);color+=vec3(.75,.85,1.)*spec*sea*.6*max(nl,0.)*vis;color+=texture2D(nightMap,vUv).rgb*(1.-smoothstep(-.16,.04,nl))*.8;}
  }
@@ -94,8 +97,9 @@ function makeBody(meta){
  const group=new T.Group();scene.add(group);const mat=material(meta.id),mesh=new T.Mesh(sphere,mat);
  mesh.scale.set(meta.radii[0]/meta.radius,meta.radii[2]/meta.radius,meta.radii[1]/meta.radius);mesh.userData.bodyId=meta.id;group.add(mesh);
  const label=document.createElement('span');label.className='body-label';label.textContent=meta.name;labelLayer.append(label);
- const trail=new T.Line(new T.BufferGeometry(),new T.LineBasicMaterial({color:0x6e85a7,transparent:true,opacity:.3,depthWrite:false}));scene.add(trail);
- const b={...meta,group,mesh,material:mat,label,trail,raw:new T.Vector3(),velocity:new T.Vector3(),absolute:new T.Vector3(),drawRadius:1,mapLevel:0,mapRequest:0,loaded:false,orientationAvailable:false};
+ const trail=new T.Line(new T.BufferGeometry(),new T.LineBasicMaterial({color:planetColors[meta.id]||0x6e85a7,transparent:true,opacity:.4,depthWrite:false}));trail.userData.trajectoryBodyId=meta.id;scene.add(trail);
+ const orbit=new T.Line(new T.BufferGeometry(),new T.LineBasicMaterial({color:planetColors[meta.id]||0x6e85a7,transparent:true,opacity:.18,depthWrite:false}));orbit.visible=false;orbit.userData.orbitBodyId=meta.id;scene.add(orbit);
+ const b={...meta,group,mesh,material:mat,label,trail,orbit,orbitPoints:null,raw:new T.Vector3(),velocity:new T.Vector3(),absolute:new T.Vector3(),drawRadius:1,mapLevel:0,mapRequest:0,loaded:false,orientationAvailable:false};
  if(meta.id===399){atmosphere(b,0x518de6,1.015,.65);const cm=material(0);cm.uniforms.cloud.value=1;cm.transparent=true;cm.depthWrite=false;const clouds=new T.Mesh(sphere,cm);clouds.scale.copy(mesh.scale).multiplyScalar(1.0018);group.add(clouds);b.clouds=clouds;}
  if(meta.id===299)atmosphere(b,0xbfac81,1.025,.3);
  if(meta.id===606)atmosphere(b,0xd19d5a,1.05,.5);
@@ -116,7 +120,7 @@ function makeBody(meta){
   }`,side:T.DoubleSide,transparent:true,depthWrite:false,uniforms:{dayMap:{value:white},lightWorld:{value:new T.Vector3()},lightView:{value:new T.Vector3()},occluders:{value:Array.from({length:8},()=>new T.Vector3())},occRadii:{value:Array(8).fill(0)},solarAngle:{value:.001}}});
   const ring=new T.Mesh(rg,rm);group.add(ring);b.ring=ring;
  }
- if(meta.id===10){const c=document.createElement('canvas');c.width=c.height=256;const g=c.getContext('2d'),r=g.createRadialGradient(128,128,24,128,128,128);r.addColorStop(0,'rgba(255,245,212,.7)');r.addColorStop(.27,'rgba(255,197,104,.16)');r.addColorStop(1,'rgba(255,156,70,0)');g.fillStyle=r;g.fillRect(0,0,256,256);const sp=new T.Sprite(new T.SpriteMaterial({map:new T.CanvasTexture(c),depthWrite:false,transparent:true,blending:T.AdditiveBlending}));sp.scale.set(8,8,1);group.add(sp);}
+ if(meta.id===10){const c=document.createElement('canvas');c.width=c.height=256;const g=c.getContext('2d'),r=g.createRadialGradient(128,128,12,128,128,128);r.addColorStop(0,'rgba(255,237,189,.45)');r.addColorStop(.28,'rgba(255,189,89,.13)');r.addColorStop(.55,'rgba(246,120,43,.035)');r.addColorStop(1,'rgba(255,156,70,0)');g.fillStyle=r;g.fillRect(0,0,256,256);const sp=new T.Sprite(new T.SpriteMaterial({map:new T.CanvasTexture(c),depthWrite:false,transparent:true,blending:T.AdditiveBlending}));sp.scale.set(7,7,1);group.add(sp);}
  return b;
 }
 async function ensureMap(b,quality){
@@ -156,9 +160,40 @@ function parentBody(){const b=bodies.get(selected);return b.parent!==10&&b.paren
 function family(){const parent=parentBody();return [...bodies.values()].filter(b=>b.id===parent.id||b.parent===parent.id);}
 function visibleBodies(){const key=view+':'+selected;if(key!==visibleKey){visibleKey=key;visibleCache=view==='overview'?[...bodies.values()].filter(b=>b.parent===10||b.id===10):family();}return visibleCache;}
 function unit(){return view==='overview'?AU:bodies.get(selected).radius;}
+function overviewMode(){return !$('readable-scale').checked?'physical':$('overview-scale').value==='proportional'?'proportional':'cinematic';}
+function overviewPoint(point){
+ const result=new T.Vector3().fromArray(point).divideScalar(AU),r=result.length();
+ if(overviewMode()==='cinematic'&&r>0)result.multiplyScalar((2.4+3*Math.log1p(r/.35))/r);
+ return result;
+}
+function refreshOrbitGuides(){
+ if(view!=='overview')return;
+ for(const b of bodies.values()){
+  if(b.parent!==10||!b.hasData||!orbitModel){b.orbit.visible=false;b.orbitPoints=null;continue;}
+  const orbit=orbitModel.ellipseFromState(b.raw.toArray(),b.velocity.toArray());
+  b.orbitPoints=orbit?orbit.points.map(overviewPoint):null;
+  b.orbit.geometry.dispose();b.orbit.geometry=new T.BufferGeometry();
+  if(b.orbitPoints)b.orbit.geometry.setFromPoints(b.orbitPoints);
+  b.orbit.userData.epoch=sim;b.orbit.userData.kind='osculating-guide';
+ }
+ needsOrbits=false;lastOrbitEpoch=sim;
+}
 function fitDistance(){
  const b=bodies.get(selected),aspect=Math.min(1,width/height),fov=Math.tan(camera.fov*Math.PI/360);
- if(view==='overview')return 34/(fov*aspect)*1.12;
+ if(view==='overview'){
+  if(needsOrbits)refreshOrbitGuides();
+  const right=new T.Vector3(Math.cos(theta),0,-Math.sin(theta));
+  const up=new T.Vector3(-Math.cos(phi)*Math.sin(theta),Math.sin(phi),-Math.cos(phi)*Math.cos(theta));
+  const direction=new T.Vector3(Math.sin(phi)*Math.sin(theta),Math.cos(phi),Math.sin(phi)*Math.cos(theta));
+  const horizontal=fov*Math.max(.1,width/height)*.87,vertical=fov*.83;
+  let fit=5;
+  for(const body of visibleBodies())if(body.hasData){
+   const points=body.orbitPoints||[overviewPoint(body.absolute.toArray())];
+   const margin=overviewMode()==='physical'?body.radius/AU:overviewRadii[body.id]*(body.id===699?2.32:1);
+   for(const point of points){const depth=point.dot(direction);fit=Math.max(fit,depth+(Math.abs(point.dot(right))+margin)/horizontal,depth+(Math.abs(point.dot(up))+margin)/vertical);}
+  }
+  return fit*1.05;
+ }
  if(view==='system'){
   let radius=2;for(const member of family())if(member.hasData)radius=Math.max(radius,member.absolute.distanceTo(b.absolute)/b.radius+member.radius/b.radius);
   return radius/(fov*aspect)*1.17;
@@ -172,8 +207,9 @@ function setView(next){
  view=next;if(!ready)return;
  if(view==='overview')selected=10;
  if(view==='system'){const parent=parentBody();selected=parent.id;}
- if(view==='overview'){theta=.25;phi=.69;}else aimAtSun();
- targetDistance=fitDistance();distance=targetDistance;needsTrails=true;refreshSelection();
+ document.body.dataset.view=view;
+ if(view==='overview'){theta=.25;phi=.95;needsOrbits=true;}else aimAtSun();
+ targetDistance=fitDistance();distance=targetDistance;overviewReadyCount=view==='overview'?visibleBodies().filter(b=>b.hasData).length:0;needsTrails=true;refreshSelection();
 }
 function select(id,nextView='close'){
  if(!bodies.has(Number(id)))return;selected=Number(id);setView(nextView);$('announcement').textContent='Exploring '+bodies.get(selected).name;
@@ -181,7 +217,9 @@ function select(id,nextView='close'){
 function refreshSelection(){
  const b=bodies.get(selected),isOverview=view==='overview';$('body-select').value=String(selected);
  $('scene-name').textContent=isOverview?'Solar system':b.name;$('scene-kind').textContent=isOverview?'EIGHT PLANETS · ONE STAR':b.kind.toUpperCase();
- $('scene-note').textContent=isOverview?'Proportional orbital distances':view==='system'?'Moon positions and physical spacing':'Sunlit geometry · Astronomical rotation';
+ $('scene-note').textContent=isOverview?(overviewMode()==='cinematic'?'Live geometry · Cinematic display scale':'Live geometry · Real orbital distances'):view==='system'?'Moon positions and physical spacing':'Sunlit geometry · Astronomical rotation';
+ $('overview-toolbar').hidden=!isOverview;
+ $('overview').classList.toggle('active',isOverview);
  $('closeup').classList.toggle('active',view==='close');$('system-view').classList.toggle('active',view==='system');
  const children=[...bodies.values()].filter(x=>x.parent===b.id);$('system-view').disabled=!children.length&&b.parent===10||b.id===10;
  $('scale-option').hidden=!isOverview;$('body-radius').textContent=b.radius.toLocaleString('en-GB',{maximumFractionDigits:1})+' km';
@@ -222,7 +260,8 @@ function updateUI(){
  const ok=b.hasData; $('state-dot').classList.toggle('ready',ok);$('state-label').textContent=ok?'JPL ephemeris loaded':'Position data unavailable';
  if(rec){$('solution').textContent=rec.source+' · '+(b.orientationAvailable?b.frame:'Orientation unavailable');$('fetched').textContent=rec.fetchedUTC;$('window').textContent=new Date(rec.start*1000).toISOString().slice(0,16)+' — '+new Date(rec.end*1000).toISOString().slice(0,16)+' UTC';}
  for(const moon of family()){const el=$('moon-distance-'+moon.id);if(el)el.textContent=moon.hasData?Math.round(moon.raw.length()).toLocaleString()+' km':'Unavailable';}
- $('scale-label').textContent=view==='overview'?($('readable-scale').checked?'Proportional distances · Body sizes enlarged':'Physical sizes and distances'):'Physical sizes and distances · 48 h trajectories';
+ $('scale-label').textContent=view==='overview'?(overviewMode()==='cinematic'?'Cinematic · Spacing compressed · Sizes enlarged':overviewMode()==='proportional'?'Real distances · Sizes enlarged':'Physical sizes and distances'):'Physical sizes and distances · 48 h trajectories';
+ $('guide-note').hidden=view!=='overview'||!$('trails').checked;
  if(b.id!==607&&rec&&!b.orientationAvailable)$('rotation-note').textContent='Orientation data unavailable. Rotation is not being simulated.';
 }
 function drawTrails(){
@@ -231,7 +270,7 @@ function drawTrails(){
   const rec=records[b.id];const show=$('trails').checked&&rec&&visible.includes(b)&&(view==='overview'?b.id!==10:b.parent!==10&&b.parent!==0);
   b.trail.visible=Boolean(show);if(!show)continue;
   const points=[];
-  for(let i=0;i<rec.samples.length;i+=2){const row=rec.samples[i];points.push(new T.Vector3(row[1],row[3],-row[2]).divideScalar(scale));}
+  for(let i=0;i<rec.samples.length;i+=2){const row=rec.samples[i];points.push(view==='overview'?overviewPoint([row[1],row[3],-row[2]]):new T.Vector3(row[1],row[3],-row[2]).divideScalar(scale));}
   b.trail.geometry.dispose();b.trail.geometry=new T.BufferGeometry().setFromPoints(points);
  }
  needsTrails=false;
@@ -250,10 +289,12 @@ function positionLabels(visible){
   if(!b.hasData||view==='close'&&b.id===selected)continue;
   project.copy(b.group.position).project(camera);if(project.z>1||project.z< -1)continue;
   const cx=(project.x+1)*width/2,cy=(1-project.y)*height/2;
-  if(cx<0||cx>width||cy<100||cy>height-80)continue;
-  const w=Math.max(50,b.name.length*7),h=18,r=Math.min(45,Math.max(4,b.drawRadius*height/(Math.max(camera.position.distanceTo(b.group.position),.1)*.65)));
-  const options=[[cx+r+5,cy-8],[cx-w/2,cy-r-20],[cx-w/2,cy+r+7],[cx-r-w-5,cy-8]];
-  for(const [x,y] of options){const rect={x,y,w,h};if(x<8||x+w>width-8||y<98||y+h>height-76||occupied.some(a=>x<a.x+a.w+5&&x+w+5>a.x&&y<a.y+a.h+4&&y+h+4>a.y))continue;b.label.style.display='block';b.label.style.transform=`translate(${x}px,${y}px)`;occupied.push(rect);break;}
+  const top=height<300?55:height<450?85:100,bottom=height<300?48:80;
+  if(cx<0||cx>width||cy<top||cy>height-bottom)continue;
+  const w=Math.max(50,b.name.length*7),h=18,r=Math.min(100,Math.max(6,b.drawRadius*(b.id===699?2.32:1)*height/(Math.max(camera.position.distanceTo(b.group.position),.1)*.65)));
+  const right=[cx+r+5,cy-8],above=[cx-w/2,cy-r-20],below=[cx-w/2,cy+r+7],left=[cx-r-w-5,cy-8];
+  const options=b.id===10&&view==='overview'?[left,below,above,right]:[right,above,below,left];
+  for(const [x,y] of options){const rect={x,y,w,h};if(x<8||x+w>width-8||y<top-2||y+h>height-bottom+4||occupied.some(a=>x<a.x+a.w+5&&x+w+5>a.x&&y<a.y+a.h+4&&y+h+4>a.y))continue;b.label.style.display='block';b.label.style.transform=`translate(${x}px,${y}px)`;occupied.push(rect);break;}
  }
 }
 function applyRecords(status){
@@ -265,7 +306,12 @@ function applyRecords(status){
  $('loading-message').textContent=`${status.message} · ${status.ready}/29 bodies`;
  $('range-start').textContent=new Date(start*1000).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'UTC'});
  $('range-end').textContent=new Date(end*1000).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'UTC'})+' UTC';
- needsTrails=true;
+ needsTrails=true;needsOrbits=true;
+ if(view==='overview'){
+  const count=visibleBodies().filter(b=>b.hasData).length;
+  if(count>overviewReadyCount){targetDistance=fitDistance();distance=targetDistance;}
+  overviewReadyCount=count;
+ }
  const missing=29-(status.ready||0);
  if(missing&&status.busy)$('notice').textContent=`Loading ${missing} more bodies from JPL…`;
  else if(missing)$('notice').textContent=`${missing} bodies have unavailable data. Retrying shortly.`;
@@ -328,7 +374,10 @@ $('live').onclick=()=>{mode='live';paused=false;speed=1;sim=Date.now()/1000;upda
 $('pause').onclick=()=>{if(!paused){paused=true;mode='playback';}else paused=false;updateClockControls();};
 $('speed').onchange=e=>{speed=Number(e.target.value);mode='playback';paused=false;updateClockControls();};
 $('scrub').oninput=e=>{if(!ready)return;sim=start+(end-start)*Number(e.target.value)/1000;paused=true;mode='playback';needsTrails=true;updateClockControls();};
-$('trails').onchange=()=>needsTrails=true;$('readable-scale').onchange=()=>updateUI();
+$('trails').onchange=()=>{needsTrails=true;updateUI();};
+function changeOverviewScale(){needsTrails=true;needsOrbits=true;if(view==='overview'){refreshOrbitGuides();targetDistance=fitDistance();distance=targetDistance;}refreshSelection();}
+$('readable-scale').onchange=()=>{$('overview-scale').value=$('readable-scale').checked?'cinematic':'physical';changeOverviewScale();};
+$('overview-scale').onchange=()=>{$('readable-scale').checked=$('overview-scale').value!=='physical';changeOverviewScale();};
 $('fullscreen').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen().catch(()=>{});};
 const pointers=new Map();let dragged=false,down=null,pinch=0;
 viewport.addEventListener('wheel',e=>{e.preventDefault();zoom(Math.exp(e.deltaY*.001));},{passive:false});
@@ -349,13 +398,17 @@ function frame(now){
  setStates(sim);const focused=bodies.get(selected),visible=visibleBodies(),u=unit();if(view==='overview')origin.set(0,0,0);else origin.copy(focused.absolute);
  for(const b of bodies.values()){
   b.group.visible=visible.includes(b)&&b.hasData;if(!b.group.visible){b.trail.visible=false;continue;}
-  b.group.position.copy(b.absolute).sub(origin).divideScalar(u);
+  if(view==='overview')b.group.position.copy(overviewPoint(b.absolute.toArray()));else b.group.position.copy(b.absolute).sub(origin).divideScalar(u);
   b.drawRadius=b.radius/u;
-  if(view==='overview'&&$('readable-scale').checked)b.drawRadius={10:.10,199:.018,299:.026,399:.028,499:.022,599:.15,699:.13,799:.10,899:.10}[b.id]||b.drawRadius;
   b.group.scale.setScalar(b.drawRadius);
  }
  const ease=reduced?1:1-Math.exp(-dt*7);distance+=(targetDistance-distance)*ease;
  camera.position.set(distance*Math.sin(phi)*Math.sin(theta),distance*Math.cos(phi),distance*Math.sin(phi)*Math.cos(theta));camera.lookAt(0,0,0);camera.updateMatrixWorld();
+ if(view==='overview'&&overviewMode()!=='physical')for(const b of visible)if(b.hasData){
+  const pixelFloor=overviewPixels[b.id]*(mobile?.8:1)*Math.min(1,height/450);
+  b.drawRadius=Math.max(overviewMode()==='cinematic'?overviewRadii[b.id]:b.radius/AU,pixelFloor*2*Math.tan(camera.fov*Math.PI/360)*camera.position.distanceTo(b.group.position)/height);
+  b.group.scale.setScalar(b.drawRadius);
+ }
  for(const b of visible){
   lightWorld.copy(b.absolute).negate().normalize();if(b.id===10)lightWorld.set(1,0,0);lightView.copy(lightWorld).transformDirection(camera.matrixWorldInverse);
   const occluders=view==='overview'?[]:visible.filter(o=>o.hasData&&o!==b).sort((a,c)=>a.absolute.distanceToSquared(b.absolute)-c.absolute.distanceToSquared(b.absolute));
@@ -363,6 +416,8 @@ function frame(now){
   if(b.ring)uniformsFor(b.ring.material,b,[b,...occluders],true);
  }
  if(needsTrails)drawTrails();positionTrails();
+ if(view==='overview'&&(needsOrbits||Math.abs(sim-lastOrbitEpoch)>1800))refreshOrbitGuides();
+ for(const b of bodies.values())b.orbit.visible=Boolean(view==='overview'&&$('trails').checked&&b.hasData&&b.orbitPoints);
  if(now-lastMapCheck>500){lastMapCheck=now;updateVisibleMaps(visible);}
  renderer.render(scene,camera);if(now-lastLabels>100){lastLabels=now;positionLabels(visible);}
  if(now-lastUI>1000){lastUI=now;updateUI();}

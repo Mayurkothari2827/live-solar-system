@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#060d14"><title>ORBIT · Live Solar Observatory</title>
   <meta name="description" content="Explore the solar system at current UTC using NASA/JPL positions and SPICE rotation, with live weather in Bikaner's city observatory.">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css?v=20261003">
 </head>
 <body>
 <header class="topbar">
@@ -16,10 +16,11 @@
     <div id="scene"></div><div id="labels" aria-hidden="true"></div>
     <div class="scene-heading"><div id="scene-kind" class="eyebrow">TERRESTRIAL PLANET</div><h2 id="scene-name">Earth</h2><div id="scene-note">True dimensions · Sunlit geometry</div></div>
     <div class="scene-status" aria-label="Position data status"><span id="hud-status-dot" aria-hidden="true"></span><span id="hud-source-state">Connecting to JPL data</span></div>
+    <div class="overview-toolbar" id="overview-toolbar" hidden><label class="sr-only" for="overview-scale">Solar overview display scale</label><select id="overview-scale"><option value="cinematic">Cinematic</option><option value="proportional">Real distances</option><option value="physical">True scale</option></select></div>
     <div class="view-toolbar" role="group" aria-label="View mode"><button id="closeup" class="active">Close-up</button><button id="system-view">Moon system</button><button id="top-view">Top view</button></div>
     <div class="zoom-toolbar"><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out">−</button><button id="fit" aria-label="Fit selected system">Fit</button></div>
     <div id="loading" class="loading"><span class="loader"></span><span id="loading-message">Preparing ephemeris…</span></div>
-    <div class="scene-bottom"><span id="scale-label">Physical scale</span><span class="gesture">Drag to orbit · Scroll / pinch to zoom</span></div>
+    <div class="scene-bottom"><div><span id="scale-label">Physical scale</span><span id="guide-note" hidden>Faint curves: orbit guides · Bright arcs: loaded trajectories</span></div><span class="gesture">Drag to orbit · Scroll / pinch to zoom</span></div>
   </section>
   <aside class="inspector" id="inspector" aria-label="Body telemetry">
     <div class="sheet-heading mobile-only"><div><span class="eyebrow">SOLAR OBSERVATORY</span><h2 id="sheet-title">Telemetry</h2></div><button id="close-sheet" aria-label="Close information panel">×</button></div>
@@ -27,13 +28,15 @@
     <div class="facts"><div><span>Distance from <span id="distance-origin">Sun</span></span><strong id="body-distance">—</strong></div><div><span>Orbital speed</span><strong id="body-speed">—</strong></div><div><span>Equatorial radius</span><strong id="body-radius">—</strong></div></div>
     <div class="rotation-block"><span class="section-label">ROTATION</span><p id="rotation-note">Astronomical orientation from NASA SPICE.</p></div>
     <div id="moons-panel"><div class="section-row"><span id="moon-heading" class="section-label">MOONS</span><span id="moon-count"></span></div><div id="moon-list"></div></div>
-    <div class="view-options"><label><input type="checkbox" id="trails" checked> Trajectories</label><label><input type="checkbox" id="show-labels" checked> Body labels</label><label id="scale-option" hidden><input type="checkbox" id="readable-scale" checked> Expand planets for visibility</label></div>
+    <div class="view-options"><label><input type="checkbox" id="trails" checked> Orbit guides & trajectories</label><label><input type="checkbox" id="show-labels" checked> Body labels</label><label id="scale-option" hidden><input type="checkbox" id="readable-scale" checked> Enlarge planets for visibility</label></div>
     <details class="data-details"><summary>Data & accuracy</summary><div>
       <p><a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noreferrer">NASA/JPL Horizons</a> body-center positions and velocities. Geometric positions at the displayed instant, without light-travel delay.</p>
       <p><a href="https://naif.jpl.nasa.gov/naif/" target="_blank" rel="noreferrer">NAIF SPICE</a> supplies axial tilt, reference rotation, Earth orientation, and lunar libration. Hyperion’s chaotic orientation is not available.</p>
       <p>Five-minute position/velocity samples use cubic Hermite interpolation. One-minute orientation samples use quaternion interpolation. These are ephemeris predictions, not perfectly exact observations.</p>
       <p>Surface maps, clouds, gas-giant storms, and night lights are reference imagery, not live photographs. Gas planets and the Sun have reference frames, not a single rigid visible surface.</p>
-      <p>21 selected moons are included; this is not a catalog of every known moon. Moon-system and close-up views use physical dimensions. Solar overview can enlarge bodies.</p>
+      <p>21 selected moons are included; this is not a catalog of every known moon. Moon-system and close-up views use physical dimensions.</p>
+      <p>Cinematic overview compresses radial spacing and enlarges bodies to show their surfaces. Live orbital directions, inclinations, and axial orientation are preserved. Real distances keeps proportional positions with enlarged bodies; True scale preserves both sizes and spacing.</p>
+      <p>Faint full orbit guides are instantaneous two-body ellipses calculated from the loaded position and velocity with <a href="https://ssd.jpl.nasa.gov/astro_par.html" target="_blank" rel="noreferrer">JPL's solar gravitational parameter</a>. They illustrate orbital shape, not future JPL predictions. Brighter short arcs are the actual loaded 48-hour trajectories. The solar halo is an illustrative glow, not live corona imagery.</p>
       <dl><dt>Position solution</dt><dd id="solution">—</dd><dt>Fetched</dt><dd id="fetched">—</dd><dt>Data window</dt><dd id="window">—</dd></dl>
       <p class="credits">Maps: <a href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noreferrer">Solar System Scope / INOVE, CC BY 4.0</a>; <a href="https://github.com/CelestiaProject/CelestiaContent" target="_blank" rel="noreferrer">Celestia contributors</a>. Surface mapping and reconstruction are imperfect. <a href="/README.md" target="_blank">Full credits and model notes</a>.</p>
     </div></details>
@@ -54,6 +57,6 @@
   <button data-sheet="data" aria-controls="inspector" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/></svg><span>Data</span></button>
 </nav>
 <div id="announcement" class="sr-only" aria-live="polite"></div>
-<script src="/assets/three.min.js"></script><script src="/app.js"></script><script src="/mobile.js"></script>
+<script src="/assets/three.min.js"></script><script src="/solar-orbits.js?v=20261003"></script><script src="/app.js?v=20261003"></script><script src="/mobile.js"></script>
 </body>
 </html>
