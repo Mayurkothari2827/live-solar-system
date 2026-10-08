@@ -26,3 +26,15 @@ test('reduced motion suppresses optional gas illustration; layer changes dispose
 
 test('mobile draw cap preserves current UTC and object search navigates across catalog scales',async()=>{const a=await boot({mobile:true});const start=a.renderer.count;for(let i=0;i<60;i++)a.frame(1/60);assert.equal(a.renderer.count-start,30);a.elements.get('search').value='TRAPPIST';a.elements.get('search').oninput();assert(a.elements.get('search-results').children.length>0);a.elements.get('search-results').children[0].onclick();a.frame(.04);assert.match(a.elements.get('object-name').textContent,/TRAPPIST/);assert(!a.elements.get('planet-section').hidden);});
 test('deep links and failed observation images keep source attribution and usable 3D data',async()=>{const a=await boot({search:'?layer=blackholes'});assert.match(a.elements.get('object-name').textContent,/Sagittarius/);a.elements.get('observation-image').onerror();assert(a.elements.get('observation-image').hidden);assert.match(a.elements.get('observation-caption').textContent,/EHT Collaboration.*Image unavailable/);assert.match(a.elements.get('observation-link').href,/eso.org/);assert(a.world().children.length>0);});
+
+test('recorded observation stage preserves provenance, closes on target change, and recovers from failure',async()=>{
+ const a=await boot({mobile:true});assert(a.elements.get('show-observation').hidden);
+ a.layer('blackholes');assert(!a.elements.get('show-observation').hidden);
+ a.elements.get('show-observation').onclick();assert(!a.elements.get('observation-stage').hidden);
+ assert.match(a.elements.get('stage-credit').textContent,/2017 observations.*EHT Collaboration/);
+ assert.equal(a.elements.get('stage-image').src,a.elements.get('observation-image').src);
+ a.choose('m87-star');assert(a.elements.get('observation-stage').hidden);
+ a.elements.get('show-observation').onclick();a.elements.get('stage-image').onerror();
+ assert(a.elements.get('observation-stage').hidden);assert.match(a.elements.get('announcement').textContent,/unavailable/);
+ a.layer('nearby');assert(a.elements.get('show-observation').hidden);
+});
