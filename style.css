@@ -30,9 +30,9 @@ h1, h2, p { margin: 0; }
 .header-controls { display: flex; gap: 8px; align-items: center; }
 .header-controls select { width: 174px; }
 #fullscreen { font-size: 24px; padding: 0 10px; }
-.city-link, .space-link { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 13px; border: 1px solid #2a4050; background: #101f2c; color: #c5dae3; border-radius: 6px; font-size: 12px; white-space: nowrap; text-decoration: none; }
+.space-link { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 13px; border: 1px solid #2a4050; background: #101f2c; color: #c5dae3; border-radius: 6px; font-size: 12px; white-space: nowrap; text-decoration: none; }
 .space-link { border-color: #397076; color: var(--accent); }
-.city-link:hover { background: #1a3241; border-color: #668d9c; }
+.space-link:hover { background: #1a3241; border-color: #668d9c; }
 .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 292px; min-height: 440px; height: calc(100dvh - 254px); }
 .viewport { position: relative; min-width: 0; overflow: hidden; background: radial-gradient(ellipse at 45% 52%, #0a1420 0%, #02060a 70%); touch-action: none; }
 #scene, #labels { position: absolute; inset: 0; }
@@ -134,7 +134,6 @@ body[data-ephemeris-status='unavailable'] #hud-status-dot { background: #ff9a85;
   .header-controls #overview { font-size: 12px; }
   .space-link { font-size: 11px; padding: 10px 9px; }
   .header-controls #fullscreen { display: none; }
-  .city-link { position: absolute; top: 10px; right: max(16px, env(safe-area-inset-right)); font-size: 11px; border-color: #244351; background: transparent; }
   .workspace { height: auto; min-height: 0; flex: 1; display: block; position: relative; }
   .viewport { height: 100%; min-height: 0; }
   .scene-heading { left: max(18px, env(safe-area-inset-left)); top: 20px; max-width: calc(100% - 30px); }
@@ -204,8 +203,7 @@ body[data-ephemeris-status='unavailable'] #hud-status-dot { background: #ff9a85;
 @media (max-height: 500px) and (max-width: 1024px) and (pointer: coarse) and (orientation: landscape) {
   :root { --dock-height: 55px; --clock-height: 58px; }
   .topbar { min-height: 62px; flex-wrap: nowrap; padding-top: 8px; padding-bottom: 8px; gap: 20px; }
-  .header-controls { width: auto; flex: 1; padding-right: 112px; }
-  .city-link { top: 8px; }
+  .header-controls { width: auto; flex: 1; }
   .identity h1 { font-size: 17px; }
   .edition { font-size: 7px; }
   .orbit-symbol { display: none; }
