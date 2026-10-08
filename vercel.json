@@ -7,10 +7,14 @@
     "api/index.py": {
       "maxDuration": 60,
       "includeFiles": "{server.py,kernels/**,assets/moon-files.json}",
-      "excludeFiles": "{public/**,cache/**,.venv/**,tests/**,**/__pycache__/**,assets/**/*.jpg,assets/**/*.jpeg,assets/**/*.png,assets/**/*.webp,assets/**/*.js,assets/**/*.license,LICENSES/**,assets/bikaner*.json,assets/bikaner-imagery/**,assets/city-materials/**}"
+      "excludeFiles": "{public/**,cache/**,.venv/**,tests/**,**/__pycache__/**,assets/**/*.jpg,assets/**/*.jpeg,assets/**/*.png,assets/**/*.webp,assets/**/*.js,assets/**/*.license,LICENSES/**,assets/bikaner*.json,assets/bikaner-imagery/**,assets/city-materials/**,assets/space/**}"
     }
   },
   "rewrites": [
+    {
+      "source": "/space",
+      "destination": "/space.html"
+    },
     {
       "source": "/api/:path*",
       "destination": "/api/index?route=:path*"

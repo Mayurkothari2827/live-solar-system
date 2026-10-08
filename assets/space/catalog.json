@@ -1,0 +1,235 @@
+{
+  "retrievedUTC": "2026-10-08T16:46:45.427214+00:00",
+  "coordinates": {
+    "frame": "ICRS",
+    "epoch": "J2000 catalog frame; not propagated to current UTC",
+    "source": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync",
+    "raw": {
+      "metadata": [
+        {
+          "name": "main_id",
+          "description": "Main identifier for an object",
+          "datatype": "CHAR",
+          "arraysize": "*",
+          "ucd": "meta.id;meta.main",
+          "utype": "mango:MangoObject.identifier"
+        },
+        {
+          "name": "ra",
+          "description": "Right ascension",
+          "datatype": "DOUBLE",
+          "unit": "deg",
+          "ucd": "pos.eq.ra;meta.main",
+          "utype": "mango:EpochPosition.longitude[CS.spaceSys=ICRS CT.epoch=J2000]"
+        },
+        {
+          "name": "dec",
+          "description": "Declination",
+          "datatype": "DOUBLE",
+          "unit": "deg",
+          "ucd": "pos.eq.dec;meta.main",
+          "utype": "mango:EpochPosition.latitude[CS.spaceSys=ICRS CT.epoch=J2000]"
+        }
+      ],
+      "data": [
+        [
+          "M 101",
+          210.80242916666668,
+          54.34875
+        ],
+        [
+          "M  31",
+          10.684708333333333,
+          41.268750000000004
+        ],
+        [
+          "M  33",
+          23.46206906218,
+          30.660175111980003
+        ],
+        [
+          "M  51",
+          202.469575,
+          47.19525833333333
+        ],
+        [
+          "M  81",
+          148.88821939854,
+          69.06529514038
+        ],
+        [
+          "M  82",
+          148.96845833333333,
+          69.67970277777778
+        ],
+        [
+          "M  87",
+          187.70593076725,
+          12.391123246083334
+        ],
+        [
+          "NAME LMC",
+          80.89416666666666,
+          -69.75611111111111
+        ],
+        [
+          "NAME Sgr A*",
+          266.41681662499997,
+          -29.00782497222222
+        ],
+        [
+          "NAME SMC",
+          13.158333333333333,
+          -72.80027777777778
+        ],
+        [
+          "HD 226868",
+          299.59031556498,
+          35.20160680908
+        ]
+      ]
+    }
+  },
+  "milkyWay": {
+    "diameterLy": 100000,
+    "solarRadiusLy": 26000,
+    "source": "https://science.nasa.gov/universe/exoplanets/our-milky-way-galaxy-how-big-is-space/",
+    "note": "Reconstructed barred spiral; individual rendered points are illustrative samples, not mapped stars. Solar placement and arm geometry approximate."
+  },
+  "objects": [
+    {
+      "id": "m31",
+      "name": "Andromeda \u00b7 M31",
+      "type": "galaxy",
+      "raDeg": 10.684708333333333,
+      "decDeg": 41.268750000000004,
+      "distancePc": 766503.4845032251,
+      "distanceApproximate": true,
+      "source": "https://science.nasa.gov/missions/hubble/nasas-hubble-traces-hidden-history-of-andromeda-galaxy/",
+      "note": "Nearest large galaxy. Spiral structure is reconstructed; the observation is Hubble imaging.",
+      "positionSource": "https://simbad.cds.unistra.fr/simbad/",
+      "morphology": "spiral",
+      "image": "https://cdn.esahubble.org/archives/images/screen/heic1502a.jpg",
+      "imageCredit": "NASA, ESA, J. Dalcanton (University of Washington, USA), B. F. Williams (University of Washington, USA), L. C. Johnson (University of Washington, USA), the PHAT team, and R. Gendler.",
+      "imageSource": "https://esahubble.org/images/heic1502a/",
+      "imageDate": "Hubble mosaic \u00b7 released 2015-01-05",
+      "imageLicense": "CC BY 4.0"
+    },
+    {
+      "id": "m33",
+      "name": "Triangulum \u00b7 M33",
+      "type": "galaxy",
+      "raDeg": 23.46206906218,
+      "decDeg": 30.660175111980003,
+      "distancePc": 919804.1814038701,
+      "distanceApproximate": true,
+      "source": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-33/",
+      "note": "Local Group spiral galaxy. Shape, orientation and marker sizes are illustrative.",
+      "positionSource": "https://simbad.cds.unistra.fr/simbad/",
+      "morphology": "spiral"
+    },
+    {
+      "id": "m81",
+      "name": "Bode\u2019s Galaxy \u00b7 M81",
+      "type": "galaxy",
+      "raDeg": 148.88821939854,
+      "decDeg": 69.06529514038,
+      "distancePc": 3679216.7256154804,
+      "distanceApproximate": true,
+      "source": "https://www.nasa.gov/image-article/spiral-galaxy-m81/",
+      "note": "A nearby spiral galaxy. Map positions use catalog coordinates and rounded source distance.",
+      "positionSource": "https://simbad.cds.unistra.fr/simbad/",
+      "morphology": "spiral"
+    },
+    {
+      "id": "m82",
+      "name": "Cigar Galaxy \u00b7 M82",
+      "type": "galaxy",
+      "raDeg": 148.96845833333333,
+      "decDeg": 69.67970277777778,
+      "distancePc": 3679216.7256154804,
+      "distanceApproximate": true,
+      "source": "https://science.nasa.gov/asset/hubble/m81-and-m82-from-the-ground/",
+      "note": "Starburst galaxy near M81. Its elongated shape is a visual reconstruction.",
+      "positionSource": "https://simbad.cds.unistra.fr/simbad/",
+      "morphology": "irregular"
+    },
+    {
+      "id": "m87",
+      "name": "Virgo A \u00b7 M87",
+      "type": "galaxy",
+      "raDeg": 187.70593076725,
+      "decDeg": 12.391123246083334,
+      "distancePc": 16863076.659070954,
+      "distanceApproximate": true,
+      "source": "https://www.nasa.gov/universe/what-are-black-holes/",
+      "note": "Elliptical galaxy containing the imaged M87* black hole.",
+      "positionSource": "https://simbad.cds.unistra.fr/simbad/",
+      "morphology": "elliptical"
+    },
+    {
+      "id": "lmc",
+      "name": "Large Magellanic Cloud",
+      "type": "galaxy",
+      "raDeg": 80.89416666666666,
+      "decDeg": -69.75611111111111,
+      "distancePc": 49056.223008206405,
+      "distanceApproximate": true,
+      "source": "https://imagine.gsfc.nasa.gov/science/objects/galaxies1.html",
+      "note": "Milky Way satellite galaxy. Irregular distribution is a reconstruction.",
+      "positionSource": "https://simbad.cds.unistra.fr/simbad/",
+      "morphology": "irregular"
+    },
+    {
+      "id": "smc",
+      "name": "Small Magellanic Cloud",
+      "type": "galaxy",
+      "raDeg": 13.158333333333333,
+      "decDeg": -72.80027777777778,
+      "distancePc": 61320.278760258014,
+      "distanceApproximate": true,
+      "source": "https://science.nasa.gov/photojournal/wises-view-of-a-wispy-cloud/",
+      "note": "Milky Way satellite galaxy. Irregular distribution is a reconstruction.",
+      "positionSource": "https://simbad.cds.unistra.fr/simbad/",
+      "morphology": "irregular"
+    },
+    {
+      "id": "sgr-a",
+      "name": "Sagittarius A*",
+      "type": "blackhole",
+      "raDeg": 266.41681662499997,
+      "decDeg": -29.00782497222222,
+      "distancePc": 7971.636238833541,
+      "distanceApproximate": true,
+      "source": "https://www.eso.org/public/images/eso2208-eht-mwa/",
+      "note": "The Milky Way\u2019s central black hole. EHT image averages observations collected in 2017; released in 2022.",
+      "positionSource": "https://simbad.cds.unistra.fr/simbad/",
+      "massSolar": 4000000,
+      "host": "Milky Way",
+      "image": "https://cdn.eso.org/images/screen/eso2208-eht-mwa.jpg",
+      "imageSource": "https://www.eso.org/public/images/eso2208-eht-mwa/",
+      "imageCredit": "EHT Collaboration",
+      "imageDate": "2017 observations \u00b7 released 2022-05-12",
+      "imageLicense": "CC BY 4.0"
+    },
+    {
+      "id": "m87-star",
+      "name": "M87*",
+      "type": "blackhole",
+      "raDeg": 187.70593076725,
+      "decDeg": 12.391123246083334,
+      "distancePc": 16863076.659070954,
+      "distanceApproximate": true,
+      "source": "https://www.nasa.gov/universe/what-are-black-holes/",
+      "note": "Supermassive black hole in M87. Coordinates use its host center; EHT image is a recorded radio observation.",
+      "positionSource": "https://simbad.cds.unistra.fr/simbad/",
+      "massSolar": 6500000000,
+      "host": "M87",
+      "image": "https://cdn.eso.org/images/screen/eso1907a.jpg",
+      "imageSource": "https://www.eso.org/public/images/eso1907a/",
+      "imageCredit": "EHT Collaboration",
+      "imageDate": "2017 observations \u00b7 released 2019-04-10",
+      "imageLicense": "CC BY 4.0"
+    }
+  ]
+}
