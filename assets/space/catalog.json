@@ -113,7 +113,13 @@
       "imageCredit": "NASA, ESA, J. Dalcanton (University of Washington, USA), B. F. Williams (University of Washington, USA), L. C. Johnson (University of Washington, USA), the PHAT team, and R. Gendler.",
       "imageSource": "https://esahubble.org/images/heic1502a/",
       "imageDate": "Hubble mosaic \u00b7 released 2015-01-05",
-      "imageLicense": "CC BY 4.0"
+      "imageLicense": "CC BY 4.0",
+      "imageLicenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "imagePolicySource": "https://esahubble.org/copyright/",
+      "imageScope": "A partial disk mosaic spanning more than 40,000 light-years; it does not show the whole galaxy.",
+      "imageInstrument": "Hubble \u00b7 Advanced Camera for Surveys",
+      "imageBands": "475 nm and 814 nm composite",
+      "imageFieldOfView": "57.98 \u00d7 18.54 arcminutes"
     },
     {
       "id": "m33",
@@ -124,9 +130,21 @@
       "distancePc": 919804.1814038701,
       "distanceApproximate": true,
       "source": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-33/",
-      "note": "Local Group spiral galaxy. Shape, orientation and marker sizes are illustrative.",
+      "note": "The third-largest galaxy in our Local Group. This Hubble mosaic combines 54 pointings to reveal its central stars, clusters and inner spiral arms.",
       "positionSource": "https://simbad.cds.unistra.fr/simbad/",
-      "morphology": "spiral"
+      "morphology": "spiral",
+      "image": "https://cdn.esahubble.org/archives/images/screen/heic1901a.jpg",
+      "imageSource": "https://esahubble.org/images/heic1901a/",
+      "imageCredit": "NASA, ESA, and M. Durbin, J. Dalcanton, and B. F. Williams (University of Washington)",
+      "imageDate": "Hubble mosaic \u00b7 released 2019-01-07",
+      "imageInstrument": "Hubble \u00b7 Advanced Camera for Surveys",
+      "imageBands": "475 nm and 814 nm composite",
+      "imageScope": "Central region and inner spiral arms; a partial view of the galaxy.",
+      "imageFieldOfView": "20.18 \u00d7 11.36 arcminutes",
+      "noteSource": "https://esahubble.org/news/heic1901/",
+      "imageLicense": "CC BY 4.0",
+      "imageLicenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "imagePolicySource": "https://esahubble.org/copyright/"
     },
     {
       "id": "m81",
@@ -137,9 +155,21 @@
       "distancePc": 3679216.7256154804,
       "distanceApproximate": true,
       "source": "https://www.nasa.gov/image-article/spiral-galaxy-m81/",
-      "note": "A nearby spiral galaxy. Map positions use catalog coordinates and rounded source distance.",
+      "note": "A grand-design spiral whose arms reach toward the nucleus. Hubble resolves individual stars, star clusters and glowing gas within its disk.",
       "positionSource": "https://simbad.cds.unistra.fr/simbad/",
-      "morphology": "spiral"
+      "morphology": "spiral",
+      "image": "https://cdn.esahubble.org/archives/images/screen/heic0710a.jpg",
+      "imageSource": "https://esahubble.org/images/heic0710a/",
+      "imageCredit": "NASA, ESA and the Hubble Heritage Team (STScI/AURA). Acknowledgment: A. Zezas and J. Huchra (Harvard-Smithsonian Center for Astrophysics)",
+      "imageDate": "2004\u20132006 observations \u00b7 released 2007-05-28",
+      "imageInstrument": "Hubble \u00b7 Advanced Camera for Surveys",
+      "imageBands": "Blue, visible and near-infrared composite",
+      "imageScope": "Wide mosaic of the central bulge and spiral disk; the extended outer halo is outside this field.",
+      "imageFieldOfView": "18.85 \u00d7 12.67 arcminutes",
+      "noteSource": "https://esahubble.org/images/heic0710a/",
+      "imageLicense": "CC BY 4.0",
+      "imageLicenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "imagePolicySource": "https://esahubble.org/copyright/"
     },
     {
       "id": "m82",
@@ -150,9 +180,20 @@
       "distancePc": 3679216.7256154804,
       "distanceApproximate": true,
       "source": "https://science.nasa.gov/asset/hubble/m81-and-m82-from-the-ground/",
-      "note": "Starburst galaxy near M81. Its elongated shape is a visual reconstruction.",
+      "note": "Intense star formation drives a superwind from this tilted galaxy. Red filaments trace glowing hydrogen flowing above and below the stellar disk.",
       "positionSource": "https://simbad.cds.unistra.fr/simbad/",
-      "morphology": "irregular"
+      "morphology": "irregular",
+      "image": "https://cdn.esahubble.org/archives/images/screen/heic0604a.jpg",
+      "imageSource": "https://esahubble.org/images/heic0604a/",
+      "imageCredit": "NASA, ESA and the Hubble Heritage Team (STScI/AURA). Acknowledgment: J. Gallagher (University of Wisconsin), M. Mountain (STScI) and P. Puxley (NSF).",
+      "imageDate": "March 2006 observations \u00b7 released 2006-04-24",
+      "imageInstrument": "Hubble \u00b7 Advanced Camera for Surveys",
+      "imageBands": "Visible, near-infrared and hydrogen emission composite",
+      "imageScope": "Wide view of the inclined disk and bright hydrogen outflow; the faint outer halo extends beyond it.",
+      "noteSource": "https://esahubble.org/news/heic0604/",
+      "imageLicense": "CC BY 4.0",
+      "imageLicenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "imagePolicySource": "https://esahubble.org/copyright/"
     },
     {
       "id": "m87",
@@ -163,9 +204,21 @@
       "distancePc": 16863076.659070954,
       "distanceApproximate": true,
       "source": "https://www.nasa.gov/universe/what-are-black-holes/",
-      "note": "Elliptical galaxy containing the imaged M87* black hole.",
+      "note": "A giant elliptical galaxy with a plasma jet powered by its central black hole, M87*. The blue-white jet in this Hubble view extends roughly 3,000 light-years.",
       "positionSource": "https://simbad.cds.unistra.fr/simbad/",
-      "morphology": "elliptical"
+      "morphology": "elliptical",
+      "image": "https://cdn.esahubble.org/archives/images/screen/heic2411b.jpg",
+      "imageSource": "https://esahubble.org/images/heic2411b/",
+      "imageCredit": "NASA, ESA, A. Lessing (Stanford University), E. Baltz (Stanford University), M. Shara (AMNH), J. DePasquale (STScI)",
+      "imageDate": "Hubble composite \u00b7 released 2024-09-26",
+      "imageInstrument": "Hubble \u00b7 Wide Field Camera 3",
+      "imageBands": "Ultraviolet (275 nm) and visible (606 nm) composite",
+      "imageScope": "Central region and a roughly 3,000-light-year plasma jet; a partial view of this giant galaxy.",
+      "imageFieldOfView": "1.55 \u00d7 1.24 arcminutes",
+      "noteSource": "https://esahubble.org/images/heic2411b/",
+      "imageLicense": "CC BY 4.0",
+      "imageLicenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "imagePolicySource": "https://esahubble.org/copyright/"
     },
     {
       "id": "lmc",
@@ -176,9 +229,21 @@
       "distancePc": 49056.223008206405,
       "distanceApproximate": true,
       "source": "https://imagine.gsfc.nasa.gov/science/objects/galaxies1.html",
-      "note": "Milky Way satellite galaxy. Irregular distribution is a reconstruction.",
+      "note": "An irregular satellite of the Milky Way. VISTA uses infrared light to reveal stars through dust and help astronomers study stellar evolution and galactic motion.",
       "positionSource": "https://simbad.cds.unistra.fr/simbad/",
-      "morphology": "irregular"
+      "morphology": "irregular",
+      "image": "https://cdn.eso.org/images/screen/eso1914a.jpg",
+      "imageSource": "https://www.eso.org/public/images/eso1914a/",
+      "imageCredit": "ESO/VMC Survey",
+      "imageDate": "VISTA survey mosaic \u00b7 released 2019-09-13",
+      "imageInstrument": "ESO VISTA \u00b7 VIRCAM",
+      "imageBands": "Infrared Y, J and Ks bands mapped to visible colours",
+      "imageScope": "Wide survey of the galaxy and surrounding star field; an infrared view rather than naked-eye colours.",
+      "imageFieldOfView": "7.70 \u00d7 8.60 degrees",
+      "noteSource": "https://www.eso.org/public/images/eso1914a/",
+      "imageLicense": "CC BY 4.0",
+      "imageLicenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "imagePolicySource": "https://www.eso.org/public/outreach/copyright/"
     },
     {
       "id": "smc",
@@ -189,9 +254,21 @@
       "distancePc": 61320.278760258014,
       "distanceApproximate": true,
       "source": "https://science.nasa.gov/photojournal/wises-view-of-a-wispy-cloud/",
-      "note": "Milky Way satellite galaxy. Irregular distribution is a reconstruction.",
+      "note": "A dwarf irregular companion of the Milky Way. Infrared observations reveal stars hidden by dust; bright 47 Tucanae in this field belongs to our own galaxy.",
       "positionSource": "https://simbad.cds.unistra.fr/simbad/",
-      "morphology": "irregular"
+      "morphology": "irregular",
+      "image": "https://cdn.eso.org/images/screen/eso1714a.jpg",
+      "imageSource": "https://www.eso.org/public/images/eso1714a/",
+      "imageCredit": "ESO/VISTA VMC",
+      "imageDate": "VISTA survey mosaic \u00b7 released 2017-05-03",
+      "imageInstrument": "ESO VISTA \u00b7 VIRCAM",
+      "imageBands": "Infrared Y, J and Ks bands mapped to visible colours",
+      "imageScope": "Wide survey of the galaxy and surrounding sky; the bright cluster at right is foreground 47 Tucanae.",
+      "imageFieldOfView": "5.91 \u00d7 5.22 degrees",
+      "noteSource": "https://www.eso.org/public/images/eso1714a/",
+      "imageLicense": "CC BY 4.0",
+      "imageLicenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "imagePolicySource": "https://www.eso.org/public/outreach/copyright/"
     },
     {
       "id": "sgr-a",
@@ -210,7 +287,12 @@
       "imageSource": "https://www.eso.org/public/images/eso2208-eht-mwa/",
       "imageCredit": "EHT Collaboration",
       "imageDate": "2017 observations \u00b7 released 2022-05-12",
-      "imageLicense": "CC BY 4.0"
+      "imageLicense": "CC BY 4.0",
+      "imageLicenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "imagePolicySource": "https://www.eso.org/public/outreach/copyright/",
+      "imageInstrument": "Event Horizon Telescope \u00b7 global radio array",
+      "imageBands": "1.3 mm radio emission reconstructed from interferometry",
+      "imageScope": "Emission around the central black-hole shadow; false-colour radio reconstruction, not a visible-light photograph."
     },
     {
       "id": "m87-star",
@@ -229,7 +311,13 @@
       "imageSource": "https://www.eso.org/public/images/eso1907a/",
       "imageCredit": "EHT Collaboration",
       "imageDate": "2017 observations \u00b7 released 2019-04-10",
-      "imageLicense": "CC BY 4.0"
+      "imageLicense": "CC BY 4.0",
+      "imageLicenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "imagePolicySource": "https://www.eso.org/public/outreach/copyright/",
+      "imageInstrument": "Event Horizon Telescope \u00b7 global radio array",
+      "imageBands": "1.3 mm radio emission reconstructed from interferometry",
+      "imageScope": "Emission around the central black-hole shadow; false-colour radio reconstruction, not a visible-light photograph."
     }
-  ]
+  ],
+  "imageryVerifiedUTC": "2026-10-08"
 }

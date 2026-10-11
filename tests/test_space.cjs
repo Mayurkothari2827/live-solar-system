@@ -24,7 +24,7 @@ test('black holes expose real recorded observations, masses and a static default
 test('phone sheets restore focus, hidden tabs stop drawing and a failed catalog never substitutes fake positions',async()=>{const a=await boot({mobile:true});a.elements.get('open-info').focus();a.elements.get('open-info').onclick();assert.equal(a.document.activeElement,a.elements.get('close-info'));a.elements.get('close-info').onclick();assert.equal(a.document.activeElement,a.elements.get('open-info'));assert(a.elements.get('space-info').inert);const count=a.renderer.count;a.document.hidden=true;a.document.dispatch('visibilitychange');for(let i=0;i<30;i++)a.frame();assert.equal(a.renderer.count,count);a.advance(60);a.document.hidden=false;a.document.dispatch('visibilitychange');a.frame();assert.match(a.elements.get('utc-clock').textContent,/12:01/);const bad=await boot({offline:true});assert(!bad.elements.get('loading').hidden);assert.match(bad.elements.get('loading').textContent,/No invented catalog positions/);assert.equal(bad.world().children.length,0);});
 test('reduced motion suppresses optional gas illustration; layer changes dispose previous geometry',async()=>{const a=await boot({reduced:true});const old=a.world().children.find(o=>o.isPoints).geometry;let disposed=false;old.addEventListener('dispose',()=>disposed=true);a.layer('blackholes');assert(disposed);const mat=a.world().children.find(o=>o.material?.isShaderMaterial).material;a.elements.get('actions').children[1].onclick();a.frame(.1);assert.equal(mat.uniforms.time.value,0);});
 
-test('mobile draw cap preserves current UTC and object search navigates across catalog scales',async()=>{const a=await boot({mobile:true});const start=a.renderer.count;for(let i=0;i<60;i++)a.frame(1/60);assert.equal(a.renderer.count-start,30);a.elements.get('search').value='TRAPPIST';a.elements.get('search').oninput();assert(a.elements.get('search-results').children.length>0);a.elements.get('search-results').children[0].onclick();a.frame(.04);assert.match(a.elements.get('object-name').textContent,/TRAPPIST/);assert(!a.elements.get('planet-section').hidden);});
+test('mobile draw cap preserves current UTC and object search navigates across catalog scales',async()=>{const a=await boot({mobile:true});const idle=a.renderer.count;for(let i=0;i<60;i++)a.frame(1/60);assert.equal(a.renderer.count,idle,'idle scene must not redraw');a.layer('blackholes');a.elements.get('actions').children[1].onclick();const start=a.renderer.count;for(let i=0;i<60;i++)a.frame(1/60);assert.equal(a.renderer.count-start,30,'active illustration remains capped at 30 fps');a.intervals.forEach(fn=>fn());assert.match(a.elements.get('utc-clock').textContent,/12:00:02/);a.elements.get('search').value='TRAPPIST';a.elements.get('search').oninput();assert(a.elements.get('search-results').children.length>0);a.elements.get('search-results').children[0].onclick();a.frame(.04);assert.match(a.elements.get('object-name').textContent,/TRAPPIST/);assert(!a.elements.get('planet-section').hidden);});
 test('deep links and failed observation images keep source attribution and usable 3D data',async()=>{const a=await boot({search:'?layer=blackholes'});assert.match(a.elements.get('object-name').textContent,/Sagittarius/);a.elements.get('observation-image').onerror();assert(a.elements.get('observation-image').hidden);assert.match(a.elements.get('observation-caption').textContent,/EHT Collaboration.*Image unavailable/);assert.match(a.elements.get('observation-link').href,/eso.org/);assert(a.world().children.length>0);});
 
 test('recorded observation stage preserves provenance, closes on target change, and recovers from failure',async()=>{
@@ -37,4 +37,27 @@ test('recorded observation stage preserves provenance, closes on target change, 
  a.elements.get('show-observation').onclick();a.elements.get('stage-image').onerror();
  assert(a.elements.get('observation-stage').hidden);assert.match(a.elements.get('announcement').textContent,/unavailable/);
  a.layer('nearby');assert(a.elements.get('show-observation').hidden);
+});
+
+
+test('mobile panels and recorded images suspend GPU drawing and resume with focus restored',async()=>{
+ const a=await boot({mobile:true});a.layer('blackholes');a.elements.get('actions').children[1].onclick();a.frame(.04);
+ a.elements.get('open-info').focus();a.elements.get('open-info').onclick();let count=a.renderer.count;
+ for(let i=0;i<30;i++)a.frame();assert.equal(a.renderer.count,count);
+ a.elements.get('close-info').onclick();a.frame(.04);assert(a.renderer.count>count);
+ a.elements.get('show-observation').onclick();count=a.renderer.count;
+ for(let i=0;i<30;i++)a.frame();assert.equal(a.renderer.count,count);
+ a.elements.get('close-observation').onclick();a.frame(.04);assert(a.renderer.count>count);
+ assert.equal(a.document.activeElement,a.elements.get('show-observation'));
+});
+test('target navigation, image metadata and planet explanations remain accessible on phones',async()=>{
+ const a=await boot({mobile:true});a.layer('galaxies');a.elements.get('next-target').onclick();
+ assert.match(a.elements.get('object-name').textContent,/Triangulum/);
+ assert.match(a.facts(),/OBSERVING INSTRUMENT.*Hubble/);
+ assert.match(a.elements.get('object-evidence').textContent,/Recorded images/);
+ a.elements.get('read-object').onclick();assert(!a.elements.get('space-info').inert);
+ a.elements.get('close-info').onclick();a.elements.get('toggle-labels').onclick();assert(a.elements.get('space-labels').hidden);
+ a.layer('nearby');a.elements.get('planet-list').children[0].onclick();
+ assert(!a.elements.get('space-info').inert);assert.match(a.elements.get('object-explainer').textContent,/Earth days/);
+ assert.match(a.elements.get('object-evidence').textContent,/minimum masses/);
 });
