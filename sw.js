@@ -1,5 +1,5 @@
 /* Bump VERSION whenever the shell changes. Updates activate only on user request. */
-const VERSION='orbit-pwa-v1';
+const VERSION='orbit-pwa-v2';
 const SHELL=VERSION+'-shell',RUNTIME=VERSION+'-assets',DATA='orbit-pwa-data-v1';
 const FILES=['/','/index.html','/space.html','/style.css','/app.js','/mobile.js','/solar-orbits.js','/space.css','/space.js','/space-model.js','/pwa.js','/pwa.css','/manifest.webmanifest','/assets/three.min.js','/assets/texture-manifest.json','/assets/space/catalog.json','/assets/space/nearby.json','/assets/icons/orbit-192.png','/assets/icons/orbit-512.png','/assets/icons/orbit-maskable.png','/assets/icons/apple-touch-icon.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(SHELL).then(cache=>cache.addAll(FILES))));

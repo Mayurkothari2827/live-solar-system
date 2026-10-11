@@ -53,12 +53,12 @@ async function boot({mobile=false,reduced=false,delayedImages=false,missing=[]}=
  for(let i=0;i<8;i++)await flush();
  function frame(seconds=1/30){performanceClock+=seconds*1000;wallClock+=seconds*1000;const callback=frames.shift();assert(callback);callback(performanceClock);}
  frame();await flush();
- return {elements,document,options,pixelRatio,frames,renders,imageRequests,images,disposed,fetchRequests,records,frame,advanceWall:seconds=>wallClock+=seconds*1000,get scene(){return renders.at(-1)?.scene;},get camera(){return renders.at(-1)?.camera;},get clock(){return wallClock;},get now(){return performanceClock;},groups(){return this.scene.children.filter(o=>o.isGroup);},select(id){elements.get('body-select').onchange({target:{value:String(id)}});}};
+ return {elements,document,options,get pixelRatio(){return pixelRatio;},frames,renders,imageRequests,images,disposed,fetchRequests,records,frame,advanceWall:seconds=>wallClock+=seconds*1000,get scene(){return renders.at(-1)?.scene;},get camera(){return renders.at(-1)?.camera;},get clock(){return wallClock;},get now(){return performanceClock;},groups(){return this.scene.children.filter(o=>o.isGroup);},select(id){elements.get('body-select').onchange({target:{value:String(id)}});}};
 }
 
 test('phone resources use packaged maps, bounded geometry and pixel density; off-screen Moon and rings stay unloaded',async()=>{
  const app=await boot({mobile:true});
- assert.equal(app.pixelRatio,1.5);assert.equal(app.options.antialias,false);assert.equal(app.document.documentElement.dataset.renderProfile,'mobile');
+ assert.equal(app.pixelRatio,1.25);assert.equal(app.options.antialias,false);assert.equal(app.document.documentElement.dataset.renderProfile,'mobile');
  const earth=app.groups()[3];assert.equal(earth.children[0].geometry.parameters.widthSegments,64);assert.equal(earth.children[0].geometry.parameters.heightSegments,40);
  assert.equal(app.scene.children.find(o=>o.isPoints).geometry.attributes.position.count,800);
  assert(app.imageRequests.length>=4);assert(app.imageRequests.every(p=>p.startsWith('/assets/optimized/')));
@@ -176,4 +176,19 @@ test('overview refits when a newly downloaded outer planet becomes available',as
  assert.equal(app.scene.children.filter(o=>o.userData.kind==='osculating-guide'&&o.visible).length,8);
  const neptune=app.groups().find(group=>group.children[0].userData.bodyId===899),point=neptune.position.clone().project(app.camera);
  assert(Math.abs(point.x)<1&&Math.abs(point.y)<1&&point.z<1,'new Neptune stays in the fitted overview');
+});
+
+
+test('covered phone panels reduce draws without slowing simulated time',async()=>{
+ const app=await boot({mobile:true});app.elements.get('speed').onchange({target:{value:'3600'}});
+ const earth=app.groups()[3],before=earth.quaternion.clone();app.document.body.dataset.sheet='data';
+ const count=app.renders.length;for(let i=0;i<240;i++)app.frame(1/120);
+ assert(app.renders.length-count<=2);assert(earth.quaternion.angleTo(before)>.1);
+ app.document.body.dataset.sheet='';const resumed=app.renders.length;for(let i=0;i<120;i++)app.frame(1/120);
+ assert(app.renders.length-resumed>=25);
+});
+test('sustained slow frames reduce pixel density while preserving playback',async()=>{
+ const app=await boot({mobile:true});app.elements.get('speed').onchange({target:{value:'3600'}});
+ const earth=app.groups()[3],before=earth.quaternion.clone();for(let i=0;i<120;i++)app.frame(.05);
+ assert.equal(app.pixelRatio,1);assert(earth.quaternion.angleTo(before)>.1);
 });

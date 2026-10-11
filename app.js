@@ -5,7 +5,8 @@ const $=id=>document.getElementById(id),T=window.THREE,AU=149597870.7,orbitModel
 if(!T){$('loading-message').textContent='The 3D renderer is unavailable.';return;}
 const mobile=matchMedia('(max-width: 760px)').matches||matchMedia('(pointer: coarse)').matches;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const profile={mobile,maxTexture:mobile?2048:4096,pixelRatio:Math.min(devicePixelRatio,mobile?1.5:2),frameInterval:1000/(mobile?30:60),stars:mobile?800:1800};
+const profile={mobile,maxTexture:mobile?2048:4096,pixelRatio:Math.min(devicePixelRatio,mobile?1.25:2),frameInterval:1000/(mobile?30:60),stars:mobile?800:1800};
+let slowFrames=0,lastQualityChange=0;
 document.documentElement.dataset.renderProfile=mobile?'mobile':'desktop';
 const viewport=$('scene'),labelLayer=$('labels');
 let renderer;
@@ -390,7 +391,14 @@ document.addEventListener('visibilitychange',()=>{previous=performance.now();ela
 function frame(now){
  requestAnimationFrame(frame);const delta=Math.max(0,(now-previous)/1000);previous=now;if(document.hidden){elapsed=0;return;}
  // Accumulate every animation tick before skipping draws: playback rates remain physical.
- elapsed+=delta;if(now-lastRender<profile.frameInterval-.5)return;
+ elapsed+=delta;
+ // Sustained slow animation ticks indicate main-thread/GPU pressure. Reduce only
+ // render resolution; ephemeris interpolation and elapsed simulation time stay intact.
+ if(delta>0&&delta<.25){slowFrames=delta>1/22?slowFrames+1:Math.max(0,slowFrames-1);}
+ if(slowFrames>=30&&now-lastQualityChange>5000&&profile.pixelRatio>1){profile.pixelRatio=Math.max(1,profile.pixelRatio-.25);renderer.setPixelRatio(profile.pixelRatio);slowFrames=0;lastQualityChange=now;}
+ const covered=Boolean($('app-dialog')?.open)||(mobile&&['telemetry','moons','data'].includes(document.body.dataset.sheet));
+ const interval=covered?1000:profile.frameInterval;
+ if(now-lastRender<interval-.5)return;
  const dt=elapsed;elapsed=0;lastRender=now;
  if(Date.now()>nextFetch&&!fetching&&catalogue.length)fetchData();if(!ready)return;
  if(!paused){if(mode==='live')sim=Date.now()/1000;else sim+=dt*speed;}
