@@ -1,0 +1,20 @@
+{
+  "id": "/",
+  "name": "ORBIT · Space Observatory",
+  "short_name": "ORBIT",
+  "description": "Explore our Solar System and sourced deep-space observations.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#060d14",
+  "theme_color": "#060d14",
+  "icons": [
+    {"src":"/assets/icons/orbit-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"/assets/icons/orbit-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
+    {"src":"/assets/icons/orbit-maskable.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
+  ],
+  "shortcuts": [
+    {"name":"Solar System","url":"/"},
+    {"name":"Deep Space","url":"/space.html"}
+  ]
+}

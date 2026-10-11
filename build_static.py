@@ -12,7 +12,7 @@ def copy_if_changed(source,target):
         before=source.stat();after=target.stat()
         if before.st_size==after.st_size and before.st_mtime_ns==after.st_mtime_ns:return str(target)
     return shutil.copy2(source,target)
-STATIC_FILES=['index.html','app.js','mobile.js','solar-orbits.js','style.css','space.html','space.js','space-model.js','space.css','README.md','CELESTIA-README','CELESTIA-LICENSE.md','CELESTIA-REUSE.toml']
+STATIC_FILES=['manifest.webmanifest','sw.js','pwa.js','pwa.css','index.html','app.js','mobile.js','solar-orbits.js','style.css','space.html','space.js','space-model.js','space.css','README.md','CELESTIA-README','CELESTIA-LICENSE.md','CELESTIA-REUSE.toml']
 
 # Prune generated files whose sources were removed, including obsolete features.
 for target in sorted(OUTPUT.rglob('*'), key=lambda path: len(path.parts), reverse=True):
