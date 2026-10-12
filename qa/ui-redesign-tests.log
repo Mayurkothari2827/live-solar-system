@@ -1,0 +1,406 @@
+
+> orbit-observatory@2.0.0 test
+> node --test tests/*.cjs
+
+TAP version 13
+# Subtest: directory loads actual catalogs and science, quality and discoveries persist
+ok 1 - directory loads actual catalogs and science, quality and discoveries persist
+  ---
+  duration_ms: 276.580125
+  ...
+# Subtest: manual tours use engine navigation, pause progression and preserve resumable steps
+ok 2 - manual tours use engine navigation, pause progression and preserve resumable steps
+  ---
+  duration_ms: 125.1075
+  ...
+# Subtest: comparisons preserve physical radius ratios and do not invent missing Moon properties
+ok 3 - comparisons preserve physical radius ratios and do not invent missing Moon properties
+  ---
+  duration_ms: 7.564167
+  ...
+# Subtest: scene sharing includes reproducible UTC and camera; cancellation does not report success
+ok 4 - scene sharing includes reproducible UTC and camera; cancellation does not report success
+  ---
+  duration_ms: 8.325583
+  ...
+# Subtest: native link and image sharing cancellation is shown as cancellation
+ok 5 - native link and image sharing cancellation is shown as cancellation
+  ---
+  duration_ms: 5.860958
+  ...
+# Subtest: mobile sheets toggle with accessible state, Escape dismissal and return focus
+ok 6 - mobile sheets toggle with accessible state, Escape dismissal and return focus
+  ---
+  duration_ms: 237.023167
+  ...
+# Subtest: data sheet preserves desktop disclosure state and rotation never leaves focus hidden
+ok 7 - data sheet preserves desktop disclosure state and rotation never leaves focus hidden
+  ---
+  duration_ms: 19.992958
+  ...
+# Subtest: time drawer and backdrop change presentation without touching the epoch
+ok 8 - time drawer and backdrop change presentation without touching the epoch
+  ---
+  duration_ms: 15.655417
+  ...
+# Subtest: phone clock mirrors the actual displayed UTC epoch and distinguishes accelerated playback and pause
+ok 9 - phone clock mirrors the actual displayed UTC epoch and distinguishes accelerated playback and pause
+  ---
+  duration_ms: 38.70225
+  ...
+# Subtest: missing ephemeris remains unavailable independently of clock mode; invalid timestamps are not fabricated
+ok 10 - missing ephemeris remains unavailable independently of clock mode; invalid timestamps are not fabricated
+  ---
+  duration_ms: 4.589292
+  ...
+# Subtest: native downloads reject wrong bodies and expired caches; valid offline data clears on request
+ok 11 - native downloads reject wrong bodies and expired caches; valid offline data clears on request
+  ---
+  duration_ms: 207.438333
+  ...
+# Subtest: native bridge respects abort, route boundaries, methods and Android panel back
+ok 12 - native bridge respects abort, route boundaries, methods and Android panel back
+  ---
+  duration_ms: 3.642709
+  ...
+# Subtest: cache clearing invalidates requests already in flight
+ok 13 - cache clearing invalidates requests already in flight
+  ---
+  duration_ms: 8.923666
+  ...
+# Subtest: iOS custom scheme routes only its own bundled API authority
+ok 14 - iOS custom scheme routes only its own bundled API authority
+  ---
+  duration_ms: 5.709625
+  ...
+# Subtest: native cancellation rejects promptly while an uncancellable HTTP transport remains pending
+ok 15 - native cancellation rejects promptly while an uncancellable HTTP transport remains pending
+  ---
+  duration_ms: 30.791667
+  ...
+# Subtest: native lifecycle emits visibility and reconnection without altering astronomical data
+ok 16 - native lifecycle emits visibility and reconnection without altering astronomical data
+  ---
+  duration_ms: 8.674958
+  ...
+# Subtest: native image sharing writes only the scoped cache file and propagates cancellation
+ok 17 - native image sharing writes only the scoped cache file and propagates cancellation
+  ---
+  duration_ms: 6.623625
+  ...
+# Subtest: a tilted eccentric guide uses the current state, correct focus and actual periapsis/apoapsis
+ok 18 - a tilted eccentric guide uses the current state, correct focus and actual periapsis/apoapsis
+  ---
+  duration_ms: 9.648667
+  ...
+# Subtest: circular and near-circular states keep a stable plane without singular periapsis
+ok 19 - circular and near-circular states keep a stable plane without singular periapsis
+  ---
+  duration_ms: 5.412875
+  ...
+# Subtest: eccentric-anomaly samples include true periapsis and apoapsis when starting there
+ok 20 - eccentric-anomaly samples include true periapsis and apoapsis when starting there
+  ---
+  duration_ms: 1.041625
+  ...
+# Subtest: radial, invalid, parabolic and hyperbolic states get no invented guide
+ok 21 - radial, invalid, parabolic and hyperbolic states get no invented guide
+  ---
+  duration_ms: 0.278875
+  ...
+# Subtest: sample limits and alternate positive gravitational parameters remain bounded
+ok 22 - sample limits and alternate positive gravitational parameters remain bounded
+  ---
+  duration_ms: 8.032167
+  ...
+# Subtest: presentation compression is monotonic and preserves directions and attachment to guides
+ok 23 - presentation compression is monotonic and preserves directions and attachment to guides
+  ---
+  duration_ms: 5.48225
+  ...
+# Subtest: browser export works without a module loader or Three.js
+ok 24 - browser export works without a module loader or Three.js
+  ---
+  duration_ms: 2.067917
+  ...
+# Subtest: manifest and install shell contain real icons and both observatories; update stays waiting
+ok 25 - manifest and install shell contain real icons and both observatories; update stays waiting
+  ---
+  duration_ms: 334.356
+  ...
+# Subtest: offline planet fallback preserves provenance and refuses expired records
+ok 26 - offline planet fallback preserves provenance and refuses expired records
+  ---
+  duration_ms: 15.294583
+  ...
+# Subtest: offline bulk data filters expired bodies and never changes validity dates
+ok 27 - offline bulk data filters expired bodies and never changes validity dates
+  ---
+  duration_ms: 11.19175
+  ...
+# Subtest: worker scopes requests and cleans only its own obsolete caches
+ok 28 - worker scopes requests and cleans only its own obsolete caches
+  ---
+  duration_ms: 4.980083
+  ...
+# Subtest: worker rejects wrong-body and malformed online data instead of caching it
+ok 29 - worker rejects wrong-body and malformed online data instead of caching it
+  ---
+  duration_ms: 7.52375
+  ...
+# Subtest: worker clearing preserves the shell and invalidates requests already in flight
+ok 30 - worker clearing preserves the shell and invalidates requests already in flight
+  ---
+  duration_ms: 7.034916
+  ...
+# Scripts "build/three.js" and "build/three.min.js" are deprecated with r150+, and will be removed with r160. Please use ES Modules or alternatives: https://threejs.org/docs/index.html\#manual/en/introduction/Installation
+# Subtest: phone resources use packaged maps, bounded geometry and pixel density; off-screen Moon and rings stay unloaded
+ok 31 - phone resources use packaged maps, bounded geometry and pixel density; off-screen Moon and rings stay unloaded
+  ---
+  duration_ms: 297.4715
+  ...
+# Subtest: mobile draw throttling preserves accelerated position/rotation and a paused clock
+ok 32 - mobile draw throttling preserves accelerated position/rotation and a paused clock
+  ---
+  duration_ms: 40.862041
+  ...
+# Subtest: live time uses the wall clock and hidden tabs pause rendering/playback without catch-up
+ok 33 - live time uses the wall clock and hidden tabs pause rendering/playback without catch-up
+  ---
+  duration_ms: 36.393667
+  ...
+# Subtest: physical Earth–Moon spacing and overview sizes stay unchanged; trails reuse geometry
+ok 34 - physical Earth–Moon spacing and overview sizes stay unchanged; trails reuse geometry
+  ---
+  duration_ms: 31.571834
+  ...
+# Subtest: switching systems frees phone textures and late requests cannot overwrite the current selection
+ok 35 - switching systems frees phone textures and late requests cannot overwrite the current selection
+  ---
+  duration_ms: 9.416417
+  ...
+# Subtest: desktop retains detailed spheres, antialiasing and original 4k surface decode limit
+ok 36 - desktop retains detailed spheres, antialiasing and original 4k surface decode limit
+  ---
+  duration_ms: 20.3955
+  ...
+# Subtest: all texture derivatives are present, below phone budgets and preserve source credit references
+ok 37 - all texture derivatives are present, below phone budgets and preserve source credit references
+  ---
+  duration_ms: 112.924084
+  ...
+# Subtest: cinematic overview shows textured bodies and closed state-derived guides instead of subpixel planets
+ok 38 - cinematic overview shows textured bodies and closed state-derived guides instead of subpixel planets
+  ---
+  duration_ms: 10.78175
+  ...
+# Subtest: cinematic, real-distance and physical modes preserve live direction and rotation while labeling their scale
+ok 39 - cinematic, real-distance and physical modes preserve live direction and rotation while labeling their scale
+  ---
+  duration_ms: 22.227291
+  ...
+# Subtest: overview refits when a newly downloaded outer planet becomes available
+ok 40 - overview refits when a newly downloaded outer planet becomes available
+  ---
+  duration_ms: 16.771542
+  ...
+# Subtest: covered phone panels reduce draws without slowing simulated time
+ok 41 - covered phone panels reduce draws without slowing simulated time
+  ---
+  duration_ms: 11.289792
+  ...
+# Subtest: sustained slow frames reduce pixel density while preserving playback
+ok 42 - sustained slow frames reduce pixel density while preserving playback
+  ---
+  duration_ms: 20.37275
+  ...
+# Subtest: scene restoration rejects uncovered epochs and preserves valid saved settings
+ok 43 - scene restoration rejects uncovered epochs and preserves valid saved settings
+  ---
+  duration_ms: 8.68125
+  ...
+# Subtest: native background suspends rendering without accelerated catch-up
+ok 44 - native background suspends rendering without accelerated catch-up
+  ---
+  duration_ms: 13.187666
+  ...
+# Subtest: current UTC beyond downloaded data never remains marked available
+ok 45 - current UTC beyond downloaded data never remains marked available
+  ---
+  duration_ms: 9.469
+  ...
+# Subtest: lowering graphics quality releases higher resolution GPU maps
+ok 46 - lowering graphics quality releases higher resolution GPU maps
+  ---
+  duration_ms: 8.226625
+  ...
+# Subtest: per-body retries reach healthy bodies after three upstream failures and reconnect retries failures
+ok 47 - per-body retries reach healthy bodies after three upstream failures and reconnect retries failures
+  ---
+  duration_ms: 25.665875
+  ...
+# Subtest: solar context recovery preserves selected body, clock and camera state
+ok 48 - solar context recovery preserves selected body, clock and camera state
+  ---
+  duration_ms: 8.166375
+  ...
+# Subtest: solar pointer drag, pinch and cancellation change only camera controls
+ok 49 - solar pointer drag, pinch and cancellation change only camera controls
+  ---
+  duration_ms: 8.382125
+  ...
+# Subtest: slow upstream timeouts cannot undo retry fairness after cooldown expiry
+ok 50 - slow upstream timeouts cannot undo retry fairness after cooldown expiry
+  ---
+  duration_ms: 22.816917
+  ...
+# Subtest: presentation telemetry preserves heliocentric distance for a selected moon and explicit playback state
+ok 51 - presentation telemetry preserves heliocentric distance for a selected moon and explicit playback state
+  ---
+  duration_ms: 9.331916
+  ...
+# Scripts "build/three.js" and "build/three.min.js" are deprecated with r150+, and will be removed with r160. Please use ES Modules or alternatives: https://threejs.org/docs/index.html\#manual/en/introduction/Installation
+# Subtest: ICRS coordinates preserve catalog distances and handedness, including polar and invalid cases
+ok 52 - ICRS coordinates preserve catalog distances and handedness, including polar and invalid cases
+  ---
+  duration_ms: 19.17025
+  ...
+# Subtest: catalog snapshots have source provenance, valid known objects and explicit unavailable parameters
+ok 53 - catalog snapshots have source provenance, valid known objects and explicit unavailable parameters
+  ---
+  duration_ms: 1.915042
+  ...
+# Subtest: Schwarzschild reference scales with measured mass; absent orbit sizes never become invented positions
+ok 54 - Schwarzschild reference scales with measured mass; absent orbit sizes never become invented positions
+  ---
+  duration_ms: 0.287875
+  ...
+# Subtest: Milky Way and galaxy layers are bounded reconstructions with catalog navigation
+ok 55 - Milky Way and galaxy layers are bounded reconstructions with catalog navigation
+  ---
+  duration_ms: 322.982
+  ...
+# Subtest: nearby map uses every measured host position and planet diagrams disclose unknown phase and imagery
+ok 56 - nearby map uses every measured host position and planet diagrams disclose unknown phase and imagery
+  ---
+  duration_ms: 83.147792
+  ...
+# Subtest: black holes expose real recorded observations, masses and a static default illustration
+ok 57 - black holes expose real recorded observations, masses and a static default illustration
+  ---
+  duration_ms: 81.062042
+  ...
+# Subtest: phone sheets restore focus, hidden tabs stop drawing and a failed catalog never substitutes fake positions
+ok 58 - phone sheets restore focus, hidden tabs stop drawing and a failed catalog never substitutes fake positions
+  ---
+  duration_ms: 32.867208
+  ...
+# Subtest: reduced motion suppresses optional gas illustration; layer changes dispose previous geometry
+ok 59 - reduced motion suppresses optional gas illustration; layer changes dispose previous geometry
+  ---
+  duration_ms: 74.317917
+  ...
+# Subtest: mobile draw cap preserves current UTC and object search navigates across catalog scales
+ok 60 - mobile draw cap preserves current UTC and object search navigates across catalog scales
+  ---
+  duration_ms: 41.077833
+  ...
+# Subtest: deep links and failed observation images keep source attribution and usable 3D data
+ok 61 - deep links and failed observation images keep source attribution and usable 3D data
+  ---
+  duration_ms: 68.619208
+  ...
+# Subtest: recorded observation stage preserves provenance, closes on target change, and recovers from failure
+ok 62 - recorded observation stage preserves provenance, closes on target change, and recovers from failure
+  ---
+  duration_ms: 41.752709
+  ...
+# Subtest: mobile panels and recorded images suspend GPU drawing and resume with focus restored
+ok 63 - mobile panels and recorded images suspend GPU drawing and resume with focus restored
+  ---
+  duration_ms: 69.896292
+  ...
+# Subtest: target navigation, image metadata and planet explanations remain accessible on phones
+ok 64 - target navigation, image metadata and planet explanations remain accessible on phones
+  ---
+  duration_ms: 40.5225
+  ...
+# Subtest: space context recovery retains the catalog scene and native background prevents draws
+ok 65 - space context recovery retains the catalog scene and native background prevents draws
+  ---
+  duration_ms: 40.572958
+  ...
+# Subtest: space pointer drag and pinch change camera without replacing catalog selection
+ok 66 - space pointer drag and pinch change camera without replacing catalog selection
+  ---
+  duration_ms: 27.9855
+  ...
+# Subtest: static build removes obsolete output and retains both observatories
+ok 67 - static build removes obsolete output and retains both observatories
+  ---
+  duration_ms: 813.127959
+  ...
+# Subtest: preferences and saved scenes survive reload without losing their UTC or camera
+ok 68 - preferences and saved scenes survive reload without losing their UTC or camera
+  ---
+  duration_ms: 0.945083
+  ...
+# Subtest: corrupt storage and unavailable storage are handled without crashing
+ok 69 - corrupt storage and unavailable storage are handled without crashing
+  ---
+  duration_ms: 3.287291
+  ...
+# Subtest: untrusted scene values and unknown schemas cannot introduce routes or nonfinite camera settings
+ok 70 - untrusted scene values and unknown schemas cannot introduce routes or nonfinite camera settings
+  ---
+  duration_ms: 0.134333
+  ...
+# Subtest: share links round-trip exact epochs and bounded camera state on both engines
+ok 71 - share links round-trip exact epochs and bounded camera state on both engines
+  ---
+  duration_ms: 0.757833
+  ...
+# Subtest: saved item lists are bounded and invalid scenes removed
+ok 72 - saved item lists are bounded and invalid scenes removed
+  ---
+  duration_ms: 0.71525
+  ...
+# Subtest: all seven tours use supported scene descriptions and linked scientific sources
+ok 73 - all seven tours use supported scene descriptions and linked scientific sources
+  ---
+  duration_ms: 0.177041
+  ...
+# Subtest: presentation uses sourced equatorial radius and period without inventing temperature
+ok 74 - presentation uses sourced equatorial radius and period without inventing temperature
+  ---
+  duration_ms: 16.091291
+  ...
+# Subtest: live badge requires valid current coverage and current simulation UTC
+ok 75 - live badge requires valid current coverage and current simulation UTC
+  ---
+  duration_ms: 0.58825
+  ...
+# Subtest: paused and historical presentation never calls loaded data live
+ok 76 - paused and historical presentation never calls loaded data live
+  ---
+  duration_ms: 0.1725
+  ...
+# Subtest: missing position and missing reference properties remain unavailable
+ok 77 - missing position and missing reference properties remain unavailable
+  ---
+  duration_ms: 0.111959
+  ...
+# Subtest: header thumbnails recover after catalog loading; quick actions delegate to existing controllers
+ok 78 - header thumbnails recover after catalog loading; quick actions delegate to existing controllers
+  ---
+  duration_ms: 8.145125
+  ...
+1..78
+# tests 78
+# suites 0
+# pass 78
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1400.359917

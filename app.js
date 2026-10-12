@@ -16,13 +16,16 @@ renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicTone
 renderer.domElement.setAttribute('role','img');renderer.domElement.setAttribute('aria-label','Live three-dimensional solar system. Positions from JPL Horizons and rotation from SPICE. Use the planet selector, moon buttons, view buttons, and zoom controls to explore.');
 viewport.append(renderer.domElement);
 const scene=new T.Scene(),camera=new T.PerspectiveCamera(36,1,.001,1e7);
-const sphere=new T.SphereGeometry(1,mobile?64:112,mobile?40:72);
+let sphere=new T.SphereGeometry(1,mobile?64:112,mobile?40:72);
 const white=new T.DataTexture(new Uint8Array([255,255,255,255]),1,1);white.needsUpdate=true;
 const black=new T.DataTexture(new Uint8Array([0,0,0,255]),1,1);black.needsUpdate=true;
 let catalogue=[],records={},bodies=new Map(),selected=399,view='close',mode='live',paused=false,speed=1,sim=Date.now()/1000;
 let start=0,end=0,width=1,height=1,theta=.5,phi=1.2,distance=5.7,targetDistance=5.7;
+let cameraTheta=.5,cameraPhi=1.2;
+let qualityName='balanced',drawCount=0,measuredFPS=0,fpsSince=performance.now();
 let previous=performance.now(),lastRender=-Infinity,lastUI=0,lastMapCheck=-Infinity,lastLabels=-Infinity,elapsed=0,fetching=false,nextFetch=0,ready=false,assetFailures=new Set();
 let apiState={},needsTrails=true,needsOrbits=true,lastOrbitEpoch=-Infinity,overviewReadyCount=0,delivery='local-cache',visibleKey='',visibleCache=[];
+const bodyRetryAfter=new Map();
 const planetColors={199:0xaa9b8d,299:0xe4c49a,399:0x6db9ec,499:0xe79971,599:0xd7bd9c,699:0xe1cc9b,799:0x8cdddf,899:0x6898e3};
 const overviewRadii={10:.98,199:.2,299:.3,399:.31,499:.24,599:.8,699:.7,799:.4,899:.39};
 const overviewPixels={10:34,199:10,299:13,399:14,499:11,599:25,699:22,799:17,899:17};
@@ -62,7 +65,7 @@ const textures=new Map();
 let textureManifest={};
 async function texture(path,max=4096,color=true){
  const variant=max<=1024?'small':'detail',derivative=textureManifest[path]?.[variant];
- const source=derivative&&max<=2048?derivative.path:path;
+ const source=derivative&&(max<=2048||window.OrbitNative)?derivative.path:path;
  const key=source+':'+max+':'+color;if(textures.has(key))return textures.get(key).promise;
  const promise=new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>{
   // Packaged derivatives arrive at GPU size; avoid decoding 8k images on phones.
@@ -199,7 +202,7 @@ function fitDistance(){
   let radius=2;for(const member of family())if(member.hasData)radius=Math.max(radius,member.absolute.distanceTo(b.absolute)/b.radius+member.radius/b.radius);
   return radius/(fov*aspect)*1.17;
  }
- return (b.id===699?3:1.4)/(fov*aspect);
+ return (b.id===699?3:mobile?1.1:1.18)/(fov*aspect);
 }
 function resize(){width=viewport.clientWidth;height=viewport.clientHeight;renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();if(ready)targetDistance=fitDistance();}
 new ResizeObserver(resize).observe(viewport);resize();
@@ -322,7 +325,10 @@ async function fetchIndividualBodies(){
  const now=Date.now()/1000;
  for(const [key,record] of Object.entries(records))if(record.end<=now||record.start>now)delete records[key];
  const priority=[10,399,301,599,501,502,503,504];
- const pending=catalogue.filter(b=>!records[b.id]||records[b.id].end<now+10800).sort((a,b)=>{
+ const pending=catalogue.filter(b=>(!records[b.id]||records[b.id].end<now+10800)&&(bodyRetryAfter.get(b.id)||0)<=Date.now()).sort((a,b)=>{
+  const failedA=bodyRetryAfter.get(a.id),failedB=bodyRetryAfter.get(b.id);
+  if(Boolean(failedA)!==Boolean(failedB))return failedA?1:-1;
+  if(failedA&&failedB&&failedA!==failedB)return failedA-failedB;
   const rank=b=>priority.includes(b.id)?priority.indexOf(b.id):10+b.id;
   return rank(a)-rank(b);
  });
@@ -336,9 +342,9 @@ async function fetchIndividualBodies(){
    if(!response.ok)throw new Error('Data service '+response.status);
    const record=await response.json();
    if(record.id!==body.id||!Array.isArray(record.samples)||record.samples.length<2||record.start>now||record.end<=now)throw new Error('Invalid ephemeris response');
-   records[body.id]=record;consecutiveFailures=0;
+   records[body.id]=record;bodyRetryAfter.delete(body.id);consecutiveFailures=0;
    applyRecords({busy:true,ready:count(),message:'Loading bodies'});
-  }catch(error){consecutiveFailures++;if(consecutiveFailures>=3)break;}
+  }catch(error){bodyRetryAfter.set(body.id,Date.now()+60000);consecutiveFailures++;if(consecutiveFailures>=3)break;}
   finally{clearTimeout(timeout);}
  }
  const complete=count()===29;
@@ -380,29 +386,30 @@ function changeOverviewScale(){needsTrails=true;needsOrbits=true;if(view==='over
 $('readable-scale').onchange=()=>{$('overview-scale').value=$('readable-scale').checked?'cinematic':'physical';changeOverviewScale();};
 $('overview-scale').onchange=()=>{$('readable-scale').checked=$('overview-scale').value!=='physical';changeOverviewScale();};
 $('fullscreen').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen().catch(()=>{});};
-const pointers=new Map();let dragged=false,down=null,pinch=0;
+const pointers=new Map();let dragged=false,down=null,pinch=0,lastTapId=null,lastTapAt=0;
 viewport.addEventListener('wheel',e=>{e.preventDefault();zoom(Math.exp(e.deltaY*.001));},{passive:false});
-viewport.addEventListener('pointerdown',e=>{viewport.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});down={x:e.clientX,y:e.clientY};dragged=false;});
-viewport.addEventListener('pointermove',e=>{if(!pointers.has(e.pointerId))return;const old=pointers.get(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2){const [a,b]=[...pointers.values()],d=Math.hypot(a.x-b.x,a.y-b.y);if(pinch)zoom(pinch/d);pinch=d;dragged=true;return;}if(Math.hypot(e.clientX-down.x,e.clientY-down.y)>4)dragged=true;theta-=(e.clientX-old.x)*.005;phi=T.MathUtils.clamp(phi+(e.clientY-old.y)*.005,.015,Math.PI-.015);});
-function endPointer(e){pointers.delete(e.pointerId);pinch=0;if(!ready||dragged||e.type!=='pointerup')return;const rect=viewport.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top;let best=24,nearest=null;for(const b of visibleBodies()){if(!b.hasData)continue;project.copy(b.group.position).project(camera);const gap=Math.hypot((project.x+1)*width/2-x,(1-project.y)*height/2-y);if(project.z<1&&gap<best){best=gap;nearest=b;}}if(nearest)select(nearest.id);}
+viewport.addEventListener('pointerdown',e=>{viewport.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});down={x:e.clientX,y:e.clientY};dragged=pointers.size>1;});
+viewport.addEventListener('pointermove',e=>{if(!pointers.has(e.pointerId))return;const old=pointers.get(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2){const [a,b]=[...pointers.values()],d=Math.hypot(a.x-b.x,a.y-b.y);if(pinch&&d>0)zoom(pinch/d);pinch=d;dragged=true;return;}if(Math.hypot(e.clientX-down.x,e.clientY-down.y)>4)dragged=true;theta-=(e.clientX-old.x)*.005;phi=T.MathUtils.clamp(phi+(e.clientY-old.y)*.005,.015,Math.PI-.015);});
+function endPointer(e){pointers.delete(e.pointerId);pinch=0;if(!ready||dragged||e.type!=='pointerup')return;const rect=viewport.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top;let best=24,nearest=null;for(const b of visibleBodies()){if(!b.hasData)continue;project.copy(b.group.position).project(camera);const gap=Math.hypot((project.x+1)*width/2-x,(1-project.y)*height/2-y);if(project.z<1&&gap<best){best=gap;nearest=b;}}if(nearest){const double=lastTapId===nearest.id&&Date.now()-lastTapAt<350;lastTapId=nearest.id;lastTapAt=Date.now();select(nearest.id);if(double)targetDistance=fitDistance();}}
 viewport.addEventListener('pointerup',endPointer);viewport.addEventListener('pointercancel',endPointer);
+renderer.domElement.addEventListener('webglcontextrestored',()=>{if(ready){$('loading').hidden=true;needsTrails=true;needsOrbits=true;}else boot();});
 renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();$('loading').hidden=false;$('loading-message').textContent='The graphics context was lost. Reload to restore the model.';});
 document.addEventListener('visibilitychange',()=>{previous=performance.now();elapsed=0;lastRender=-Infinity;});
 function frame(now){
- requestAnimationFrame(frame);const delta=Math.max(0,(now-previous)/1000);previous=now;if(document.hidden){elapsed=0;return;}
+ requestAnimationFrame(frame);const delta=Math.max(0,(now-previous)/1000);previous=now;if(document.hidden||document.body.dataset.nativeBackground==='true'){elapsed=0;return;}
  // Accumulate every animation tick before skipping draws: playback rates remain physical.
  elapsed+=delta;
  // Sustained slow animation ticks indicate main-thread/GPU pressure. Reduce only
  // render resolution; ephemeris interpolation and elapsed simulation time stay intact.
  if(delta>0&&delta<.25){slowFrames=delta>1/22?slowFrames+1:Math.max(0,slowFrames-1);}
- if(slowFrames>=30&&now-lastQualityChange>5000&&profile.pixelRatio>1){profile.pixelRatio=Math.max(1,profile.pixelRatio-.25);renderer.setPixelRatio(profile.pixelRatio);slowFrames=0;lastQualityChange=now;}
- const covered=Boolean($('app-dialog')?.open)||(mobile&&['telemetry','moons','data'].includes(document.body.dataset.sheet));
+ if(qualityName==='balanced'&&slowFrames>=30&&now-lastQualityChange>5000&&profile.pixelRatio>1){profile.pixelRatio=Math.max(1,profile.pixelRatio-.25);renderer.setPixelRatio(profile.pixelRatio);slowFrames=0;lastQualityChange=now;}
+ const covered=Boolean($('app-dialog')?.open)||Boolean($('experience-dialog')?.open)||(mobile&&['telemetry','moons','data'].includes(document.body.dataset.sheet));
  const interval=covered?1000:profile.frameInterval;
  if(now-lastRender<interval-.5)return;
  const dt=elapsed;elapsed=0;lastRender=now;
  if(Date.now()>nextFetch&&!fetching&&catalogue.length)fetchData();if(!ready)return;
  if(!paused){if(mode==='live')sim=Date.now()/1000;else sim+=dt*speed;}
- if(sim<start||sim>end){if(mode==='live'){$('notice').textContent='Current time is outside the loaded ephemeris. Refreshing data…';fetchData();return;}sim=T.MathUtils.clamp(sim,start,end);paused=true;$('notice').textContent='Reached the edge of the downloaded ephemeris. Choose Live now to return.';updateClockControls();}
+ if(sim<start||sim>end){if(mode==='live'){setStates(sim);updateUI();$('notice').textContent='Current time is outside the loaded ephemeris. Refreshing data…';fetchData();return;}sim=T.MathUtils.clamp(sim,start,end);paused=true;$('notice').textContent='Reached the edge of the downloaded ephemeris. Choose Live now to return.';updateClockControls();}
  setStates(sim);const focused=bodies.get(selected),visible=visibleBodies(),u=unit();if(view==='overview')origin.set(0,0,0);else origin.copy(focused.absolute);
  for(const b of bodies.values()){
   b.group.visible=visible.includes(b)&&b.hasData;if(!b.group.visible){b.trail.visible=false;continue;}
@@ -411,7 +418,7 @@ function frame(now){
   b.group.scale.setScalar(b.drawRadius);
  }
  const ease=reduced?1:1-Math.exp(-dt*7);distance+=(targetDistance-distance)*ease;
- camera.position.set(distance*Math.sin(phi)*Math.sin(theta),distance*Math.cos(phi),distance*Math.sin(phi)*Math.cos(theta));camera.lookAt(0,0,0);camera.updateMatrixWorld();
+ cameraTheta+=Math.atan2(Math.sin(theta-cameraTheta),Math.cos(theta-cameraTheta))*ease;cameraPhi+=(phi-cameraPhi)*ease;camera.position.set(distance*Math.sin(cameraPhi)*Math.sin(cameraTheta),distance*Math.cos(cameraPhi),distance*Math.sin(cameraPhi)*Math.cos(cameraTheta));camera.lookAt(0,0,0);camera.updateMatrixWorld();
  if(view==='overview'&&overviewMode()!=='physical')for(const b of visible)if(b.hasData){
   const pixelFloor=overviewPixels[b.id]*(mobile?.8:1)*Math.min(1,height/450);
   b.drawRadius=Math.max(overviewMode()==='cinematic'?overviewRadii[b.id]:b.radius/AU,pixelFloor*2*Math.tan(camera.fov*Math.PI/360)*camera.position.distanceTo(b.group.position)/height);
@@ -427,8 +434,20 @@ function frame(now){
  if(view==='overview'&&(needsOrbits||Math.abs(sim-lastOrbitEpoch)>1800))refreshOrbitGuides();
  for(const b of bodies.values())b.orbit.visible=Boolean(view==='overview'&&$('trails').checked&&b.hasData&&b.orbitPoints);
  if(now-lastMapCheck>500){lastMapCheck=now;updateVisibleMaps(visible);}
- renderer.render(scene,camera);if(now-lastLabels>100){lastLabels=now;positionLabels(visible);}
+ renderer.render(scene,camera);drawCount++;if(now-fpsSince>=1000){measuredFPS=Math.round(drawCount*1000/(now-fpsSince));fpsSince=now;drawCount=0;}if(now-lastLabels>100){lastLabels=now;positionLabels(visible);}
  if(now-lastUI>1000){lastUI=now;updateUI();}
 }
+window.addEventListener('online',()=>{bodyRetryAfter.clear();nextFetch=0;if(catalogue.length)fetchData();else if(!fetching)boot();});
+window.ORBIT={
+ kind:'solar',reset(){if(ready){aimAtSun();targetDistance=fitDistance();}},ready:()=>ready,catalog:()=>catalogue,
+ snapshot:()=>({kind:'solar',id:selected,view,scale:overviewMode(),epoch:sim,camera:[theta,phi,targetDistance]}),
+ restore(s){if(!ready)return {ok:false,message:'Wait for ephemeris loading.'};if(!bodies.has(Number(s.id)))return {ok:false,message:'Unknown body.'};if(s.epoch!==undefined&&(s.epoch<start||s.epoch>end))return {ok:false,message:'Saved UTC is outside the downloaded ephemeris window. Reconnect or choose Live now.'};
+  if(s.scale){$('readable-scale').checked=s.scale!=='physical';$('overview-scale').value=s.scale;}
+  select(Number(s.id),s.view||'close');if(s.epoch!==undefined){sim=s.epoch;paused=true;mode='playback';setStates(sim);updateClockControls();}if(s.camera){theta=s.camera[0];phi=s.camera[1];targetDistance=s.camera[2];}return {ok:true};},
+ quality(name){qualityName=name;const oldSphere=sphere,segments=name==='low'?[40,24]:name==='high'?[112,72]:[64,40];sphere=new T.SphereGeometry(1,...segments);for(const b of bodies.values())for(const mesh of [b.mesh,b.clouds,b.atmosphere])if(mesh?.geometry===oldSphere)mesh.geometry=sphere;oldSphere.dispose();const cap=name==='low'?1:name==='high'?2:mobile?1.25:1.5;profile.pixelRatio=Math.min(devicePixelRatio,cap);profile.maxTexture=name==='low'?1024:name==='high'?4096:2048;profile.frameInterval=1000/(name==='high'?60:name==='low'?30:mobile?30:60);renderer.setPixelRatio(profile.pixelRatio);for(const b of bodies.values())if(b.mapLevel>profile.maxTexture)releaseMaps(b);lastMapCheck=-Infinity;},
+ telemetry(){const b=bodies.get(selected),rec=records[selected];const orbit=b?.hasData&&b.parent===10?orbitModel?.ellipseFromState(b.raw.toArray(),b.velocity.toArray(),{samples:16}):null;return {id:selected,view,radius:b?.radius,distanceSun:b?.hasData?b.absolute.length():null,clockState:paused?'paused':mode==='live'?'live':'playback',name:b?.name||'Loading',epoch:sim,valid:b?.hasData===true,start:rec?.start,end:rec?.end,fetched:rec?.fetchedUTC,frame:b?.frame,orientation:b?.orientationAvailable,position:b?.hasData?[b.raw.x,-b.raw.z,b.raw.y]:null,velocity:b?.hasData?[b.velocity.x,-b.velocity.z,b.velocity.y]:null,relativeTo:b?.parent!==10&&b?.parent!==0?'parent body':'Sun',fps:measuredFPS,pixelRatio:profile.pixelRatio,quality:qualityName,orbit:orbit?{a:orbit.a,e:orbit.e,periapsis:orbit.periapsis,apoapsis:orbit.apoapsis}:null};},
+ async screenshot(){renderer.render(scene,camera);return new Promise(resolve=>renderer.domElement.toBlob(resolve,'image/png'));},
+ closePanel(){const close=$('close-sheet');if(document.body.dataset.sheet&&close?.click){close.click();return true;}return false;}
+};
 boot();requestAnimationFrame(frame);
 })();

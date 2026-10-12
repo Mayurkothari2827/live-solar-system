@@ -1,0 +1,9 @@
+
+> orbit-observatory@2.0.0 sync:native
+> npm run build:native && cap sync
+
+
+> orbit-observatory@2.0.0 build:native
+> node scripts/build_native.mjs
+
+Static browser files prepared in public/. Python and kernels stay in the API bundle.

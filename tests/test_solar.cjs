@@ -19,10 +19,10 @@ class Element extends Target {
  append(...x){this.children.push(...x);}replaceChildren(...x){this.children=x;}setAttribute(k,v){this[k]=v;}setPointerCapture(){}
  getContext(){return {drawImage(){},createRadialGradient(){return {addColorStop(){}};},fillRect(){}};}
 }
-function fixtures(){
+function fixtures(windowSeconds=3600){
  const records={};
  for(const b of catalogue.bodies){
-  const epoch=NOW/1000,start=epoch-3600,end=epoch+3600,radii={199:.387,299:.723,399:1,499:1.524,599:5.204,699:9.582,799:19.2,899:30.07};
+  const epoch=NOW/1000,start=epoch-windowSeconds,end=epoch+windowSeconds,radii={199:.387,299:.723,399:1,499:1.524,599:5.204,699:9.582,799:19.2,899:30.07};
   const x=b.id===10?0:b.id===301?384400:b.parent===10?AU*radii[b.id]:600000;
   const velocity=b.parent===10?(b.id===399?29.78:Math.sqrt(OrbitModel.SUN_GM/x)):0,period=b.id===399?86164:100000;
   const angle=b.parent===10&&b.id!==399?b.id*.039:0,c=Math.cos(angle),s=Math.sin(angle);
@@ -32,11 +32,11 @@ function fixtures(){
  }
  return records;
 }
-async function boot({mobile=false,reduced=false,delayedImages=false,missing=[]}={}){
+async function boot({mobile=false,reduced=false,delayedImages=false,missing=[],perBody=false,failures=new Set(),failureSeconds=0}={}){
  const elements=new Map();for(const m of fs.readFileSync(path.join(ROOT,'index.html'),'utf8').matchAll(/id="([^"]+)"/g))elements.set(m[1],new Element());
  const viewport=elements.get('scene');viewport.clientWidth=mobile?390:1000;viewport.clientHeight=mobile?844:600;
  const document=new Target();Object.assign(document,{getElementById:id=>elements.get(id),createElement:()=>new Element(),hidden:false,documentElement:new Element(),body:new Element()});
- const frames=[],imageRequests=[],images=[],renders=[],disposed=[],fetchRequests=[],records=fixtures();
+ const frames=[],imageRequests=[],images=[],renders=[],disposed=[],fetchRequests=[],records=fixtures(perBody?86400:3600);
  for(const id of missing)delete records[id];
  let wallClock=NOW,performanceClock=0,pixelRatio,options;
  class FixedDate extends Date {constructor(...args){super(...(args.length?args:[wallClock]));}static now(){return wallClock;}}
@@ -48,12 +48,12 @@ async function boot({mobile=false,reduced=false,delayedImages=false,missing=[]}=
  const context={window,document,console,devicePixelRatio:3,performance:{now:()=>performanceClock},matchMedia:q=>({matches:q.includes('reduced-motion')?reduced:mobile}),ResizeObserver:class{constructor(fn){this.fn=fn;}observe(){this.fn();}},Image:class {
   constructor(){this.width=2048;this.height=1024;images.push(this);}
   set src(value){this._src=value;imageRequests.push(value);if(!delayedImages)Promise.resolve().then(()=>this.onload());}get src(){return this._src;}
- },requestAnimationFrame:fn=>frames.push(fn),fetch:async url=>{fetchRequests.push(url);return {ok:true,json:async()=>url==='/api/catalog'?structuredClone(catalogue):url==='/assets/texture-manifest.json'?manifest:{bodies:records,status:{ready:Object.keys(records).length-1,busy:false,message:'Ready'}}};},Date:FixedDate,Math,Map,Set,Uint8Array,AbortController,setTimeout,clearTimeout};
+ },requestAnimationFrame:fn=>frames.push(fn),fetch:async url=>{fetchRequests.push(url);const id=Number(String(url).split('id=')[1]);if(failures.has(id))wallClock+=failureSeconds*1000;return {ok:!failures.has(id),json:async()=>url==='/api/catalog'?{...structuredClone(catalogue),...(perBody?{delivery:'per-body'}:{})}:url==='/assets/texture-manifest.json'?manifest:perBody?records[id]:{bodies:records,status:{ready:Object.keys(records).length-1,busy:false,message:'Ready'}}};},Date:FixedDate,Math,Map,Set,Uint8Array,AbortController,setTimeout,clearTimeout};
  vm.createContext(context);vm.runInContext(fs.readFileSync(path.join(ROOT,'app.js'),'utf8'),context,{filename:'app.js'});
  for(let i=0;i<8;i++)await flush();
  function frame(seconds=1/30){performanceClock+=seconds*1000;wallClock+=seconds*1000;const callback=frames.shift();assert(callback);callback(performanceClock);}
  frame();await flush();
- return {elements,document,options,get pixelRatio(){return pixelRatio;},frames,renders,imageRequests,images,disposed,fetchRequests,records,frame,advanceWall:seconds=>wallClock+=seconds*1000,get scene(){return renders.at(-1)?.scene;},get camera(){return renders.at(-1)?.camera;},get clock(){return wallClock;},get now(){return performanceClock;},groups(){return this.scene.children.filter(o=>o.isGroup);},select(id){elements.get('body-select').onchange({target:{value:String(id)}});}};
+ return {engine:window.ORBIT,window,elements,document,options,get pixelRatio(){return pixelRatio;},frames,renders,imageRequests,images,disposed,fetchRequests,records,frame,advanceWall:seconds=>wallClock+=seconds*1000,get scene(){return renders.at(-1)?.scene;},get camera(){return renders.at(-1)?.camera;},get clock(){return wallClock;},get now(){return performanceClock;},groups(){return this.scene.children.filter(o=>o.isGroup);},select(id){elements.get('body-select').onchange({target:{value:String(id)}});}};
 }
 
 test('phone resources use packaged maps, bounded geometry and pixel density; off-screen Moon and rings stay unloaded',async()=>{
@@ -191,4 +191,82 @@ test('sustained slow frames reduce pixel density while preserving playback',asyn
  const app=await boot({mobile:true});app.elements.get('speed').onchange({target:{value:'3600'}});
  const earth=app.groups()[3],before=earth.quaternion.clone();for(let i=0;i<120;i++)app.frame(.05);
  assert.equal(app.pixelRatio,1);assert(earth.quaternion.angleTo(before)>.1);
+});
+
+
+test('scene restoration rejects uncovered epochs and preserves valid saved settings',async()=>{
+ const app=await boot({mobile:true});const before=app.engine.snapshot();
+ assert.equal(app.engine.restore({kind:'solar',id:399,epoch:1}).ok,false);
+ assert.equal(app.engine.snapshot().id,before.id);
+ const valid=app.engine.telemetry().epoch;
+ assert.equal(app.engine.restore({kind:'solar',id:301,view:'close',scale:'physical',epoch:valid,camera:[.2,1,8]}).ok,true);
+ app.frame(.04);assert.equal(app.engine.snapshot().id,301);assert.equal(app.engine.snapshot().epoch,valid);
+ assert.equal(app.engine.snapshot().scale,'physical');assert.equal(app.engine.telemetry().relativeTo,'parent body');
+ app.engine.quality('low');app.frame(.04);assert.equal(app.pixelRatio,1);
+ assert.equal(app.groups()[3].children[0].geometry.parameters.widthSegments,40);
+ app.engine.quality('high');assert.equal(app.pixelRatio,2);
+});
+test('native background suspends rendering without accelerated catch-up',async()=>{
+ const app=await boot();app.elements.get('speed').onchange({target:{value:'3600'}});
+ const count=app.renders.length;app.document.body.dataset.nativeBackground='true';app.frame(4);assert.equal(app.renders.length,count);
+ app.document.body.dataset.nativeBackground='false';app.document.dispatch('visibilitychange');app.frame(.04);
+ assert(app.renders.length>count);
+});
+
+
+test('current UTC beyond downloaded data never remains marked available',async()=>{
+ const app=await boot();app.advanceWall(8000);app.frame(.04);
+ assert.equal(app.engine.telemetry().valid,false);
+ assert.equal(app.engine.telemetry().position,null);
+ assert.match(app.elements.get('state-label').textContent,/unavailable/);
+});
+
+test('lowering graphics quality releases higher resolution GPU maps',async()=>{
+ const app=await boot({mobile:true});app.select(399);app.engine.quality('high');app.frame(.04);for(let i=0;i<8;i++)await flush();
+ const earth=app.groups()[3];assert.equal(earth.children[0].material.uniforms.hasNormal.value,1);
+ app.engine.quality('low');assert.equal(earth.children[0].material.uniforms.hasNormal.value,0);await flush();assert(app.disposed.length>0);
+ app.frame(.04);for(let i=0;i<8;i++)await flush();assert.equal(earth.children[0].material.uniforms.hasNormal.value,0);
+});
+
+// Persistent upstream failures must not starve unrelated bodies on every retry.
+test('per-body retries reach healthy bodies after three upstream failures and reconnect retries failures',async()=>{
+ const failures=new Set([599,501,502]);const a=await boot({perBody:true,failures});
+ assert(!a.fetchRequests.includes('/api/ephemeris?id=499'));
+ a.advanceWall(31);a.frame(.04);for(let i=0;i<8;i++)await flush();
+ assert(a.fetchRequests.includes('/api/ephemeris?id=499'),'healthy Mars must be reached on the next retry');
+ a.elements.get('overview').onclick();a.frame(.04);assert(a.groups().find(g=>g.children[0].userData.bodyId===499).visible);
+ const prior=a.fetchRequests.filter(x=>x==='/api/ephemeris?id=599').length;failures.clear();a.window.dispatch('online');for(let i=0;i<8;i++)await flush();
+ assert(a.fetchRequests.filter(x=>x==='/api/ephemeris?id=599').length>prior);
+ assert.equal(a.elements.get('notice').textContent,'');
+});
+
+test('solar context recovery preserves selected body, clock and camera state',async()=>{
+ const a=await boot({mobile:true});const canvas=a.elements.get('scene').children[0],before=a.engine.snapshot();let prevented=false;
+ canvas.dispatch('webglcontextlost',{preventDefault(){prevented=true;}});assert(prevented);assert.equal(a.elements.get('loading').hidden,false);
+ canvas.dispatch('webglcontextrestored');assert.equal(a.elements.get('loading').hidden,true);
+ const after=a.engine.snapshot();assert.equal(after.id,before.id);assert.equal(after.epoch,before.epoch);assert.deepEqual(after.camera,before.camera);
+ a.frame(.04);assert.equal(a.engine.telemetry().valid,true);
+});
+test('solar pointer drag, pinch and cancellation change only camera controls',async()=>{
+ const a=await boot({mobile:true}),v=a.elements.get('scene'),before=a.engine.snapshot();
+ v.dispatch('pointerdown',{pointerId:1,clientX:100,clientY:100});v.dispatch('pointermove',{pointerId:1,clientX:140,clientY:120});v.dispatch('pointercancel',{pointerId:1,type:'pointercancel'});
+ const dragged=a.engine.snapshot();assert.notDeepEqual(dragged.camera.slice(0,2),before.camera.slice(0,2));assert.equal(dragged.id,before.id);
+ v.dispatch('pointerdown',{pointerId:1,clientX:100,clientY:100});v.dispatch('pointerdown',{pointerId:2,clientX:200,clientY:100});
+ v.dispatch('pointermove',{pointerId:2,clientX:220,clientY:100});v.dispatch('pointermove',{pointerId:2,clientX:280,clientY:100});
+ assert(a.engine.snapshot().camera[2]<dragged.camera[2]);v.dispatch('pointercancel',{pointerId:1,type:'pointercancel'});v.dispatch('pointercancel',{pointerId:2,type:'pointercancel'});
+ const after=a.engine.snapshot();v.dispatch('pointermove',{pointerId:2,clientX:600,clientY:500});assert.deepEqual(a.engine.snapshot().camera,after.camera);
+ assert.equal(a.engine.telemetry().valid,true);
+});
+
+test('slow upstream timeouts cannot undo retry fairness after cooldown expiry',async()=>{
+ const a=await boot({perBody:true,failures:new Set([599,501,502]),failureSeconds:55});
+ a.advanceWall(91);a.frame(.04);for(let i=0;i<8;i++)await flush();
+ assert(a.fetchRequests.includes('/api/ephemeris?id=899'),'a healthy outer planet must not be starved by repeated slow failures');
+});
+
+test('presentation telemetry preserves heliocentric distance for a selected moon and explicit playback state',async()=>{
+ const app=await boot();app.select(301);app.frame(.04);const moon=app.engine.telemetry();
+ assert.equal(moon.id,301);assert(moon.distanceSun>AU,'Moon card uses heliocentric distance, not Earth-relative range');assert.equal(moon.clockState,'live');
+ app.elements.get('pause').onclick();assert.equal(app.engine.telemetry().clockState,'paused');
+ app.elements.get('speed').onchange({target:{value:'60'}});assert.equal(app.engine.telemetry().clockState,'playback');
 });

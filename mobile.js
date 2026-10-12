@@ -29,6 +29,7 @@
       }
     } else if (returnFocus) { returnFocus.focus({ preventScroll: true }); returnFocus = null; }
   }
+  byId('time-controls')?.addEventListener('click', () => setSheet('time', byId('time-controls')));
   buttons.forEach(button => button.addEventListener('click', () => setSheet(button.dataset.sheet, button)));
   ['close-sheet', 'close-time-sheet', 'sheet-backdrop'].forEach(id => byId(id).addEventListener('click', () => setSheet('')));
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && active) { event.preventDefault(); setSheet(''); } });
@@ -53,7 +54,7 @@
       const displayClock = byId('mobile-utc-clock');
       displayClock.textContent = iso.slice(11, 19) + ' UTC';
       displayClock.setAttribute('datetime', iso);
-      byId('mobile-clock-date').textContent = iso.slice(0, 10);
+      byId('mobile-clock-date').textContent = iso.slice(0, 10) + ' (' + date.toLocaleDateString('en-GB', {weekday:'long',timeZone:'UTC'}) + ')';
     }
     const source = byId('state-label').textContent;
     byId('hud-source-state').textContent = source;

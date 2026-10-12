@@ -6,3 +6,17 @@ __pycache__/
 asset-tree.json
 public/
 .vercel/
+node_modules/
+native-public/
+android/.gradle/
+android/local.properties
+android/**/build/
+ios/**/DerivedData/
+ios/**/xcuserdata/
+release-artifacts/
+
+# Release credentials stay outside version control
+*.jks
+*.keystore
+*.p12
+*.mobileprovision

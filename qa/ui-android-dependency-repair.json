@@ -1,0 +1,362 @@
+[
+  {
+    "duplicate": "node_modules/@capacitor/android/package 2.json",
+    "canonical": "node_modules/@capacitor/android/package.json",
+    "sha256": "8e9f15b7d7af7314428fc03046ac17a942ebca9f2893c60aae954f091f0db298"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/proguard-rules 2.pro",
+    "canonical": "node_modules/@capacitor/android/capacitor/proguard-rules.pro",
+    "sha256": "ed875ef632dc2e69b37423ccfdc2a08178a151885d09c3ff20dce396b4bdc949"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/build 2.gradle",
+    "canonical": "node_modules/@capacitor/android/capacitor/build.gradle",
+    "sha256": "2b03df6b575178a8de490b4db114cc84647c06a580342046a2e5f9f797920717"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/lint-baseline 2.xml",
+    "canonical": "node_modules/@capacitor/android/capacitor/lint-baseline.xml",
+    "sha256": "fd281f30515e905b8b9022541fa669c20dbd41c03c776439b16201f2fe631f76"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/lint 2.xml",
+    "canonical": "node_modules/@capacitor/android/capacitor/lint.xml",
+    "sha256": "416e9b36d2dfc70a93072a474183e006f7e67912ceebe4302d09f295194cab6e"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/AndroidManifest 2.xml",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/AndroidManifest.xml",
+    "sha256": "2c1d1edd56acc7ff7097c2ed4e4d5a20cd4cdede6ca68b214eacd798decc1186"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/assets/native-bridge 2.js",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/assets/native-bridge.js",
+    "sha256": "44ae55c944c91d5ebeb1ca2374e831d7920d1af6464faef8f0001a96252109bc"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/InvalidPluginMethodException 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/InvalidPluginMethodException.java",
+    "sha256": "886aca52f57315a9bf2c7f072ac3d08ad95886718e32d4f392a57615135d4b4d"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginManager 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginManager.java",
+    "sha256": "f3809e344b53e92d1b143992f13a69305898128ffc1b6246792dd947627e4058"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/JSExport 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/JSExport.java",
+    "sha256": "15c99176c82a5e864c5bc8f2f1c6d72801f557ff50e690b3d720294cd767c0c4"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/FileUtils 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/FileUtils.java",
+    "sha256": "24b5f0a222eb9e23bdbbe8430b2ffbcedbd72e4eadf3252dba81729263cb8d33"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/AppUUID 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/AppUUID.java",
+    "sha256": "46d479d0b20ad38234b17357f33a89336762ee5f060aa1c5f2a462866b2519b3"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/BridgeWebChromeClient 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/BridgeWebChromeClient.java",
+    "sha256": "355072033da08bcb76427bb4401a531d4f381f1051533fbfd63c37baa8a61c89"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/InvalidPluginException 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/InvalidPluginException.java",
+    "sha256": "b2416e98ac7d96bc2763d9e51b3135a987539ae049ed245d198198798c7500f7"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginCall 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginCall.java",
+    "sha256": "d5dbaaafe0ad1b0f7fed4854fbaa53e595c143436b0e159a4c75e29565666b1d"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/MessageHandler 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/MessageHandler.java",
+    "sha256": "5fa05c9148c4e24958f72b2d81747b416a73356693a8cb99249c557fdc9dec1a"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PermissionState 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PermissionState.java",
+    "sha256": "2061ca74f2e1caac1b261fcdd294050b8b61b550436c2eb98e6cd39e4750a2f4"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/App 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/App.java",
+    "sha256": "73f3401ab472bbe27b5a7d454049836eaf584e926e3cbb6fbabb0a19b6869717"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/AndroidProtocolHandler 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/AndroidProtocolHandler.java",
+    "sha256": "1c9d033711bfb6254a18c63941d2b9e15143b0638b86546db9f03aeffaea6c5d"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/JSValue 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/JSValue.java",
+    "sha256": "6ecd6124e2c3df64979cd30ae54d8b22b57c87b1a68d6f58c6105a0674031eda"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/RouteProcessor 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/RouteProcessor.java",
+    "sha256": "33aa24090f7ade8e05c78c995e4ef6fe8f6669161e78df428d083a468e838b2a"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/JSExportException 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/JSExportException.java",
+    "sha256": "2b552a82dee6543e62b2410fb4f64c1d7f236d4bfbce7f524c8de94175b4dbfd"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/CapConfig 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/CapConfig.java",
+    "sha256": "fec94ade74e402a9189626d90944c8b816292fc0f1447548cd7c6b9ec397a2ba"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginMethod 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginMethod.java",
+    "sha256": "5f105688a52ffedb021ebcdbcbce5fc270822c23830ee1845457660fa977c287"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/CapacitorWebView 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/CapacitorWebView.java",
+    "sha256": "591e0a82c89c9b931a189c9e0434e6589483f8f538a65db9f7d83f6db0cc0ed9"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/Bridge 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/Bridge.java",
+    "sha256": "619700a31548504d7f81552c696273d652c655ebe317a006bda3f9398bdecdf5"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/BridgeActivity 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/BridgeActivity.java",
+    "sha256": "344dda9fcee959138cbd70fbe2f66f73938727048455d1082188527266297c67"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/ProcessedRoute 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/ProcessedRoute.java",
+    "sha256": "667967c66974d956a0b79a632560aa2d81c02557069a98cdd1e686e2a575ee4c"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/Plugin 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/Plugin.java",
+    "sha256": "f0e5602ad2fb637c2e9e25d4139472c30d1dcd517289adf72bfc9a4f7089b9ff"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginLoadException 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginLoadException.java",
+    "sha256": "5768c968816707c4376de8fc5efc8ef27373c31657431865fa6645023426d3ef"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/JSArray 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/JSArray.java",
+    "sha256": "cc6c4967b572fa66889f4d23e37ac9781b7d94f9f455048ca7cdaa4c63a5dc81"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/WebViewListener 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/WebViewListener.java",
+    "sha256": "4a50f509c9d063ea56038d4a4a68bc7221ac4cc26ae0fbab7f38a2d56744b64d"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginConfig 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginConfig.java",
+    "sha256": "5fd5be49f3ec22e70b3904d2f244368efec11a30c32d1e3446ba97fbf2d09717"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginResult 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginResult.java",
+    "sha256": "810eac5f10dc7f83946f820025ed734485229f120df4e34a974170e91b7efbdc"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/BridgeWebViewClient 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/BridgeWebViewClient.java",
+    "sha256": "c9098b2e7f1586d24acdd767a8af9962b7f78023a0484026a983b943b2b6b3e0"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginMethodHandle 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginMethodHandle.java",
+    "sha256": "ee8ba459d02e926e1a2e9a57e91af78de861d5c42ab12ee854e3f5b32b47fe67"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/JSObject 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/JSObject.java",
+    "sha256": "05812fbbdfe3d3abf2edcd2c58700a3802f82e5cf8c19ca22d2a47d0ef1e891b"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/UriMatcher 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/UriMatcher.java",
+    "sha256": "73f059c2f70c6240c81fed3817e589d864f510107d2bdbc178a2d266cc218d00"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/NativePlugin 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/NativePlugin.java",
+    "sha256": "f89e3948852180b23804a6c59ecaa88310d9f3a674ca81d4543b4d3963b8c893"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginHandle 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginHandle.java",
+    "sha256": "cef84ae91f325d25a481dd05271fa04557cac6f1347cab9d28bd2739ade753a7"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/ServerPath 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/ServerPath.java",
+    "sha256": "88c73388c02d4a91ac351fabc10bb4942db96401c2d0e89fad5562d7b65253b2"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginInvocationException 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/PluginInvocationException.java",
+    "sha256": "fa03721cbfa4becdb393aabf1a01471fcf05746f7bf81edf907f158aa72f1d83"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/WebViewLocalServer 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/WebViewLocalServer.java",
+    "sha256": "3b7fb9b16fd96dc0ef18050120c06b6bf0b72c4b6690a2967219a21b3e65c3ab"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/JSInjector 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/JSInjector.java",
+    "sha256": "77e18a375287e890eaa1f2473daadc2c34ee2765197aff0717b90f52c48f0082"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/Logger 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/Logger.java",
+    "sha256": "1214d48e8ccacddd2ed4fa7f0b8a3af51aa164ff3deaeea6dbcfc88474fcd83a"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/cordova/MockCordovaWebViewImpl 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/cordova/MockCordovaWebViewImpl.java",
+    "sha256": "7d2d95e8d3986b6608630262166cdee1c208bc4270d76ee69c05b7463a02c0c7"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/cordova/MockCordovaInterfaceImpl 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/cordova/MockCordovaInterfaceImpl.java",
+    "sha256": "458a2a7fc3ee939a17ab158cd697d99554c35a6f7990f9be6076556bba1dc28c"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/cordova/CapacitorCordovaCookieManager 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/cordova/CapacitorCordovaCookieManager.java",
+    "sha256": "05408260dcffd9dad50f38256dca3cda6066ce5a8a30517d33b2f99290d027d5"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/util/PermissionHelper 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/util/PermissionHelper.java",
+    "sha256": "28a9c4aca9192d134f936b7303b1eb7d979aa80097a1b89e19efc5dcfaf231c8"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/util/HostMask 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/util/HostMask.java",
+    "sha256": "84039a74ac831fe348972b30925bcd69ea58b8b54c6bd4e06cc9c8efa9a40163"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/util/WebColor 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/util/WebColor.java",
+    "sha256": "dffff80a58eba961e1136c573f3c582a4864075c3cd3f386e8882d8e1dc4d454"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/util/InternalUtils 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/util/InternalUtils.java",
+    "sha256": "3639c0c36fe696e822298f791f8379901591abaf260ce32175e48d9ed75197df"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/util/JSONUtils 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/util/JSONUtils.java",
+    "sha256": "a5cc4fae3bb67854afc7bc6802140b29f6f97ed9e18c2df6d57a7feacb5e7b9e"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/WebView 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/WebView.java",
+    "sha256": "731da01c6b51895d7b81e0588a835e12ed65f4a3aa85e5db411b221754f18e96"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/CapacitorHttp 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/CapacitorHttp.java",
+    "sha256": "45725522be260ea0c4814218b8cab7bda5763dc0f8e517493f5edc241aaf3af7"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/CapacitorCookieManager 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/CapacitorCookieManager.java",
+    "sha256": "39d3d62579ea1a5253837908220dab3f3b7dea150e264a1953aabc8705347231"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/SystemBars 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/SystemBars.java",
+    "sha256": "dbe23dcf4472cc00bf7d23a635f7286168905b37ce8db9697da200454c21aa35"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/CapacitorCookies 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/CapacitorCookies.java",
+    "sha256": "ae3433e4dda80307ab78230fac96e2b1f38dca345080012f45df8c56b0b4e2ee"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/annotation/CapacitorPlugin 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/annotation/CapacitorPlugin.java",
+    "sha256": "c5b7f134975caee92bcdd72b48342d389feb5129357192d5dec12199f82dc1b8"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/annotation/Permission 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/annotation/Permission.java",
+    "sha256": "bbd6d8daa9f3a69de7f19a525344ece60f9086b17bac7fe10e8876fea3966de3"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/annotation/PermissionCallback 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/annotation/PermissionCallback.java",
+    "sha256": "3d85ed12400f58587771a11e6b31ce1a72c6074ab96e59f7b44a8e6e448b797b"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/annotation/ActivityCallback 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/annotation/ActivityCallback.java",
+    "sha256": "183ea672b63e1851acce00bd1cda5e66208c2153bc29dbc65ac226220e8565ec"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/util/MimeType 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/util/MimeType.java",
+    "sha256": "7b92ae8d00d8be6d07da5067ecd344076c8b3e00c7020efe12a8f62f00baa041"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/util/CapacitorHttpUrlConnection 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/util/CapacitorHttpUrlConnection.java",
+    "sha256": "5d5aedc973caa619bb081e1776fe7e824d4ad11167ffd51412758246df3a8b62"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/util/ICapacitorHttpUrlConnection 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/util/ICapacitorHttpUrlConnection.java",
+    "sha256": "5faaf87faa93e8c1265c8c3b3c04968dc08eb6cee6ce990326c52609e673a460"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/util/HttpRequestHandler 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/util/HttpRequestHandler.java",
+    "sha256": "17cc9e9147c3003c571d4e88939149fbef2a11a5dc2c805f7c5f0aceb2ab42f9"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/util/AssetUtil 2.java",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/plugin/util/AssetUtil.java",
+    "sha256": "1dc11429071d8eca90591ef4fc551e0e717e1a79164ae3ddd9c6ad23087052ca"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/res/layout/no_webview 2.xml",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/res/layout/no_webview.xml",
+    "sha256": "1ca4232331d23e6795db819242d1a5dce9375801680b162b2b491b3ab5b8e970"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/res/layout/capacitor_bridge_layout_main 2.xml",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/res/layout/capacitor_bridge_layout_main.xml",
+    "sha256": "a008d8238cceacc23ddf2f0e9fe6465939e9872f1b6eb495f20da6d05f308444"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/res/values/colors 2.xml",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/res/values/colors.xml",
+    "sha256": "782bfb123024c18329455843ccfecd32f25158bf73fc4d7d97bb6b217286219c"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/res/values/strings 2.xml",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/res/values/strings.xml",
+    "sha256": "542f45b9e2c3d55facf888847cbb0fd5c2b9ec37ce4312aa00fa3cbfb1e44a2a"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/android/capacitor/src/main/res/values/styles 2.xml",
+    "canonical": "node_modules/@capacitor/android/capacitor/src/main/res/values/styles.xml",
+    "sha256": "70a70d306309ad095093149d4dcf724821497a5d54a63de83f35b48bfb15f7fb"
+  }
+]

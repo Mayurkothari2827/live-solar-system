@@ -1,0 +1,147 @@
+[
+  {
+    "duplicate": "node_modules/@capacitor/share/android/build 2.gradle",
+    "canonical": "node_modules/@capacitor/share/android/build.gradle",
+    "sha256": "d36553fa36af6ee80727cecacc190bf7bb21b45d18bc30c138dd34520db6ba41"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/share/android/src/main/AndroidManifest 2.xml",
+    "canonical": "node_modules/@capacitor/share/android/src/main/AndroidManifest.xml",
+    "sha256": "bfe643676c7bfecf2683b1ad8044a754bc53141c9e4fc6714ad58c1530937b6d"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/share/android/src/main/java/com/capacitorjs/plugins/share/SharePlugin 2.java",
+    "canonical": "node_modules/@capacitor/share/android/src/main/java/com/capacitorjs/plugins/share/SharePlugin.java",
+    "sha256": "b427207755149965f34c8eb0f864fe5ecfc248ff06d931c9841c4fb571ea3c11"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/cli/dist/android/common 2.js",
+    "canonical": "node_modules/@capacitor/cli/dist/android/common.js",
+    "sha256": "959486c9a9cc25959d6b175803a38e5810b686ba134fd8ef487286bbf68cbd3f"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/cli/dist/android/open 2.js",
+    "canonical": "node_modules/@capacitor/cli/dist/android/open.js",
+    "sha256": "b576fe7c97c17ebe9fa571ebefe11c6b545e17cd8213869ed5119595cfa3a2f7"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/cli/dist/android/build 2.js",
+    "canonical": "node_modules/@capacitor/cli/dist/android/build.js",
+    "sha256": "03b4aa5d4302123148191d6a64c1576f15e22f07d15b2e4d10b1274dfd80d975"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/cli/dist/android/run 2.js",
+    "canonical": "node_modules/@capacitor/cli/dist/android/run.js",
+    "sha256": "ace6292db761bb5f298041f9a98aa9cccf0da9cd6265588ca3f49422d045f294"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/cli/dist/android/update 2.js",
+    "canonical": "node_modules/@capacitor/cli/dist/android/update.js",
+    "sha256": "201b3440a2ee843c92d59505e66c8b3a13ac2382e5a3ccf503e6bd78c2777c3f"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/cli/dist/android/add 2.js",
+    "canonical": "node_modules/@capacitor/cli/dist/android/add.js",
+    "sha256": "b303f0a25dd20e3305fb3d27f2adbb3d7950be7a961bfa28b7b3694200ef57dd"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/cli/dist/android/doctor 2.js",
+    "canonical": "node_modules/@capacitor/cli/dist/android/doctor.js",
+    "sha256": "1d068731086f9b61e67e6416d3a24a19423808b377bd97af63c933ded7440449"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/android/build 2.gradle",
+    "canonical": "node_modules/@capacitor/filesystem/android/build.gradle",
+    "sha256": "817a18e422f14189a96af8f4df17474df94d56f51ee14d0bdb41140ccab3f916"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/android/src/main/AndroidManifest 2.xml",
+    "canonical": "node_modules/@capacitor/filesystem/android/src/main/AndroidManifest.xml",
+    "sha256": "bfe643676c7bfecf2683b1ad8044a754bc53141c9e4fc6714ad58c1530937b6d"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/android/src/main/kotlin/com/capacitorjs/plugins/filesystem/FilesystemMethodResults 2.kt",
+    "canonical": "node_modules/@capacitor/filesystem/android/src/main/kotlin/com/capacitorjs/plugins/filesystem/FilesystemMethodResults.kt",
+    "sha256": "f2c8c3190040d7d18410d96435d95d2e6e0e284ff8f69c7b1952e7d85eb875ca"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/android/src/main/kotlin/com/capacitorjs/plugins/filesystem/FilesystemMethodOptions 2.kt",
+    "canonical": "node_modules/@capacitor/filesystem/android/src/main/kotlin/com/capacitorjs/plugins/filesystem/FilesystemMethodOptions.kt",
+    "sha256": "679be61e32fa25d29c1f009cb557790c1da05a0a7b8201eb37dee8e839a7b961"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/android/src/main/kotlin/com/capacitorjs/plugins/filesystem/FilesystemPlugin 2.kt",
+    "canonical": "node_modules/@capacitor/filesystem/android/src/main/kotlin/com/capacitorjs/plugins/filesystem/FilesystemPlugin.kt",
+    "sha256": "e318abdb0c1e5de9a56d37e1aa0aeea56c5b84192929d2922944633a7c1d55f8"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/android/src/main/kotlin/com/capacitorjs/plugins/filesystem/LegacyFilesystemImplementation 2.kt",
+    "canonical": "node_modules/@capacitor/filesystem/android/src/main/kotlin/com/capacitorjs/plugins/filesystem/LegacyFilesystemImplementation.kt",
+    "sha256": "cbc85ab4e5ec7d5f3f2bbf923003208e53eb6ac192ce79dfcbfe0b13f7871027"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/android/src/main/kotlin/com/capacitorjs/plugins/filesystem/FilesystemErrors 2.kt",
+    "canonical": "node_modules/@capacitor/filesystem/android/src/main/kotlin/com/capacitorjs/plugins/filesystem/FilesystemErrors.kt",
+    "sha256": "17bc3fb19d3b29a02177f3d51f801ae4d0a894fbf8373b57cd800d7a5768bcae"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/android/src/main/kotlin/com/capacitorjs/plugins/filesystem/PluginResultExtensions 2.kt",
+    "canonical": "node_modules/@capacitor/filesystem/android/src/main/kotlin/com/capacitorjs/plugins/filesystem/PluginResultExtensions.kt",
+    "sha256": "ffaa916b77353e3c1d99aee2ae87bd92a1a2e3c25a84819baad90dea3df473e8"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/app/android/build 2.gradle",
+    "canonical": "node_modules/@capacitor/app/android/build.gradle",
+    "sha256": "f4f9b707e2619796f61babb4d5c13a8443b1a78bf380214ff7e413d51a4914ac"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/app/android/src/main/AndroidManifest 2.xml",
+    "canonical": "node_modules/@capacitor/app/android/src/main/AndroidManifest.xml",
+    "sha256": "bfe643676c7bfecf2683b1ad8044a754bc53141c9e4fc6714ad58c1530937b6d"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/app/android/src/main/java/com/capacitorjs/plugins/app/AppPlugin 2.java",
+    "canonical": "node_modules/@capacitor/app/android/src/main/java/com/capacitorjs/plugins/app/AppPlugin.java",
+    "sha256": "3f1d493268d8334e8f086c5ff05fa37ab87eb2bab651bde88117974981fdcaac"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/splash-screen/android/build 2.gradle",
+    "canonical": "node_modules/@capacitor/splash-screen/android/build.gradle",
+    "sha256": "2e04d5e15211e415e8c1b2251ecb39c008e7d5cec16f25ac8ab99f75fa32bf1e"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/splash-screen/android/src/main/AndroidManifest 2.xml",
+    "canonical": "node_modules/@capacitor/splash-screen/android/src/main/AndroidManifest.xml",
+    "sha256": "bfe643676c7bfecf2683b1ad8044a754bc53141c9e4fc6714ad58c1530937b6d"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/splash-screen/android/src/main/java/com/capacitorjs/plugins/splashscreen/SplashScreenSettings 2.java",
+    "canonical": "node_modules/@capacitor/splash-screen/android/src/main/java/com/capacitorjs/plugins/splashscreen/SplashScreenSettings.java",
+    "sha256": "175af5cc6aa1d15399485a8df65a8523617331e776c6bd8ca6bba57c21d8e53c"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/splash-screen/android/src/main/java/com/capacitorjs/plugins/splashscreen/SplashScreenConfig 2.java",
+    "canonical": "node_modules/@capacitor/splash-screen/android/src/main/java/com/capacitorjs/plugins/splashscreen/SplashScreenConfig.java",
+    "sha256": "518f7015659e97f39df0b398ec3bf221e8eb0674198feaeb6a0b40fe498b1f3f"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/splash-screen/android/src/main/java/com/capacitorjs/plugins/splashscreen/SplashListener 2.java",
+    "canonical": "node_modules/@capacitor/splash-screen/android/src/main/java/com/capacitorjs/plugins/splashscreen/SplashListener.java",
+    "sha256": "57e40b1bb01c774589681ecbeb235f21875a734fddcf2602f9719e747bccba63"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/splash-screen/android/src/main/java/com/capacitorjs/plugins/splashscreen/SplashScreenPlugin 2.java",
+    "canonical": "node_modules/@capacitor/splash-screen/android/src/main/java/com/capacitorjs/plugins/splashscreen/SplashScreenPlugin.java",
+    "sha256": "342e90e8589611251f56808d2923cc923ca051df1050df1e779b4df7039fd215"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/splash-screen/android/src/main/java/com/capacitorjs/plugins/splashscreen/SplashScreen 2.java",
+    "canonical": "node_modules/@capacitor/splash-screen/android/src/main/java/com/capacitorjs/plugins/splashscreen/SplashScreen.java",
+    "sha256": "e740c31f333e05b1da6d710e392b6ae717acb4a45026d254f40d6172a7821ef4"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/splash-screen/android/src/main/res/values/styles 2.xml",
+    "canonical": "node_modules/@capacitor/splash-screen/android/src/main/res/values/styles.xml",
+    "sha256": "f441d97f9ea82f0ea993ae4a36bfd8a5acfaa63a9ccf4add5669af5907885395"
+  }
+]

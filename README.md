@@ -90,3 +90,11 @@ Updates wait for **App → Update & reload**, or activation after all old tabs c
 ### Rendering under load
 
 Solar-system phone rendering starts at a 1.25 pixel-ratio cap (about 31% fewer pixels than 1.5). Sustained slow animation ticks lower resolution in 0.25 steps to 1; source data, geometry and playback elapsed time are preserved. Covered phone telemetry/moon/data panels and the App dialog reduce solar drawing to once per second. Deep-space drawing stops behind the App dialog. Resolution resets on reload. These are workload reductions, not measured device-specific frame-rate guarantees.
+
+## ORBIT 2.0 local release
+
+See [ORBIT_2_RELEASE.md](ORBIT_2_RELEASE.md) for the shared Explore panel, native project commands, validation results and build blockers. These source changes have not been deployed. Use `npm run sync:native` after changing web sources.
+
+## Native SDK notices
+
+[Capacitor SDK notices](SDK_NOTICES.md) identify the pinned native dependencies and retain their full MIT license texts under LICENSES/. These notices are prepared for the next candidate; the previously compiled artifacts are not retroactively updated.

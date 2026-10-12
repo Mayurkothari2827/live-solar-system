@@ -1,0 +1,16 @@
+{
+ "source":"https://ssd.jpl.nasa.gov/planets/phys_par.html",
+ "retrievedUTC":"2026-10-11",
+ "notes":"Published JPL reference values, not live measurements. Retrograde rotation has a negative sign. Giant-planet gravity is a reference equatorial value; they have no solid surface. Missing moon properties remain unavailable. Published uncertainty and original references are available at the linked table.",
+ "units":{"mass":"10^24 kg","gravity":"m/s²","rotation":"sidereal days","period":"sidereal years"},
+ "bodies":{
+ "199":{"mass":0.330103,"gravity":3.70,"rotation":58.6462,"period":0.2408467},
+ "299":{"mass":4.86731,"gravity":8.87,"rotation":-243.018,"period":0.61519726},
+ "399":{"mass":5.97217,"gravity":9.80,"rotation":0.99726968,"period":1.0000174},
+ "499":{"mass":0.641691,"gravity":3.71,"rotation":1.02595676,"period":1.8808476},
+ "599":{"mass":1898.125,"gravity":24.79,"rotation":0.41354,"period":11.862615},
+ "699":{"mass":568.317,"gravity":10.44,"rotation":0.44401,"period":29.447498},
+ "799":{"mass":86.8099,"gravity":8.87,"rotation":-0.71833,"period":84.016846},
+ "899":{"mass":102.4092,"gravity":11.15,"rotation":0.67125,"period":164.79132}
+ }
+}

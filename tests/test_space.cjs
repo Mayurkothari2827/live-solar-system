@@ -12,7 +12,7 @@ async function boot({mobile=false,reduced=false,offline=false,search=''}={}){
  const context={window:win,document,console:{error:e=>errors.push(String(e))},location:{search,href:''},devicePixelRatio:3,matchMedia:q=>q.includes('reduced-motion')?{matches:reduced}:q.includes('max-width')?media:{matches:mobile},ResizeObserver:class{constructor(fn){this.fn=fn;}observe(){this.fn();}},fetch:async url=>({ok:!offline,json:async()=>structuredClone(url.includes('nearby')?nearby:catalog)}),Date:FixedDate,performance:{now:()=>now},setInterval:f=>intervals.push(f),requestAnimationFrame:f=>frames.push(f),URLSearchParams};
  vm.createContext(context);vm.runInContext(fs.readFileSync(path.join(ROOT,'space.js'),'utf8'),context);for(let i=0;i<5;i++)await flush();
  const frame=(dt=1/30)=>{now+=dt*1000;clock+=dt*1000;frames.shift()(now);};frame();
- return {document,elements,buttons,renderer,errors,media,intervals,frame,advance:n=>clock+=n*1000,world:()=>renderer.scene.children.find(o=>o.isGroup),layer(k){buttons.find(b=>b.dataset.layer===k).onclick();frame(.04);},choose(id){elements.get('target').onchange({target:{value:id}});frame(.1);},facts:()=>elements.get('facts').textContent};
+ return {engine:win.ORBIT,document,elements,buttons,renderer,errors,media,intervals,frame,advance:n=>clock+=n*1000,world:()=>renderer.scene.children.find(o=>o.isGroup),layer(k){buttons.find(b=>b.dataset.layer===k).onclick();frame(.04);},choose(id){elements.get('target').onchange({target:{value:id}});frame(.1);},facts:()=>elements.get('facts').textContent};
 }
 
 test('ICRS coordinates preserve catalog distances and handedness, including polar and invalid cases',()=>{assert.deepEqual(M.position(0,0,5),[5,0,-0]);assert(Math.abs(M.position(90,0,5)[2]+5)<1e-12);assert(Math.abs(M.position(45,90,5)[1]-5)<1e-12);assert.equal(M.position(0,91,1),null);assert.equal(M.position(0,0,-1),null);for(const h of nearby.hosts){const p=M.position(h.raDeg,h.decDeg,h.distancePc);assert(Math.abs(Math.hypot(...p)-h.distancePc)<1e-10);}});
@@ -60,4 +60,21 @@ test('target navigation, image metadata and planet explanations remain accessibl
  a.layer('nearby');a.elements.get('planet-list').children[0].onclick();
  assert(!a.elements.get('space-info').inert);assert.match(a.elements.get('object-explainer').textContent,/Earth days/);
  assert.match(a.elements.get('object-evidence').textContent,/minimum masses/);
+});
+
+test('space context recovery retains the catalog scene and native background prevents draws',async()=>{
+ const a=await boot({mobile:true});a.layer('galaxies');a.choose('m31');const world=a.world(),count=a.renderer.count;let prevented=false;
+ a.renderer.domElement.dispatch('webglcontextlost',{preventDefault(){prevented=true;}});assert(prevented);assert.equal(a.elements.get('loading').hidden,false);
+ a.renderer.domElement.dispatch('webglcontextrestored');a.frame(.04);assert.equal(a.elements.get('loading').hidden,true);assert.equal(a.world(),world);assert(a.renderer.count>count);
+ a.document.body.dataset.nativeBackground='true';const paused=a.renderer.count;for(let i=0;i<20;i++)a.frame(.1);assert.equal(a.renderer.count,paused);
+ a.document.body.dataset.nativeBackground='false';a.document.dispatch('visibilitychange');a.frame(.04);assert.equal(a.world(),world);
+});
+
+test('space pointer drag and pinch change camera without replacing catalog selection',async()=>{
+ const a=await boot({mobile:true}),v=a.elements.get('space-scene'),before=a.engine.snapshot();
+ v.dispatch('pointerdown',{pointerId:1,clientX:100,clientY:100});v.dispatch('pointermove',{pointerId:1,clientX:140,clientY:120});v.dispatch('pointercancel',{pointerId:1,type:'pointercancel'});
+ const dragged=a.engine.snapshot();assert.notDeepEqual(dragged.camera.slice(0,2),before.camera.slice(0,2));assert.equal(dragged.id,before.id);
+ v.dispatch('pointerdown',{pointerId:1,clientX:100,clientY:100});v.dispatch('pointerdown',{pointerId:2,clientX:200,clientY:100});
+ v.dispatch('pointermove',{pointerId:2,clientX:220,clientY:100});v.dispatch('pointermove',{pointerId:2,clientX:280,clientY:100});assert(a.engine.snapshot().camera[2]<dragged.camera[2]);
+ v.dispatch('pointercancel',{pointerId:1,type:'pointercancel'});v.dispatch('pointercancel',{pointerId:2,type:'pointercancel'});assert.equal(a.engine.snapshot().id,before.id);
 });

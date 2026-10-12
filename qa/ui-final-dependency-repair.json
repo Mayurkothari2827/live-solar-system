@@ -1,0 +1,17 @@
+[
+  {
+    "duplicate": "android/app/src/main/res/xml/config 5.xml",
+    "canonical": "android/app/src/main/res/xml/config.xml",
+    "sha256": "e9dcda493e663c5c4db9e3cb3bd968477a6e90aa8840bcbba40d72ed54b767ce"
+  },
+  {
+    "duplicate": "android/app/src/main/res/xml/config 4.xml",
+    "canonical": "android/app/src/main/res/xml/config.xml",
+    "sha256": "e9dcda493e663c5c4db9e3cb3bd968477a6e90aa8840bcbba40d72ed54b767ce"
+  },
+  {
+    "duplicate": "android/app/src/main/res/xml/config 3.xml",
+    "canonical": "android/app/src/main/res/xml/config.xml",
+    "sha256": "e9dcda493e663c5c4db9e3cb3bd968477a6e90aa8840bcbba40d72ed54b767ce"
+  }
+]

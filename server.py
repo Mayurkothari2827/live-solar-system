@@ -230,7 +230,8 @@ class Handler(BaseHTTPRequestHandler):
             except (ValueError,TypeError):return self.send_json({'error':'Unknown body ID'},400)
             except Exception:return self.send_json({'error':'JPL data temporarily unavailable; retry shortly.'},503)
         if path=='/api/health':return self.send_json({'ok':True,'utc':iso(time.time()),'ready':len(DATA),'expected':len(BODIES)})
-        allowed={'/':'index.html','/index.html':'index.html','/app.js':'app.js','/mobile.js':'mobile.js','/solar-orbits.js':'solar-orbits.js','/style.css':'style.css','/README.md':'README.md'}
+        allowed={'/':'index.html','/index.html':'index.html','/app.js':'app.js','/mobile.js':'mobile.js','/solar-orbits.js':'solar-orbits.js','/style.css':'style.css','/README.md':'README.md','/ORBIT_2_RELEASE.md':'ORBIT_2_RELEASE.md'}
+        allowed.update({('/'+name):name for name in ['orbit-ui.js','orbit-ui.css','orbit-store.js','orbit-tours.js','orbit-experience.js','orbit-experience.css']})
         allowed.update({'/manifest.webmanifest':'manifest.webmanifest','/sw.js':'sw.js','/pwa.js':'pwa.js','/pwa.css':'pwa.css'})
         allowed.update({'/space':'space.html','/space.html':'space.html','/space.js':'space.js','/space-model.js':'space-model.js','/space.css':'space.css'})
         if path in allowed:file=ROOT/allowed[path]

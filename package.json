@@ -1,0 +1,32 @@
+{
+  "name": "orbit-observatory",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "python3 server.py",
+    "build": "python3 build_static.py",
+    "test": "node --test tests/*.cjs",
+    "build:native": "node scripts/build_native.mjs",
+    "sync:native": "npm run build:native && cap sync",
+    "android": "cap open android",
+    "ios": "cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.5.3",
+    "@capacitor/app": "8.1.2",
+    "@capacitor/core": "8.5.3",
+    "@capacitor/filesystem": "8.1.4",
+    "@capacitor/ios": "8.5.3",
+    "@capacitor/share": "8.0.3",
+    "@capacitor/splash-screen": "8.0.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.3",
+    "esbuild": "^0.25.0"
+  },
+  "overrides": {
+    "xcode": {
+      "uuid": "11.1.1"
+    }
+  }
+}

@@ -15,8 +15,11 @@ test('static build removes obsolete output and retains both observatories', () =
   assert.equal(fs.existsSync(oldAsset), false);
   assert.equal(fs.existsSync(path.dirname(oldAsset)), false);
   assert.equal(fs.existsSync(path.join(output, 'removed-feature-fixture.html')), false);
-  for (const file of ['index.html','app.js','mobile.js','solar-orbits.js','space.html','space.js','space-model.js','space.css','assets/space/catalog.json','assets/space/nearby.json']) {
+  for (const file of ['orbit-ui.js','orbit-ui.css','index.html','app.js','mobile.js','solar-orbits.js','space.html','space.js','space-model.js','space.css','assets/space/catalog.json','assets/space/nearby.json']) {
     assert.ok(fs.existsSync(path.join(output, file)), file);
+  }
+  for (const file of ['SDK_NOTICES.md','LICENSES/Capacitor-platforms-MIT.txt','LICENSES/Capacitor-filesystem-MIT.txt','LICENSES/Capacitor-share-MIT.txt','LICENSES/Capacitor-app-splash-screen-MIT.txt']) {
+    assert.ok(fs.existsSync(path.join(output,file)), file);
   }
   for (const file of ['server.py', 'api', 'kernels']) {
     assert.equal(fs.existsSync(path.join(output, file)), false, file);

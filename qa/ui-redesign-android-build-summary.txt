@@ -1,0 +1,6 @@
+ANDROID BUILD NOT VERIFIED FOR FINAL UI
+Prior compilation blockers: byte-identical numbered resource copies (quarantined).
+Then Gradle failed loading transform-api descriptor.bin, followed by netty-transport/4.1.110.Final descriptor.bin in its local metadata cache.
+Generated metadata was preserved under metadata-2.107-orbit-ui-quarantine-20261012.
+A --refresh-dependencies retry stalled without emitting build output and was interrupted.
+Existing APK remains the earlier verified build, not this UI revision.

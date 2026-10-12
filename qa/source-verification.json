@@ -1,0 +1,28 @@
+{
+  "verifiedUTC": "2026-10-12T15:40:59.084243+00:00",
+  "javascriptTests": 72,
+  "pythonTests": 5,
+  "physicalAndroidCount": 0,
+  "physicalIPhoneCount": 0,
+  "nativeBuildPerformed": false,
+  "signingPerformed": false,
+  "deploymentPerformed": false,
+  "sourceHashes": {
+    "app.js": "929725cf8a50d1d2d4554bd86d3871837e07330c3777b528d4490056f9433917",
+    "build_static.py": "61fb508baabfb11e01bbd2516f429110f1ab3e55e484b02a480c2f67bd2de451",
+    "SDK_NOTICES.md": "e3632f53347b43c46b961918a98ee50381c77a4a7d1d2d39dd36a0a8b9de4e76",
+    "tests/test_solar.cjs": "a640281b013c1e49b77af7b023b87e1be15b43799c02f7d42255030ba7454e2d",
+    "tests/test_space.cjs": "394fb8489beff1be847ef433dd2011275a84f53f459ec1a80578e8249990031b",
+    "tests/test_native.cjs": "cb67d4414e097770466cdb482ee5fd6d01232671d682144b5b8da470b9576c2f",
+    "tests/test_static_build.cjs": "0159ac5f0c16af69b89e001c8c887d0e07d55975776736237b977b3e4546a850",
+    "LICENSES/Capacitor-share-MIT.txt": "eb99a0d61b507ad0182e18e9d2a91537c1d9025c94e098e4e7603a53b4b5218a",
+    "LICENSES/Capacitor-platforms-MIT.txt": "9c6ebf3e5ab832ba4d5af38f340978e1fedbfee6e3d23662dfdb8917a9d864dd",
+    "LICENSES/Capacitor-filesystem-MIT.txt": "de884404585ed20280150b0768082b6004d3548aaa0d6e596d6bfa0538ab331d",
+    "LICENSES/Capacitor-app-splash-screen-MIT.txt": "e8f989836e88732576472006444b65fd3d7d3c2455becdaaa4d82cd0dd43110f"
+  },
+  "previousArtifactsPredateSourceFix": true,
+  "whitespaceCheck": "PASSED for modified tracked application/build/readme/test files",
+  "assetInventoryRows": 153,
+  "unresolvedMapOriginals": 12,
+  "unresolvedNativeDerivatives": 24
+}

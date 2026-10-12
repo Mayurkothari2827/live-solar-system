@@ -214,7 +214,7 @@ body[data-ephemeris-status='unavailable'] #hud-status-dot { background: #ff9a85;
   .scene-heading h2 { font-size: 26px; }
   .scene-status { top: 86px; }
   #scene-note { display: none; }
-  .view-toolbar { left: auto; right: 70px; bottom: 12px; }
+  .view-toolbar { left: auto; right: calc(max(14px, env(safe-area-inset-right)) + 54px); bottom: 12px; }
   .zoom-toolbar { bottom: 12px; flex-direction: row; }
   .zoom-toolbar #zoom-in, .zoom-toolbar #zoom-out { display: none; }
   .scene-bottom { bottom: 12px; max-width: 200px; }

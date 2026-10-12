@@ -63,10 +63,10 @@ test('time drawer and backdrop change presentation without touching the epoch', 
 
 test('phone clock mirrors the actual displayed UTC epoch and distinguishes accelerated playback and pause', async () => {
   const ui = boot(); assert.equal(ui.ids.get('mobile-utc-clock').textContent, '12:34:56 UTC');
-  assert.equal(ui.ids.get('mobile-clock-date').textContent, '2026-10-02'); assert.equal(ui.body.dataset.clockState, 'live');
+  assert.equal(ui.ids.get('mobile-clock-date').textContent, '2026-10-02 (Friday)'); assert.equal(ui.body.dataset.clockState, 'live');
   ui.ids.get('utc-clock').setAttribute('datetime', '2026-10-03T01:02:03Z');
   ui.ids.get('clock-mode').textContent = '3,600× playback'; ui.ids.get('live').classes.delete('active'); await ui.mutation();
-  assert.equal(ui.ids.get('mobile-utc-clock').textContent, '01:02:03 UTC'); assert.equal(ui.ids.get('mobile-clock-date').textContent, '2026-10-03');
+  assert.equal(ui.ids.get('mobile-utc-clock').textContent, '01:02:03 UTC'); assert.equal(ui.ids.get('mobile-clock-date').textContent, '2026-10-03 (Saturday)');
   assert.equal(ui.body.dataset.clockState, 'playback'); assert.equal(ui.ids.get('mobile-clock-state').textContent, '3,600× PLAYBACK');
   ui.ids.get('clock-mode').textContent = 'Paused'; await ui.mutation(); assert.equal(ui.body.dataset.clockState, 'paused');
   assert.equal(ui.ids.get('mobile-clock-state').textContent, 'PAUSED');

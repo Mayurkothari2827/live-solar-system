@@ -1,0 +1,92 @@
+[
+  {
+    "duplicate": "node_modules/@capacitor/share/ios/Sources/SharePlugin/SharePlugin 2.swift",
+    "canonical": "node_modules/@capacitor/share/ios/Sources/SharePlugin/SharePlugin.swift",
+    "sha256": "84d77cf2510017e3d414591e238615c6a6a666283399dca5a991d46bf21c5afc",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/share/ios/Sources/SharePlugin/SharePlugin 2.swift"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemPlugin 2.swift",
+    "canonical": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemPlugin.swift",
+    "sha256": "c3d0d45c0166f479ec9b76d81a1234e073337081243b31cff70462c218e30ce5",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemPlugin 2.swift"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemOperation 2.swift",
+    "canonical": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemOperation.swift",
+    "sha256": "83f83517ef45a60aa25debe2580051925b317b919fd41e6cea5ef87a0ddf793b",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemOperation 2.swift"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/LegacyFilesystemImplementation 2.swift",
+    "canonical": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/LegacyFilesystemImplementation.swift",
+    "sha256": "7882598273564b04b3a67508db771bf9b7e6f99cc4275ad4527925b41ab4a7e3",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/LegacyFilesystemImplementation 2.swift"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/CAPPluginCall+Accelerators 2.swift",
+    "canonical": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/CAPPluginCall+Accelerators.swift",
+    "sha256": "290d01b3dcdd8361c3656f6394cf6409eebf8d0ec14d28d010341b2168187a08",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/CAPPluginCall+Accelerators 2.swift"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemOperationExecutor 2.swift",
+    "canonical": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemOperationExecutor.swift",
+    "sha256": "ea8252a6d1195ffb3442c8a8ad9149acde5332d3644fcd43739b45227bc13bed",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemOperationExecutor 2.swift"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemLocationResolver 2.swift",
+    "canonical": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemLocationResolver.swift",
+    "sha256": "4c46c0a5cf88e8257ea7fd61b33ba098ec26227918c48b53e89ceff8d10fb20e",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemLocationResolver 2.swift"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/IONFileStructures+Converters 2.swift",
+    "canonical": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/IONFileStructures+Converters.swift",
+    "sha256": "b4dd96f40a57dff5b43f9b93e208b5f64ae716bcda57378ca4f44a83b713c7c0",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/IONFileStructures+Converters 2.swift"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemConstants 2.swift",
+    "canonical": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemConstants.swift",
+    "sha256": "b2895df8dc83bb3e9c7bbc827752354b325a7951d7669b09affd068934839a03",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemConstants 2.swift"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemError 2.swift",
+    "canonical": "node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemError.swift",
+    "sha256": "01d2cfafa2f30f0d9e9f631369b0b6702f6d197138409acbee350af187e029f5",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/filesystem/ios/Sources/FilesystemPlugin/FilesystemError 2.swift"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/app/ios/Sources/AppPlugin/AppPlugin 2.swift",
+    "canonical": "node_modules/@capacitor/app/ios/Sources/AppPlugin/AppPlugin.swift",
+    "sha256": "51f0e6df7e7669829b57a731d08923409b87d0388f321116ae051ddfc802f2f3",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/app/ios/Sources/AppPlugin/AppPlugin 2.swift"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/splash-screen/ios/Sources/SplashScreenPlugin/SplashScreenSettings 2.swift",
+    "canonical": "node_modules/@capacitor/splash-screen/ios/Sources/SplashScreenPlugin/SplashScreenSettings.swift",
+    "sha256": "4d53d9075ae6559cb692b0042b1a889edfa6071f3f11bfb3055dbd6f552970ed",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/splash-screen/ios/Sources/SplashScreenPlugin/SplashScreenSettings 2.swift"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/splash-screen/ios/Sources/SplashScreenPlugin/SplashScreenConfig 2.swift",
+    "canonical": "node_modules/@capacitor/splash-screen/ios/Sources/SplashScreenPlugin/SplashScreenConfig.swift",
+    "sha256": "6b7c9d0b4944757af97ed0cf425d617152b9c56803c6b782580bab2599683be9",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/splash-screen/ios/Sources/SplashScreenPlugin/SplashScreenConfig 2.swift"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/splash-screen/ios/Sources/SplashScreenPlugin/SplashScreen 2.swift",
+    "canonical": "node_modules/@capacitor/splash-screen/ios/Sources/SplashScreenPlugin/SplashScreen.swift",
+    "sha256": "dd63442f04f7c9d8fa3e0ca4a6f16dd0db7fe3e160a76ca3a1131a3c3e1584c3",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/splash-screen/ios/Sources/SplashScreenPlugin/SplashScreen 2.swift"
+  },
+  {
+    "duplicate": "node_modules/@capacitor/splash-screen/ios/Sources/SplashScreenPlugin/SplashScreenPlugin 2.swift",
+    "canonical": "node_modules/@capacitor/splash-screen/ios/Sources/SplashScreenPlugin/SplashScreenPlugin.swift",
+    "sha256": "77f94373591c9cba6ca1ce2d59f40acd58b2b740e83da5e94f137fa9d0555028",
+    "backup": "/tmp/orbit-duplicate-dependencies/node_modules/@capacitor/splash-screen/ios/Sources/SplashScreenPlugin/SplashScreenPlugin 2.swift"
+  }
+]

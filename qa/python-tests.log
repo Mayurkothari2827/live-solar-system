@@ -1,0 +1,15 @@
+127.0.0.1 - - [12/Oct/2026 21:03:56] "GET /api/index?route=catalog HTTP/1.0" 200 -
+127.0.0.1 - - [12/Oct/2026 21:03:56] "GET /api/catalog HTTP/1.0" 200 -
+.127.0.0.1 - - [12/Oct/2026 21:03:56] "GET /api/ephemeris HTTP/1.0" 400 -
+127.0.0.1 - - [12/Oct/2026 21:03:56] "GET /api/ephemeris?id=invalid HTTP/1.0" 400 -
+127.0.0.1 - - [12/Oct/2026 21:03:56] "GET /api/ephemeris?id=123456 HTTP/1.0" 400 -
+.127.0.0.1 - - [12/Oct/2026 21:03:56] "GET /api/index?route=ephemeris&id=199 HTTP/1.0" 200 -
+127.0.0.1 - - [12/Oct/2026 21:03:56] "GET /api/ephemeris?id=199 HTTP/1.0" 200 -
+.127.0.0.1 - - [12/Oct/2026 21:03:56] "GET /api/ephemeris?id=10 HTTP/1.0" 200 -
+.Solar API failure: TimeoutError upstream timeout
+127.0.0.1 - - [12/Oct/2026 21:03:56] "GET /api/ephemeris?id=199 HTTP/1.0" 503 -
+.
+----------------------------------------------------------------------
+Ran 5 tests in 0.222s
+
+OK
