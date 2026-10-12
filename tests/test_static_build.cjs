@@ -25,3 +25,8 @@ test('static build removes obsolete output and retains both observatories', () =
     assert.equal(fs.existsSync(path.join(output, file)), false, file);
   }
 });
+
+test('Vercel function exclusions fit the deployment schema limit', () => {
+  const config = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
+  assert.ok(config.functions['api/index.py'].excludeFiles.length <= 256);
+});
