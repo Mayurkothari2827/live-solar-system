@@ -6,7 +6,7 @@ execFileSync('python3',['build_static.py'],{stdio:'inherit'});
 fs.rmSync('native-public',{recursive:true,force:true});fs.mkdirSync('native-public',{recursive:true});
 for(const file of fs.readdirSync('public'))if(fs.statSync(path.join('public',file)).isFile()&&!['sw.js'].includes(file))fs.copyFileSync(path.join('public',file),path.join('native-public',file));
 fs.mkdirSync('native-public/assets',{recursive:true});
-for(const file of ['three.min.js','texture-manifest.json','solar-directory.json','planet-properties.json','credits.json'])fs.copyFileSync('assets/'+file,'native-public/assets/'+file);
+for(const file of ['science-atlas.json','three.min.js','texture-manifest.json','solar-directory.json','planet-properties.json','credits.json'])fs.copyFileSync('assets/'+file,'native-public/assets/'+file);
 for(const dir of ['optimized','icons','space'])fs.cpSync('assets/'+dir,'native-public/assets/'+dir,{recursive:true});
 for(const file of fs.readdirSync('assets'))if(file.endsWith('.license'))fs.copyFileSync('assets/'+file,'native-public/assets/'+file);
 // Preserve legal attributions for the bundled texture derivatives.

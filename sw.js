@@ -1,7 +1,7 @@
 /* Bump VERSION whenever the shell changes. Updates activate only on user request. */
-const VERSION='orbit-pwa-v5';
+const VERSION='orbit-pwa-v7';
 const SHELL=VERSION+'-shell',RUNTIME=VERSION+'-assets',DATA='orbit-pwa-data-v1';
-const FILES=['/orbit-ui.js','/orbit-ui.css','/orbit-store.js','/orbit-tours.js','/orbit-experience.js','/orbit-experience.css','/assets/solar-directory.json','/assets/planet-properties.json','/','/index.html','/space.html','/style.css','/app.js','/mobile.js','/solar-orbits.js','/space.css','/space.js','/space-model.js','/pwa.js','/pwa.css','/manifest.webmanifest','/assets/three.min.js','/assets/texture-manifest.json','/assets/space/catalog.json','/assets/space/nearby.json','/assets/icons/orbit-192.png','/assets/icons/orbit-512.png','/assets/icons/orbit-maskable.png','/assets/icons/apple-touch-icon.png'];
+const FILES=['/science-model.js','/science-atlas.js','/science-atlas.css','/assets/science-atlas.json','/orbit-ui.js','/orbit-ui.css','/orbit-store.js','/orbit-tours.js','/orbit-experience.js','/orbit-experience.css','/assets/solar-directory.json','/assets/planet-properties.json','/','/index.html','/space.html','/style.css','/app.js','/mobile.js','/solar-orbits.js','/space.css','/space.js','/space-model.js','/pwa.js','/pwa.css','/manifest.webmanifest','/assets/three.min.js','/assets/texture-manifest.json','/assets/space/catalog.json','/assets/space/nearby.json','/assets/icons/orbit-192.png','/assets/icons/orbit-512.png','/assets/icons/orbit-maskable.png','/assets/icons/apple-touch-icon.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(SHELL).then(cache=>cache.addAll(FILES))));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith('orbit-pwa-')&&![SHELL,RUNTIME,DATA].includes(key))await caches.delete(key);await self.clients.claim();})()));
 let writes=Promise.resolve(),cacheGeneration=0;

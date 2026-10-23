@@ -270,3 +270,16 @@ test('presentation telemetry preserves heliocentric distance for a selected moon
  app.elements.get('pause').onclick();assert.equal(app.engine.telemetry().clockState,'paused');
  app.elements.get('speed').onchange({target:{value:'60'}});assert.equal(app.engine.telemetry().clockState,'playback');
 });
+
+test('drag follows the finger vertically and horizontally while clamp preserves camera poles',async()=>{
+ const a=await boot({mobile:true}),v=a.elements.get('scene');a.engine.restore({kind:'solar',id:399,camera:[0,Math.PI/2,5]});for(let i=0;i<45;i++)a.frame(.04);
+ const point=new THREE.Vector3(0,0,1),before=point.clone().project(a.camera);
+ v.dispatch('pointerdown',{pointerId:1,clientX:100,clientY:100});v.dispatch('pointermove',{pointerId:1,clientX:140,clientY:60});for(let i=0;i<45;i++)a.frame(.04);
+ const after=point.clone().project(a.camera);assert(after.y>before.y,'drag up moves the visible surface up');assert(after.x>before.x,'drag right moves the visible surface right');
+ v.dispatch('pointermove',{pointerId:1,clientX:140,clientY:-10000});assert(a.engine.snapshot().camera[1]<Math.PI);v.dispatch('pointercancel',{pointerId:1,type:'pointercancel'});
+});
+test('science state composes moon vectors in a common heliocentric frame and expires safely',async()=>{
+ const a=await boot(),snapshot=a.engine.science(),earth=snapshot.rows.find(b=>b.id===399),moon=snapshot.rows.find(b=>b.id===301);assert(earth.valid&&moon.valid);assert(Math.abs(moon.position[0]-earth.position[0]-384400)<1);assert(moon.velocity.every(Number.isFinite));
+ a.elements.get('science-dialog').open=true;const count=a.renders.length;for(let i=0;i<240;i++)a.frame(1/120);assert(a.renders.length-count<=2,'atlas obscures the canvas and caps its work');
+ a.advanceWall(8000);a.frame(1.1);assert(a.engine.science().rows.every(b=>!b.valid));
+});

@@ -1,0 +1,337 @@
+{
+  "reviewedUTC": "2026-10-23",
+  "notes": "Curated reference guide. Source dates and measurement uncertainties remain at the linked publications. Nearest-object descriptions are scoped to the cited population and report. No new catalog positions are invented.",
+  "sources": {
+    "jpl": {
+      "name": "JPL planetary physical parameters",
+      "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html"
+    },
+    "horizons": {
+      "name": "JPL Horizons system",
+      "url": "https://ssd.jpl.nasa.gov/horizons/manual.html"
+    },
+    "moon": {
+      "name": "NASA Moon facts",
+      "url": "https://science.nasa.gov/moon/facts/"
+    },
+    "proxima": {
+      "name": "NASA · our nearest stellar neighbor",
+      "url": "https://science.nasa.gov/asset/hubble/proxima-centauri/"
+    },
+    "sirius": {
+      "name": "ESA/Hubble · Sirius B",
+      "url": "https://esahubble.org/news/heic0516/"
+    },
+    "pulsar": {
+      "name": "NASA Fermi · PSR J0437−4715 catalog",
+      "url": "https://fermi.gsfc.nasa.gov/ssc/data/access/lat/3rd_PSR_catalog/3PC_HTML/J0437-4715.html"
+    },
+    "nicer": {
+      "name": "NICER analysis · 2024 research paper",
+      "url": "https://doi.org/10.3847/2041-8213/ad5a6f"
+    },
+    "bh1": {
+      "name": "ESA Gaia · nearby black holes",
+      "url": "https://www.esa.int/Science_Exploration/Space_Science/Gaia/Gaia_discovers_a_new_family_of_black_holes"
+    },
+    "m31": {
+      "name": "NASA · Andromeda Galaxy",
+      "url": "https://www.nasa.gov/universe/galaxies/andromeda-galaxy/"
+    },
+    "mw": {
+      "name": "NASA · Milky Way scale",
+      "url": "https://science.nasa.gov/universe/exoplanets/our-milky-way-galaxy-how-big-is-space/"
+    },
+    "gr": {
+      "name": "NASA · black-hole anatomy",
+      "url": "https://science.nasa.gov/universe/black-holes/anatomy/"
+    },
+    "stars": {
+      "name": "NASA · types of stars",
+      "url": "https://science.nasa.gov/universe/stars/types/"
+    },
+    "metric": {
+      "name": "New Mexico State University · general relativity",
+      "url": "https://astronomy.nmsu.edu/kurt/Astronomy301G/Lectures/GeneralRelativity.pdf"
+    },
+    "moonnumbers": {
+      "name": "NASA · Earth and Moon measurements",
+      "url": "https://science.nasa.gov/moon/by-the-numbers/"
+    },
+    "sun": {
+      "name": "NASA · Sun facts",
+      "url": "https://science.nasa.gov/sun/facts/"
+    },
+    "mercury": {
+      "name": "NASA · Mercury facts",
+      "url": "https://science.nasa.gov/mercury/facts/"
+    },
+    "venus": {
+      "name": "NASA · Venus facts",
+      "url": "https://science.nasa.gov/venus/facts/"
+    },
+    "earth": {
+      "name": "NASA · Earth facts",
+      "url": "https://science.nasa.gov/earth/facts/"
+    },
+    "mars": {
+      "name": "NASA · Mars facts",
+      "url": "https://science.nasa.gov/mars/facts/"
+    },
+    "jupiter": {
+      "name": "NASA · Jupiter facts",
+      "url": "https://science.nasa.gov/jupiter/facts/"
+    },
+    "saturn": {
+      "name": "NASA · Saturn facts",
+      "url": "https://science.nasa.gov/saturn/facts/"
+    },
+    "uranus": {
+      "name": "NASA · Uranus facts",
+      "url": "https://science.nasa.gov/uranus/facts/"
+    },
+    "neptune": {
+      "name": "NASA · Neptune facts",
+      "url": "https://science.nasa.gov/neptune/facts/"
+    },
+    "moonfact": {
+      "name": "NASA NSSDCA · Moon fact sheet (2024)",
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html"
+    }
+  },
+  "worlds": {
+    "10": {
+      "title": "A star powered by fusion",
+      "summary": "Hydrogen fusion releases the energy that lights the solar system. The visible photosphere is a layer of plasma, not a solid surface.",
+      "detail": "Rotation depends on latitude: the equator turns faster than the poles. A single rigid rotation speed would hide this important difference.",
+      "sources": [
+        "sun"
+      ]
+    },
+    "199": {
+      "title": "A world of long days",
+      "summary": "Mercury completes three rotations for every two trips around the Sun. That spin–orbit resonance makes its solar day very different from its sidereal rotation period.",
+      "detail": "Its thin exosphere offers little insulation between the sunlit and dark sides.",
+      "sources": [
+        "mercury"
+      ]
+    },
+    "299": {
+      "title": "A slowly turning greenhouse world",
+      "summary": "Venus turns in the retrograde direction. Its rotation relative to the stars takes longer than its orbit around the Sun.",
+      "detail": "Its dense carbon-dioxide atmosphere traps heat. The bright cloud deck conceals the rocky surface.",
+      "sources": [
+        "venus"
+      ]
+    },
+    "399": {
+      "title": "A rotating ocean world",
+      "summary": "Earth turns once relative to distant stars in about 23 hours 56 minutes. The familiar 24-hour solar day also includes our motion around the Sun.",
+      "detail": "Equatorial rotation speed is roughly 1,674 km/h. Move the latitude control to see why the speed decreases toward the poles.",
+      "sources": [
+        "earth"
+      ]
+    },
+    "301": {
+      "title": "One face, a changing geometry",
+      "summary": "The Moon rotates once per orbit around Earth, so it keeps approximately the same face toward us. Libration lets us see beyond one exact hemisphere over time.",
+      "detail": "Its mean orbital distance is 384,400 km. The live distance below changes through the orbit; it is not that average.",
+      "sources": [
+        "moon",
+        "moonfact"
+      ]
+    },
+    "499": {
+      "title": "A record of a wetter past",
+      "summary": "Mars has a thin atmosphere and a cold, dusty surface. Channels and minerals preserve evidence that liquid water once altered this world.",
+      "detail": "A Martian rotation is only a little longer than Earth’s. Its year is much longer because its orbit is farther from the Sun.",
+      "sources": [
+        "mars"
+      ]
+    },
+    "599": {
+      "title": "A giant with no solid surface",
+      "summary": "Jupiter is dominated by hydrogen and helium. Bands, storms and its powerful magnetic environment make its visible atmosphere highly dynamic.",
+      "detail": "The listed rotation is a reference period. Clouds at different latitudes do not all follow one rigid surface.",
+      "sources": [
+        "jupiter"
+      ]
+    },
+    "699": {
+      "title": "Ice rings around a gas giant",
+      "summary": "Saturn’s rings contain enormous numbers of orbiting particles, mostly water ice. They are not a single solid disk.",
+      "detail": "The reference rotation and radius describe the planet, not the orbital speed of the rings or a solid ground surface.",
+      "sources": [
+        "saturn"
+      ]
+    },
+    "799": {
+      "title": "A planet tipped onto its side",
+      "summary": "Uranus has an extreme axial tilt that produces unusual seasons. Methane in its atmosphere helps give it a blue-green appearance.",
+      "detail": "The negative reference rotation period encodes retrograde rotation; the speed magnitude remains positive.",
+      "sources": [
+        "uranus"
+      ]
+    },
+    "899": {
+      "title": "An active, distant ice giant",
+      "summary": "Neptune’s atmosphere supports powerful winds and changing storms. Methane absorbs red light in its upper atmosphere.",
+      "detail": "Reference surface textures are maps assembled from observations; cloud patterns are not being streamed live.",
+      "sources": [
+        "neptune"
+      ]
+    }
+  },
+  "cards": [
+    {
+      "id": "proxima",
+      "category": "Stars",
+      "title": "Our nearest stellar neighbor",
+      "name": "Proxima Centauri",
+      "measure": "About 4.2 light-years",
+      "text": "Beyond the Sun, this faint red dwarf is the nearest star to us. Its light has traveled for more than four years before reaching Earth.",
+      "detail": "Distances are measured by observations such as parallax. The nearby-host map uses the dated NASA Exoplanet Archive snapshot and does not animate unmeasured planet phases.",
+      "sources": [
+        "proxima"
+      ],
+      "scene": {
+        "kind": "space",
+        "layer": "nearby",
+        "id": "Proxima Cen"
+      }
+    },
+    {
+      "id": "sirius",
+      "category": "Stellar remnants",
+      "title": "The nearest white dwarf",
+      "name": "Sirius B",
+      "measure": "About 8.6 light-years",
+      "text": "This compact stellar remnant accompanies Sirius A. A mass comparable to the Sun is packed into a body roughly Earth-sized.",
+      "detail": "A white dwarf no longer powers itself through ordinary core hydrogen fusion. Its glow comes from stored heat as it cools. Sirius B is a recorded observation, not a live 3D surface map.",
+      "sources": [
+        "sirius",
+        "stars"
+      ]
+    },
+    {
+      "id": "pulsar",
+      "category": "Stellar remnants",
+      "title": "A nearby millisecond pulsar",
+      "name": "PSR J0437−4715",
+      "measure": "5.76 ms · about 174 turns/s",
+      "text": "NASA’s Fermi catalog lists a period of about 0.00576 seconds and a distance of 156.79 parsecs, approximately 511 light-years.",
+      "detail": "The 2024 NICER study describes it as the nearest observed millisecond pulsar. That is a specific class, not a claim that it is the nearest neutron star of any kind. Pulses arise as the rotating emission beam sweeps across our line of sight.",
+      "sources": [
+        "pulsar",
+        "nicer",
+        "stars"
+      ]
+    },
+    {
+      "id": "bh1",
+      "category": "Black holes",
+      "title": "A nearby dark companion",
+      "name": "Gaia BH1",
+      "measure": "About 1,560 light-years",
+      "text": "ESA identifies Gaia BH1 as the closest known black hole in its cited report. The motion of a visible companion reveals the unseen mass.",
+      "detail": "“Known” matters: discoveries can change rankings. A black hole need not have a bright accretion disk; absence of glowing gas does not mean absence of a black hole.",
+      "sources": [
+        "bh1"
+      ]
+    },
+    {
+      "id": "milky",
+      "category": "Galaxies",
+      "title": "Our galactic home",
+      "name": "Milky Way",
+      "measure": "Roughly 100,000 light-years across",
+      "text": "The solar system lies in the disk of a barred spiral galaxy. Looking toward the galactic center means looking through crowded star fields and dust.",
+      "detail": "We cannot photograph our entire galaxy from outside it. The overview reconstructs its large-scale structure; the decorative star points are not an all-star catalog.",
+      "sources": [
+        "mw"
+      ],
+      "scene": {
+        "kind": "space",
+        "layer": "milky",
+        "id": "milky"
+      }
+    },
+    {
+      "id": "m31",
+      "category": "Galaxies",
+      "title": "Nearest large galactic neighbor",
+      "name": "Andromeda · M31",
+      "measure": "About 2.5 million light-years",
+      "text": "Andromeda is our nearest large galaxy. Its light gives us a view from roughly 2.5 million years ago.",
+      "detail": "It is not the nearest galaxy of every type: the Milky Way has much closer dwarf companions. “Nearest galaxy” needs a definition of the population being compared.",
+      "sources": [
+        "m31"
+      ],
+      "scene": {
+        "kind": "space",
+        "layer": "galaxies",
+        "id": "m31"
+      }
+    },
+    {
+      "id": "nucleus",
+      "category": "Black holes",
+      "title": "Nucleus, pulsar, black hole",
+      "name": "Different things in space",
+      "measure": "Learn the distinction",
+      "text": "A galactic nucleus is the central region of a galaxy. A pulsar is a rotating neutron star seen through periodic emission. A black hole has an event horizon.",
+      "detail": "These words do not name the same object. Some galactic nuclei host an actively feeding supermassive black hole; many are comparatively quiet.",
+      "sources": [
+        "stars",
+        "gr"
+      ]
+    },
+    {
+      "id": "spacetime",
+      "category": "Relativity",
+      "title": "Why gravity bends light",
+      "name": "Curved spacetime",
+      "measure": "Geometry changes paths and clocks",
+      "text": "In general relativity, matter and energy influence spacetime geometry. Light follows that geometry, producing gravitational lensing.",
+      "detail": "A funnel drawing is an analogy, not a literal hole in a sheet. The relativity lab computes idealized clock rates and curvature for a spherical, nonrotating black hole.",
+      "sources": [
+        "gr",
+        "metric"
+      ]
+    },
+    {
+      "id": "photon",
+      "category": "Relativity",
+      "title": "The orbit of light",
+      "name": "Photon sphere & stable orbits",
+      "measure": "1.5 rₛ · 3 rₛ",
+      "text": "For the ideal nonrotating black hole, circular photon paths occur at 1.5 Schwarzschild radii. They are unstable. The innermost stable circular orbit for a test particle is at 3 Schwarzschild radii.",
+      "detail": "Spin changes these radii. A bright observed ring, the black-hole shadow and the event horizon are different structures.",
+      "sources": [
+        "gr",
+        "metric"
+      ]
+    },
+    {
+      "id": "measurement",
+      "category": "Measurements",
+      "title": "How far does a second reach?",
+      "name": "Light, distance & observation",
+      "measure": "299,792.458 km per light-second",
+      "text": "Light-travel time turns distance into a communication delay. The atlas calculates distance divided by the speed of light from simultaneous JPL positions.",
+      "detail": "Those numbers are geometric estimates. Precision signal timing also accounts for motion during the journey, relativity and observing geometry. Deep-space observations always show a past state.",
+      "sources": [
+        "horizons"
+      ]
+    }
+  ],
+  "referenceBodies": {
+    "301": {
+      "mass": 0.07346,
+      "gravity": 1.62,
+      "rotation": 27.32166666666667,
+      "parentPeriodDays": 27.3217,
+      "source": "moonfact"
+    }
+  }
+}

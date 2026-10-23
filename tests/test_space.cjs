@@ -78,3 +78,5 @@ test('space pointer drag and pinch change camera without replacing catalog selec
  v.dispatch('pointermove',{pointerId:2,clientX:220,clientY:100});v.dispatch('pointermove',{pointerId:2,clientX:280,clientY:100});assert(a.engine.snapshot().camera[2]<dragged.camera[2]);
  v.dispatch('pointercancel',{pointerId:1,type:'pointercancel'});v.dispatch('pointercancel',{pointerId:2,type:'pointercancel'});assert.equal(a.engine.snapshot().id,before.id);
 });
+
+test('deep-space vertical drag follows the same direction as the solar viewer',async()=>{const a=await boot(),v=a.elements.get('space-scene'),before=a.engine.snapshot();v.dispatch('pointerdown',{pointerId:1,clientX:100,clientY:100});v.dispatch('pointermove',{pointerId:1,clientX:140,clientY:60});const after=a.engine.snapshot();assert(after.camera[0]<before.camera[0]);assert(after.camera[1]>before.camera[1]);v.dispatch('pointercancel',{pointerId:1,type:'pointercancel'});a.elements.get('science-dialog').open=true;const count=a.renderer.count;for(let i=0;i<30;i++)a.frame(.04);assert.equal(a.renderer.count,count);});

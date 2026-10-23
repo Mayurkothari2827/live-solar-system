@@ -1,0 +1,14 @@
+/* Pure, unit-explicit calculations. No synthetic ephemerides or renderer state. */
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.OrbitScience=api;})(typeof globalThis!=='undefined'?globalThis:this,()=>{
+'use strict';
+const C=299792.458,AU=149597870.7,G=6.67430e-20,SOLAR_MASS=1.98847e30;
+const finite=Number.isFinite,vector=v=>Array.isArray(v)&&v.length===3&&v.every(finite);
+function valid(body,epoch){return Boolean(body?.valid&&finite(epoch)&&finite(body.start)&&finite(body.end)&&epoch>=body.start&&epoch<=body.end&&vector(body.position)&&vector(body.velocity));}
+function pair(a,b,epoch){if(!valid(a,epoch)||!valid(b,epoch))return null;const d=b.position.map((v,i)=>v-a.position[i]),v=b.velocity.map((x,i)=>x-a.velocity[i]),km=Math.hypot(...d);return {km,au:km/AU,lightSeconds:km/C,relativeSpeed:Math.hypot(...v),radialSpeed:km?d.reduce((s,x,i)=>s+x*v[i],0)/km:0,angularDegrees:finite(b.radius)&&b.radius>0&&km>b.radius?2*Math.asin(b.radius/km)*180/Math.PI:null};}
+function rotation(radius,days,latitude=0){if(!finite(radius)||radius<=0||!finite(days)||days===0||!finite(latitude)||Math.abs(latitude)>90)return null;const hours=Math.abs(days)*24,equatorialKmh=2*Math.PI*radius/hours;return {hours,equatorialKmh,latitudeKmh:equatorialKmh*Math.max(0,Math.cos(latitude*Math.PI/180)),direction:days<0?'Retrograde':'Prograde'};}
+function physical(radius,mass24){if(!finite(radius)||radius<=0||!finite(mass24)||mass24<=0)return null;const gm=G*mass24*1e24;return {escapeKms:Math.sqrt(2*gm/radius),surfaceGravity:gm/radius**2*1000,circumferenceKm:2*Math.PI*radius};}
+function illumination(target,observer,sun,epoch){if(![target,observer,sun].every(b=>valid(b,epoch))||target.id===observer.id||target.id===sun.id)return null;const a=sun.position.map((v,i)=>v-target.position[i]),b=observer.position.map((v,i)=>v-target.position[i]),den=Math.hypot(...a)*Math.hypot(...b);return den?(1+Math.max(-1,Math.min(1,a.reduce((s,x,i)=>s+x*b[i],0)/den)))/2:null;}
+function status(snapshot,body,now=Date.now()/1000){if(!snapshot||!valid(body,snapshot.epoch))return 'Unavailable';if(snapshot.clockState==='paused')return 'Paused model';if(snapshot.clockState!=='live')return 'Playback model';return now>=body.start&&now<=body.end&&Math.abs(snapshot.epoch-now)<5?'Live model':'Expired data';}
+function relativity(massSolar,rOverRs){if(!finite(massSolar)||massSolar<=0||!finite(rOverRs)||rOverRs<=1)return null;const rs=2*G*SOLAR_MASS*massSolar/C**2,r=rs*rOverRs,clockRate=Math.sqrt(1-1/rOverRs);return {rsKm:rs,rKm:r,photonSphereKm:1.5*rs,iscoKm:3*rs,clockRate,localSecondsPerDistantHour:3600*clockRate,redshift:1/clockRate-1,curvatureKm4:12*rs**2/r**6};}
+return {C,AU,G,SOLAR_MASS,valid,pair,rotation,physical,illumination,status,relativity};
+});
